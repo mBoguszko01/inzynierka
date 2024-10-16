@@ -23,5 +23,5 @@
     transition: background-color 0.2s;
 }
 .list-element-container-selected:hover{
-    background-color: #3B2E75;
+    background-color: #3B2E75; /* bez tego, po najechaniu uaktywnia sie hover dla .list-element-container */
 }

@@ -1,0 +1,44 @@
+.dashboard-main-container{
+    padding: 25px 30px 30px 30px;
+}
+.dashboard-right-panel-upper-content{
+    display: flex;
+    gap: 16px;
+    /*height: calc(100% - 81px); szerokosc top bar + padding */
+}
+.dashboard-left-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 16px;
+}
+.dashboard-cash-chart{
+    background-color: white;
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+}
+.dashboard-circular-charts-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.dashboard-circular-chart{
+    width: 48%;
+    height: 370px;
+    background-color: white;
+    border-radius: 10px;
+}
+.dashboard-right-container{
+    background-color: white;
+    width: 30%;
+    border-radius: 10px;
+    height: 786px;
+}
+.dashboard-recent-transactions{
+    background-color: white;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 16px;
+}

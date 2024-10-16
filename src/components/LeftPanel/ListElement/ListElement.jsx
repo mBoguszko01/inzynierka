@@ -32,13 +32,13 @@ const ListElement = (props) => {
     };
     return iconMap[name.toLowerCase()];
   };
-  const isCurrView = currView.selectedView === name.toLowerCase();
+  const isCurrView = currView.selectedView === name;
   let classes = "list-element-container";
   if (isCurrView){
     classes += " list-element-container-selected";
   }
   return (
-    <div className={classes} onClick={()=>changeViewHandler(name.toLowerCase())}>
+    <div className={classes} onClick={()=>changeViewHandler(name)}>
       <Icon path={iconName(name)} size={1} />
       <span>{name}</span>
     </div>
