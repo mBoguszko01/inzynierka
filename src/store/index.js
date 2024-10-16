@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import viewReducer from './view';
 
 const store = configureStore({
-    //reducer: {toggle: toggleReducer, cart: cartReducer}
+    reducer: {view: viewReducer}
 });
 
 export default store;

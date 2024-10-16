@@ -2,6 +2,8 @@ import Logo from "./Logo/Logo";
 import "./LeftPanel.css";
 import ListElement from "./ListElement/ListElement";
 const LeftPanel = (props) => {
+    
+
   return (
     <div className="left-panel">
       <Logo />
@@ -9,10 +11,10 @@ const LeftPanel = (props) => {
         <div className="options-section">
           <span className="list-section-heading">Main</span>
           <li>
-            <ListElement name="Dashboard" />
+            <ListElement name="Dashboard"/>
           </li>
           <li>
-            <ListElement name="Planned Transactions" />
+            <ListElement name="Planned Transactions"/>
           </li>
           <li>
             <ListElement name="Total Assets" />
