@@ -1,0 +1,33 @@
+.recent-transactions{
+    width: 100%;
+    color: #535C91;
+    border: none;
+    border-collapse: collapse;
+}
+.tr-headings
+{
+  background-color: #F6F6F6;
+  border-top: 1px solid #E4E4E4;;
+  border-bottom: 1px solid #E4E4E4;
+}
+.recent-transactions tr{
+    height: 45px;
+}
+.recent-transactions td{
+    text-align: center;
+    border-bottom: 1px solid #E4E4E4;
+}
+.recent-transactions-top{
+    display: flex;
+    justify-content: space-between;
+}
+.recent-transactions-show-more button{
+    font-size: 14px;
+    color: #9290C3;
+    border: none;
+    background-color: white;
+}
+.recent-transactions-show-more button:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

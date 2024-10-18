@@ -1,0 +1,29 @@
+.assets-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+.asset-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 35px;
+}
+.asset-container span{
+    font-size: 20px;
+}
+.asset-name{
+    color: #535C91;
+}
+.asset-balance{
+    color: #58B185;
+}
+.asset-logo-and-name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}

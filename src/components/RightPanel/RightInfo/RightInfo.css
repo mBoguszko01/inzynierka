@@ -1,0 +1,16 @@
+.show-more{
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.show-more button{
+    font-size: 14px;
+    color: #9290C3;
+    border: none;
+    background-color: white;
+}
+.show-more button:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

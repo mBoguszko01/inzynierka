@@ -13,6 +13,8 @@
     gap: 16px;
 }
 .dashboard-cash-chart{
+    display: flex;
+    align-items: center;
     background-color: white;
     height: 400px;
     width: 100%;
@@ -26,7 +28,7 @@
 }
 .dashboard-circular-chart{
     width: 48%;
-    height: 370px;
+    height: 400px;
     background-color: white;
     border-radius: 10px;
 }
@@ -34,9 +36,13 @@
     background-color: white;
     width: 30%;
     border-radius: 10px;
-    height: 786px;
+    height: 816px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 .dashboard-recent-transactions{
+    padding: 38px 22px;
     background-color: white;
     height: 400px;
     border-radius: 10px;

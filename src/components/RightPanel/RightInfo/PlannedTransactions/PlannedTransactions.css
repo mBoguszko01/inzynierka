@@ -1,0 +1,39 @@
+.planned-transactions-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+.section-header{
+    color: #535C91;
+    margin-bottom: 9px;
+}
+.section-small-text{
+    font-size: 14px;
+    color: #9290C3;
+}
+.section-large-text{
+    font-size: 20px;
+}
+.expense{
+    color: #BD3D3A;
+}
+.transaction-container{
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-bottom: 50px;
+}
+.transaction-text-info-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.transaction-date-and-price{
+    display: flex;
+    justify-content: space-between;
+}
+.separator{
+    width: 100%;
+    border-bottom: 1px solid #9290C3;
+}
