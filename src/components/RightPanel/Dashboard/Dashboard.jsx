@@ -11,8 +11,8 @@ const Dashboard = (props) => {
         <div className="dashboard-left-container">
           <div className="dashboard-cash-chart"><CashChart /></div>
           <div className="dashboard-circular-charts-container">
-            <div className="dashboard-circular-chart"><CircularChart /></div>
-            <div className="dashboard-circular-chart"><CircularChart /></div>
+            <div className="dashboard-circular-chart"><CircularChart chartName="This Month Expenses" /></div>
+            <div className="dashboard-circular-chart"><CircularChart chartName="Distribution of Financial Assets"/></div>
           </div>
         </div>
         <div className="dashboard-right-container"><RightInfo /></div>

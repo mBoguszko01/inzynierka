@@ -1,12 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
+import { viewActions } from "../../store/view";
 import "./RecentTransactions.css";
 
 const RecentTransactions = (props) => {
+  const dispatch = useDispatch();
+  const currView = useSelector((state) => state.view);
+  const changeViewHandler = () => {
+    dispatch(viewActions.changeView("Transactions"));
+  };
   return (
     <>
       <div className="recent-transactions-top">
         <span className="section-header">Recent Transactions</span>
         <div className="recent-transactions-show-more">
-          <button target="_blank">Show more</button>
+          <button onClick={changeViewHandler}>Show more</button>
         </div>
       </div>
 

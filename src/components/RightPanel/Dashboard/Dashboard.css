@@ -48,3 +48,11 @@
     border-radius: 10px;
     margin-top: 16px;
 }
+.circular-chart-name-container{
+    padding-top: 31px;
+    padding-left: 22px;
+}
+.circular-chart-name{
+    font-size: 16px;
+    color: #535C91;
+}
