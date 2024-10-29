@@ -18,6 +18,10 @@
     color: white;
     padding: 40px 2% 0 2%;
 }
+.left-panel-closed{
+    min-width: 61px;
+    max-width: 61px;
+}
 .right-panel{
     width: 100%;
     background-color: #f5f5f5;
