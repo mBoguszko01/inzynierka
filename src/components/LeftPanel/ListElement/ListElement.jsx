@@ -19,7 +19,7 @@ const ListElement = (props) => {
   const changeViewHandler = (viewName) => {
     dispatch(viewActions.changeView(viewName));
   };
-  const { name } = props;
+  const { name, isSidebarOpen } = props;
   const iconName = (name) => {
     const iconMap = {
       "dashboard": mdiViewDashboardOutline,
@@ -37,10 +37,14 @@ const ListElement = (props) => {
   if (isCurrView){
     classes += " list-element-container-selected";
   }
+  if (!isSidebarOpen){
+    classes += " list-element-container-closed"
+  }
+
   return (
     <div className={classes} onClick={()=>changeViewHandler(name)}>
       <Icon path={iconName(name)} size={1} />
-      <span>{name}</span>
+      {isSidebarOpen && <span>{name}</span>}
     </div>
   );
 };

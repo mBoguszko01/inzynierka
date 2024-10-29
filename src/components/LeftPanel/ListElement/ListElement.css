@@ -5,6 +5,7 @@
     height: 45px;
     padding-left: 18px;
     border-radius: 4px;
+
 }
 .list-element-container:active{
     box-shadow:  3px 2px 22px 1px rgba(0, 0, 0, 0.24);
@@ -24,4 +25,9 @@
 }
 .list-element-container-selected:hover{
     background-color: #3B2E75; /* bez tego, po najechaniu uaktywnia sie hover dla .list-element-container */
+}
+.list-element-container-closed{
+    padding-right: 18px;
+    width: fit-content;
+
 }
