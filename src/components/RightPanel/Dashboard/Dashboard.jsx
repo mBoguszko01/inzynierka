@@ -2,6 +2,7 @@ import CashChart from "../CashChart/CashChart";
 import CircularChart from "../CircularChart/CircularChart";
 import RightInfo from "../RightInfo/RightInfo";
 import RecentTransactions from "../../RecentTransactions/RecentTransactions";
+
 import "./Dashboard.css";
 
 const Dashboard = (props) => {
