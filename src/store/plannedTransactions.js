@@ -5,8 +5,9 @@ const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
   initialState: {
     plannedTransactionsList: [
-        { date: new Date('2024-10-01'), price: 25.50, asset: 'ING', name: 'Netflix' },
+        { date: new Date('2024-10-01'), price: 25.50, asset: 'ING', name: 'Netflix subscription' },
         { date: new Date('2024-10-03'), price: 15.00, asset: 'Cash', name: 'Gym membership' },
+        { date: new Date('2024-10-03'), price: 15.00, asset: 'Cash', name: 'Amazon prime' },
     ],
   },
   reducers: {

@@ -8,7 +8,7 @@ const Transaction = (props) => {
         <span className="section-header">{name}</span>
         <div className="transaction-date-and-price">
           <span className='section-small-text'>Payment {paymentDate}</span>
-          <span className='section-small-text expense'>{price}</span>
+          <span className='section-small-text expense'>-{price}$</span>
         </div>
       </div>
     </div>

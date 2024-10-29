@@ -9,6 +9,21 @@ const PlannedTransactions = () => {
   const changeViewHandler = () => {
     dispatch(viewActions.changeView("Planned Transactions"));
   };
+
+  const transactions = useSelector(
+    (state) => state.plannedTransactions.plannedTransactionsList
+  );
+
+  let totalPriceOfPlannedTransactions = 0;
+  transactions.forEach((transaction) => {
+    totalPriceOfPlannedTransactions += transaction.price;
+  });
+
+  let limitedTransactions = [];
+  limitedTransactions = [...transactions]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3);
+  console.log(totalPriceOfPlannedTransactions);
   return (
     <div className="dashboard-planned-transactions-container">
       <span className="section-header">Planned Transactions</span>
@@ -16,30 +31,19 @@ const PlannedTransactions = () => {
         Total
       </span>
       <span className="expense section-large-text" style={{ marginBottom: 40 }}>
-        -200$
+        -{totalPriceOfPlannedTransactions}$
       </span>
-
-      <Transaction
-        paymentDate={"2024/10/17"}
-        price={"-22,90 $"}
-        imgSrc={"/Netflix_icon.jpg"}
-      >
-        Netflix subscription
-      </Transaction>
-      <Transaction
-        paymentDate={"2024/10/21"}
-        price={"-13,99 $"}
-        imgSrc={"/Youtube_icon.jpg"}
-      >
-        Youtube Premium subscription
-      </Transaction>
-      <Transaction
-        paymentDate={"2024/10/25"}
-        price={"-60,00 $"}
-        imgSrc={"/Gym_icon.jpg"}
-      >
-        Gym membership
-      </Transaction>
+      {limitedTransactions.map((transaction, index) => (
+        <>
+          <Transaction
+            paymentDate={transaction.date.toLocaleDateString()}
+            price={transaction.price}
+            imgSrc={"/Netflix_icon.jpg"}
+          >
+            {transaction.name}
+          </Transaction>
+        </>
+      ))}
       <div className="separator"></div>
       <div className="show-more">
         <button onClick={changeViewHandler}>Show more</button>
