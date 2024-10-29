@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { transactionActions } from "../../../../store/transactions";
 import "./DialogNewTransaction.css";
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     asset: "",
     category: "",
@@ -16,7 +19,14 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    const transactionData = {
+      ...formData,
+      date: new Date(formData.date),
+      price: parseFloat(formData.price),
+    };
+    console.log(transactionData);
+    dispatch(transactionActions.addNewElement(transactionData));
     closeDialog();
   };
   return (
@@ -34,43 +44,52 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
             </div>
             <form>
               <div className="input-container">
-                <label>Asset</label>
-                <select
-                  name="asset"
-                  value={formData.asset}
-                  onChange={handleChange}
-                >
-                  <option value="ING">ING</option>
-                  <option value="Revolut">Revolut</option>
-                  <option value="Cash">Cash</option>
-                </select>
-
-                <label>Category</label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                >
-                  <option value="Grocieries">Grocieries</option>
-                  <option value="Petrol">Petrol</option>
-                  <option value="Entertainment">Entertainment</option>
-                </select>
-
-                <label>Date</label>
-                <input
-                  name="date"
-                  type="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                />
-
-                <label>Price</label>
-                <input
-                  name="price"
-                  type="text"
-                  value={formData.price}
-                  onChange={handleChange}
-                />
+                <div className="dialog-input-section">
+                  <label>Asset</label>
+                  <select
+                    name="asset"
+                    value={formData.asset}
+                    onChange={handleChange}
+                  >
+                    <option value="">&nbsp;Select an asset</option>
+                    <option value="ING">&nbsp;ING</option>
+                    <option value="Revolut">&nbsp;Revolut</option>
+                    <option value="Cash">&nbsp;Cash</option>
+                  </select>
+                </div>
+                <div className="dialog-input-section">
+                  <label>Category</label>
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                  >
+                    <option value="">&nbsp;Select a category</option>
+                    <option value="Grocieries">&nbsp;Grocieries</option>
+                    <option value="Petrol">&nbsp;Petrol</option>
+                    <option value="Entertainment">&nbsp;Entertainment</option>
+                  </select>
+                </div>
+                <div className="dialog-input-section">
+                  <label>Date</label>
+                  <input
+                    name="date"
+                    type="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    className="dialog-input"
+                  />
+                </div>
+                <div className="dialog-input-section">
+                  <label>Price</label>
+                  <input
+                    name="price"
+                    type="text"
+                    value={formData.price}
+                    onChange={handleChange}
+                    className="dialog-input"
+                  />
+                </div>
               </div>
             </form>
             <div className="dialog-bottom-btns-container">

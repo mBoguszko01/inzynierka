@@ -47,11 +47,11 @@
   align-items: flex-end;
   justify-content: flex-end;
   gap: 12px;
-  height: 25%;
+  height: 20%;
 }
 .dialog-bottom-btns-container button{
-  height: 30px;
-  width: 80px;
+  height: 40px;
+  width: 100px;
   border-radius: 20px;
   color: white;
   font-weight: bold;
@@ -60,11 +60,44 @@
   cursor: pointer;
 }
 .dialog-btn-submit{
-  background-color: #150156;
+  background-color: #535C91;
   border: none;
 
 }
 .dialog-btn-cancel{
   border: 1px solid #70757a;
   color: #70757a !important;
+}
+dialog form select{
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #535C91;
+  color: #535C91;
+  font-size: 14px;
+}
+.dialog-input{
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #535C91;
+  color: #535C91;
+  font-size: 14px;
+}
+dialog form select:active{
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #535C91;
+  color: #535C91;
+  font-size: 14px;
+}
+input{
+  padding: 0 8px;
+}
+.dialog-input-section{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dialog-input-section label{
+  font-size: 14px;
+  color: #9290C3;
 }
