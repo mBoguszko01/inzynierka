@@ -10,7 +10,7 @@ const PlannedTransactions = () => {
     dispatch(viewActions.changeView("Planned Transactions"));
   };
   return (
-    <div className="planned-transactions-container">
+    <div className="dashboard-planned-transactions-container">
       <span className="section-header">Planned Transactions</span>
       <span className="section-small-text" style={{ marginBottom: 7 }}>
         Total
