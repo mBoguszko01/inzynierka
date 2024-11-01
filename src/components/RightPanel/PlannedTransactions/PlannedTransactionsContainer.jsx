@@ -1,7 +1,8 @@
 import { useState } from "react";
 import PlannedTransactions from "./PlannedTransactions";
 import "./PlannedTransactionsContainer.css";
-//import DialogNewTransaction from "./DialogNewTransaction/DialogNewTransaction";
+import DialogNewPlannedTransaction from "./DialogNewPlannedTransaction/DialogNewPlannedTransaction";
+
 const PlannedTransactionsContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -11,6 +12,7 @@ const PlannedTransactionsContainer = () => {
   const openDialog = () => {
     setIsDialogOpen(true);
   }
+  
   return (
     <div className="planned-transactions-container">
       <div className="planned-transactions-top">
@@ -19,7 +21,7 @@ const PlannedTransactionsContainer = () => {
         </div>
       </div>
       <PlannedTransactions />
-      {/* <DialogNewTransaction isDialogOpen = {isDialogOpen} closeDialog={closeDialog}/> */}
+      {<DialogNewPlannedTransaction isDialogOpen = {isDialogOpen} closeDialog={closeDialog}/>}
     </div>
   );
 };
