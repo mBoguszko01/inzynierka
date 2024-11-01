@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { viewActions } from "../../../../store/view";
 import Transaction from "./Transaction";
-import "./PlannedTransactions.css";
+import "./DashboardPlannedTransactions.css";
 
-const PlannedTransactions = () => {
+const DashboardPlannedTransactions = () => {
   const dispatch = useDispatch();
   const currView = useSelector((state) => state.view);
   const changeViewHandler = () => {
@@ -51,4 +51,4 @@ const PlannedTransactions = () => {
     </div>
   );
 };
-export default PlannedTransactions;
+export default  DashboardPlannedTransactions;
