@@ -23,7 +23,7 @@ const DashboardPlannedTransactions = () => {
   limitedTransactions = [...transactions]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
-  console.log(totalPriceOfPlannedTransactions);
+
   return (
     <div className="dashboard-planned-transactions-container">
       <span className="section-header">Planned Transactions</span>

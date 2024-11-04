@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {plannedTransactionActions} from '../../../../store/plannedTransactions';
 import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     asset: "",
@@ -18,8 +21,14 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       [name]: value,
     }));
   };
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const plannedTransactionData = {
+      ...formData,
+      date: new Date(formData.date),
+      price: parseFloat(formData.price)
+    };
+    dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
     closeDialog();
   };
 
