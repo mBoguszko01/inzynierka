@@ -1,30 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { viewActions } from "../../../../store/view";
-import Asset from "./Asset";
-const TotalAssets = () => {
+import DashboardAsset from "./DashboardAsset";
+const DashboardTotalAssets = () => {
   const dispatch = useDispatch();
   const currView = useSelector((state) => state.view);
   const changeViewHandler = () => {
     dispatch(viewActions.changeView('Total Assets'));
   };
   return (
-    <div className="assets-container">
+    <div className="dashboard-assets-container">
       <span className="section-header">Total Assets</span>
       <span
-        className="asset-balance section-large-text"
+        className="dashboard-asset-balance section-large-text"
         style={{ marginBottom: 40 }}
       >
         +12,300$
       </span>
-      <Asset imgSrc={"/ING_icon.jpg"} balance={"+10,300$"}>
+      <DashboardAsset imgSrc={"/ING_icon.jpg"} balance={"+10,300$"}>
         Ing
-      </Asset>
-      <Asset imgSrc={"/Revolut_icon.jpg"} balance={"+1000$"}>
+      </DashboardAsset>
+      <DashboardAsset imgSrc={"/Revolut_icon.jpg"} balance={"+1000$"}>
         Revlout
-      </Asset>
-      <Asset imgSrc={"/Cash_icon.jpg"} balance={"+500$"}>
+      </DashboardAsset>
+      <DashboardAsset imgSrc={"/Cash_icon.jpg"} balance={"+500$"}>
         Cash
-      </Asset>
+      </DashboardAsset>
       <div className="separator"></div>
       <div className="show-more">
         <button onClick={changeViewHandler}>Show more</button>
@@ -32,4 +32,4 @@ const TotalAssets = () => {
     </div>
   );
 };
-export default TotalAssets;
+export default DashboardTotalAssets;
