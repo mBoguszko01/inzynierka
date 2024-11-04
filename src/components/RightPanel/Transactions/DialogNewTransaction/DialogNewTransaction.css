@@ -1,7 +1,7 @@
 .dialog {
   position: relative;
   width: 400px;
-  height: 350px;
+  /* height: 350px; */
   padding: 28px 16px 28px 16px;
   border: 1px solid #535C91;
   border-radius: 10px;
@@ -47,7 +47,7 @@
   align-items: flex-end;
   justify-content: flex-end;
   gap: 12px;
-  height: 20%;
+  margin-top: 1em;
 }
 .dialog-bottom-btns-container button{
   height: 40px;
