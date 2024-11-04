@@ -1,0 +1,22 @@
+.total-assets-container{
+    background-color: white;
+    margin: 25px 30px 30px 30px;
+    padding: 22px;
+    border-radius: 10px;
+}
+.total-assets-add-new-asset button{
+    font-size: 14px;
+    color: #9290C3;
+    border: none;
+    background-color: white;
+    justify-self: flex-end;
+    margin-bottom: 9px;
+}
+.total-assets-add-new-asset button:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.total-assets-top{
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,14 @@
+.assets-table{
+    width: 100%;
+    color: #535C91;
+    border: none;
+    border-collapse: collapse;
+}
+.assets-table tr{
+    height: 45px;
+}
+.assets-table td{
+    text-align: center;
+    border-bottom: 1px solid #E4E4E4;
+}
+
