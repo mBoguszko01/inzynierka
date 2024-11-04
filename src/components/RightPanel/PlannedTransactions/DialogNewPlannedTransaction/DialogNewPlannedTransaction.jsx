@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {plannedTransactionActions} from '../../../../store/plannedTransactions';
-import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
@@ -36,7 +35,6 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
 
   return (
     <>
-      <h1>DODAĆ AUTOMATYCZNĄ ZMIANĘ DATY ON REPEAT</h1>
       {isDialogOpen && (
         <div className="dialog-background fade-in">
           <dialog className="dialog" open={isDialogOpen}>

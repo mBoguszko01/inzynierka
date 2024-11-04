@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Assets from "./Assets";
 import "./TotalAssetsContainer.css";
-
+import DialogNewAsset from "./DialogNewAsset/DialogNewAsset";
 const TotalAssetsContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -20,12 +20,12 @@ const TotalAssetsContainer = () => {
         </div>
       </div>
       <Assets />
-      {/*{
-        <DialogNewPlannedTransaction
+      {
+        <DialogNewAsset
           isDialogOpen={isDialogOpen}
           closeDialog={closeDialog}
         />
-      } */}
+      }
     </div>
   );
 };
