@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { plannedTransactionActions } from "../../../../store/plannedTransactions";
+import { assetsActions } from "../../../../store/assets";
 //LOGO, nazwa, wartosc
 const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
@@ -24,8 +24,7 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
       ...formData,
       value: parseFloat(formData.value),
     };
-    console.log(newAssetData)
-    // dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+    dispatch(assetsActions.addNewElement(newAssetData));
     setFormData(defaultFormData);
     closeDialog();
   };

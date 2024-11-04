@@ -11,8 +11,10 @@ const assetsSlice = createSlice({
           ]
     },
     reducers: {
-        
+        addNewElement(state, action) {
+            state.totalAssets.push(action.payload);
+          }
     }
 })
-export const assetsDataActions = assetsSlice.actions;
+export const assetsActions = assetsSlice.actions;
 export default assetsSlice.reducer;
