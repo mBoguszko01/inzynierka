@@ -5,14 +5,15 @@ import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
+  const defaultFormData = {
     name: "",
     asset: "",
     date: "",
     price: "",
     repeat: "",
     logoUrl: "",
-  });
+  }
+  const [formData, setFormData] = useState(defaultFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +30,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       price: parseFloat(formData.price)
     };
     dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+    setFormData(defaultFormData);
     closeDialog();
   };
 

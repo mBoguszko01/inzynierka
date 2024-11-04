@@ -19,6 +19,7 @@ const PlannedTransactions = () => {
           <th>Account</th>
           <th>Date</th>
           <th>Amount</th>
+          <th>Repeat</th>
           <th>Logo</th>
         </tr>
       </thead>
@@ -29,6 +30,7 @@ const PlannedTransactions = () => {
             <td>{transaction.asset}</td>
             <td>{transaction.date.toLocaleDateString()}</td>
             <td>{transaction.price}</td>
+            <td>{transaction.repeat}</td>
             <td>DODAĆ LOGO</td>
           </tr>
         ))}
