@@ -36,6 +36,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
 
   return (
     <>
+      <h1>DODAĆ AUTOMATYCZNĄ ZMIANĘ DATY ON REPEAT</h1>
       {isDialogOpen && (
         <div className="dialog-background fade-in">
           <dialog className="dialog" open={isDialogOpen}>

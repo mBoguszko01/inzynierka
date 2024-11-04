@@ -4,12 +4,13 @@ import { transactionActions } from "../../../../store/transactions";
 import "./DialogNewTransaction.css";
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
+  const defaultFormData = {
     asset: "",
     category: "",
     date: "",
     price: "",
-  });
+  };
+  const [formData, setFormData] = useState(defaultFormData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -27,6 +28,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     };
     console.log(transactionData);
     dispatch(transactionActions.addNewElement(transactionData));
+    setFormData(defaultFormData);
     closeDialog();
   };
   return (
