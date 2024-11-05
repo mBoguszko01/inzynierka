@@ -11,7 +11,7 @@ const categorySlice = createSlice({
     },
     reducers: {
         addNewElement(state, action) {
-            state.categoryList.push(action.payload);
+            state.categoryList.push(action.payload); // dodać sprawdzenie poprawności HEX
           }
     }
 })

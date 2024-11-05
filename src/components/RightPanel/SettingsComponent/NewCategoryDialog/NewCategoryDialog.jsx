@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { TwitterPicker } from "react-color";
 import { categoryActions } from "../../../../store/categories";
+import './NewCategoryDialog.css';
 //LOGO, nazwa, wartosc
 const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
@@ -10,6 +12,13 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
   };
   const [formData, setFormData] = useState(defaultFormData);
 
+  const handleColorChange = (color) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      color: color.hex
+    }))
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -18,13 +27,14 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
     }));
   };
   const handleSubmit = (e) => {
+    
     e.preventDefault();
     const newCategoryData = {
       ...formData,
-      value: parseFloat(formData.value),
     };
     dispatch(categoryActions.addNewElement(newCategoryData));
     setFormData(defaultFormData);
+    console.log(newCategoryData)
     closeDialog();
   };
 
@@ -53,14 +63,9 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Color</label>
-                  <input
-                    name="color"
-                    type="text"
-                    value={formData.color}
-                    onChange={handleChange}
-                    className="dialog-input"
-                  />
+                  <TwitterPicker color={formData.color} onChange={handleColorChange}/>
                 </div>
+                
               </div>
             </form>
             <div className="dialog-bottom-btns-container">

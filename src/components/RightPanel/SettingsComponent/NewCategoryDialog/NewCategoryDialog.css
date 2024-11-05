@@ -1,0 +1,7 @@
+/*Usuniecie trojkacika na gorze color pickera*/
+.twitter-picker > div:nth-child(1) {
+    display: none !important;
+}
+.twitter-picker > div > div:nth-child(1) {
+    display: none !important; 
+}
