@@ -14,6 +14,7 @@ const RightPanel = (props) => {
             {currView.selectedView === 'Planned Transactions' && <PlannedTransactionsContainer />}
             {currView.selectedView === 'Total Assets' && <TotalAssetsContainer />}
             {currView.selectedView === 'Transactions' && <Transactions/>}
+            {(currView.selectedView === 'Split Bill' || currView.selectedView === 'Savings Planner' || currView.selectedView === 'Settings') && <h3>Feature under development...</h3>}
     </div>
 }
 export default RightPanel;

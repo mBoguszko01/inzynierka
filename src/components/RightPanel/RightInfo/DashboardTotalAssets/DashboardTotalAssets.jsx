@@ -7,6 +7,19 @@ const DashboardTotalAssets = () => {
   const changeViewHandler = () => {
     dispatch(viewActions.changeView('Total Assets'));
   };
+
+  const assets = useSelector(
+    (state) => state.assets.totalAssets
+  )
+  let topThreeAssets = [];
+  topThreeAssets = [...assets].sort((a,b) => b.value - a.value).slice(0,3);
+
+  let totalAssets = 0;
+  assets.forEach(asset => {
+    totalAssets += asset.value
+  });
+
+
   return (
     <div className="dashboard-assets-container">
       <span className="section-header">Total Assets</span>
@@ -14,17 +27,13 @@ const DashboardTotalAssets = () => {
         className="dashboard-asset-balance section-large-text"
         style={{ marginBottom: 40 }}
       >
-        +12,300$
+        {`+${totalAssets}$`}
       </span>
-      <DashboardAsset imgSrc={"/ING_icon.jpg"} balance={"+10,300$"}>
-        Ing
-      </DashboardAsset>
-      <DashboardAsset imgSrc={"/Revolut_icon.jpg"} balance={"+1000$"}>
-        Revlout
-      </DashboardAsset>
-      <DashboardAsset imgSrc={"/Cash_icon.jpg"} balance={"+500$"}>
-        Cash
-      </DashboardAsset>
+      {topThreeAssets.map((asset,index) => (
+        <>
+          <DashboardAsset imgSrc={asset.logo} balance={asset.value}>{asset.name}</DashboardAsset>
+        </>
+      ))}
       <div className="separator"></div>
       <div className="show-more">
         <button onClick={changeViewHandler}>Show more</button>
