@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {plannedTransactionActions} from '../../../../store/plannedTransactions';
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
@@ -32,6 +32,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     setFormData(defaultFormData);
     closeDialog();
   };
+
 
   return (
     <>

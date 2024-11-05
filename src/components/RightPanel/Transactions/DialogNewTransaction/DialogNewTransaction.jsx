@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../../store/transactions";
 import "./DialogNewTransaction.css";
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
+
+  const categories = useSelector(
+    (state) => state.categories.categoryList
+  );
+
+
   const defaultFormData = {
     asset: "",
     category: "",
@@ -67,9 +73,11 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select a category</option>
-                    <option value="Grocieries">&nbsp;Grocieries</option>
-                    <option value="Petrol">&nbsp;Petrol</option>
-                    <option value="Entertainment">&nbsp;Entertainment</option>
+                    {
+                      categories.map((category, index) => (
+                        <option value ={category.name}>&nbsp;{category.name}</option>
+                      ))
+                    }
                   </select>
                 </div>
                 <div className="dialog-input-section">

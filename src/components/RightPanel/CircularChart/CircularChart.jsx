@@ -18,7 +18,7 @@ const CircularChart = (props) => {
     chartData = useSelector((state) => state.assets).totalAssets;
   }
   else{
-    const transactions = useSelector((state) => state.transactions).transactionsList
+    const transactions = useSelector((state) => state.transactions.transactionsList)
     chartData = Object.entries(
       transactions.reduce((acc, { category, price }) => {
         acc[category] = (acc[category] || 0) + price;
