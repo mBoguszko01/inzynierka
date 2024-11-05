@@ -14,6 +14,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const CircularChart = (props) => {
   const { chartName } = props;
   let chartData;
+  let colors = [...COLORS];
   if(chartName === 'Distribution of Financial Assets'){
     chartData = useSelector((state) => state.assets).totalAssets;
   }
@@ -25,6 +26,9 @@ const CircularChart = (props) => {
         return acc;
       }, {})
     ).map(([name, value]) => ({ name, value }));
+
+    let categories = useSelector((state) => state.categories.categoryList)
+    colors = categories.map(category => category.color);
   }
   return (
     <>
@@ -39,7 +43,7 @@ const CircularChart = (props) => {
             cx="50%"
             cy="50%"
             innerRadius={"70%"}
-            outerRadius={"80%"} // Promień zewnętrzny
+            outerRadius={"80%"} // zmiana tych parametrów zmienia grubość pierścienia
             fill="#8884d8"
             dataKey="value"
             label
@@ -47,7 +51,7 @@ const CircularChart = (props) => {
             {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={colors[index % COLORS.length]}
               />
             ))}
           </Pie>

@@ -4,9 +4,9 @@ const categorySlice = createSlice({
     name: "category",
     initialState:{
         categoryList: [
-            { name: "Grocieries", color: '#FFFFFF' },
-            { name: "Petrol", color: '#FFFFFF' },
-            { name: "Entertainment", color: '#FFFFFF' },
+            { name: "Grocieries", color: '#FFBB28' },
+            { name: "Petrol", color: '#00C49F' },
+            { name: "Entertainment", color: '#92f811' },
           ]
     },
     reducers: {
