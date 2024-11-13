@@ -1,18 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
   initialState: {
     plannedTransactionsList: [
-        { date: new Date('2024-10-01'), price: 25.50, asset: 'ING', name: 'Netflix subscription', category: 'Grocieries', repeat: 'Every month'},
-        { date: new Date('2024-10-03'), price: 15.00, asset: 'Cash', name: 'Gym membership', category: 'Petrol', repeat: 'Every 6 months' },
-        { date: new Date('2024-10-03'), price: 15.00, asset: 'Cash', name: 'Amazon prime', category: 'Entertainment', repeat: 'Every 2 months' },
+      {
+        date: new Date("2024-10-31"),
+        price: 100,
+        asset: "ING",
+        name: "Netflix subscription",
+        category: "Grocieries",
+        repeat: "Every month",
+      },
+      {
+        date: new Date("2024-10-29"),
+        price: 12,
+        asset: "Cash",
+        name: "Gym membership",
+        category: "Petrol",
+        repeat: "Every 6 months",
+      },
+      {
+        date: new Date("2024-11-14"),
+        price: 12,
+        asset: "Cash",
+        name: "Gym membership",
+        category: "Petrol",
+        repeat: "Every 6 months",
+      },
+      {
+        date: new Date("2024-11-12"),
+        price: 12,
+        asset: "Cash",
+        name: "Gym membership",
+        category: "Petrol",
+        repeat: "Every 6 months",
+      },
     ],
+    updatedTransactions: [],
   },
   reducers: {
     addNewElement(state, action) {
       state.plannedTransactionsList.push(action.payload);
+    },
+    updateTransactionDates(state, action) {
+      const indexes = action.payload;
+      indexes.forEach(index => {
+          state.plannedTransactionsList[index].date = new Date('2024-12-01');
+      });
     },
   },
 });

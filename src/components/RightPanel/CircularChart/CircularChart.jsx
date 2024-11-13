@@ -29,8 +29,6 @@ const CircularChart = (props) => {
 
     let categories = useSelector((state) => state.categories.categoryList)
     colors = categories.map(category => category.color);
-    console.log(categories);
-    console.log(chartData);
   }
   return (
     <>
