@@ -1,42 +1,58 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {plannedTransactionActions} from '../../../../store/plannedTransactions';
+import { plannedTransactionActions } from "../../../../store/plannedTransactions";
+import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
   const defaultFormData = {
     name: "",
     asset: "",
+    category: "",
     date: "",
     price: "",
     repeat: "",
     logoUrl: "",
-  }
+  };
   const [formData, setFormData] = useState(defaultFormData);
-
+  const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
+  const closeNewCategoryDialog = () =>{
+    setIsNewCategoryOpen(false);
+  }
+  const categories = useSelector((state) => state.categories.categoryList);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (value !== "newCategory") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      setIsNewCategoryOpen(true);
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const plannedTransactionData = {
       ...formData,
       date: new Date(formData.date),
-      price: parseFloat(formData.price)
+      price: parseFloat(formData.price),
     };
     dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
     setFormData(defaultFormData);
     closeDialog();
   };
 
-
   return (
     <>
-      {isDialogOpen && (
+      {isNewCategoryOpen && (
+        <DialogNewCategory
+          isDialogOpen={isNewCategoryOpen}
+          closeDialog={closeNewCategoryDialog}
+        />
+      )}
+      {(isDialogOpen && !isNewCategoryOpen) && (
         <div className="dialog-background fade-in">
           <dialog className="dialog" open={isDialogOpen}>
             <div className="dialog-top-bar">
@@ -73,6 +89,24 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                   </select>
                 </div>
                 <div className="dialog-input-section">
+                  <label>Category</label>
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                  >
+                    <option value="">&nbsp;Select a category</option>
+                    {categories.map((category, index) => (
+                      <option value={category.name}>
+                        &nbsp;{category.name}
+                      </option>
+                    ))}
+                    <option value="newCategory">
+                      &nbsp;+ Create new category
+                    </option>
+                  </select>
+                </div>
+                <div className="dialog-input-section">
                   <label>Date</label>
                   <input
                     name="date"
@@ -100,9 +134,15 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;</option>
-                    <option value="Every month">&nbsp;Repeat every month</option>
-                    <option value="Every two months">&nbsp;Repeat every 2 months</option>
-                    <option value="Every 6 months">&nbsp;Repeat every 6 months</option>
+                    <option value="Every month">
+                      &nbsp;Repeat every month
+                    </option>
+                    <option value="Every 2 months">
+                      &nbsp;Repeat every 2 months
+                    </option>
+                    <option value="Every 6 months">
+                      &nbsp;Repeat every 6 months
+                    </option>
                     <option value="Custom">&nbsp;Custom</option>
                   </select>
                 </div>

@@ -17,9 +17,10 @@ const PlannedTransactions = () => {
       <thead>
         <tr className="tr-headings">
           <th>Name</th>
-          <th>Account</th>
-          <th>Date</th>
+          <th>Asset</th>
+          <th>Category</th>
           <th>Amount</th>
+          <th>Date</th>
           <th>Repeat</th>
           <th>Logo</th>
         </tr>
@@ -29,6 +30,7 @@ const PlannedTransactions = () => {
           <tr key={index}>
             <td>{transaction.name}</td>
             <td>{transaction.asset}</td>
+            <td>{transaction.category}</td>
             <td>{transaction.date.toLocaleDateString()}</td>
             <td>{transaction.price}</td>
             <td>{transaction.repeat}</td>

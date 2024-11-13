@@ -32,7 +32,6 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       }));
     }
     else{
-      console.log('Wybrano!')
       setIsNewCategoryOpen(true);
     }
     
