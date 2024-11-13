@@ -13,6 +13,7 @@ const PlannedTransactions = () => {
     .slice(0, limiter);
   return (
     <table className="recent-transactions">
+
       <thead>
         <tr className="tr-headings">
           <th>Name</th>

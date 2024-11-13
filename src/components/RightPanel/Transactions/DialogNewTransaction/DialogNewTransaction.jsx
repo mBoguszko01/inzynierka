@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../../store/transactions";
+
+import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
 import "./DialogNewTransaction.css";
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
@@ -9,7 +11,6 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     (state) => state.categories.categoryList
   );
 
-
   const defaultFormData = {
     asset: "",
     category: "",
@@ -17,12 +18,24 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     price: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
+  const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
+  const closeNewCategoryDialog = () =>{
+    setIsNewCategoryOpen(false);
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if(value !== 'newCategory')
+    {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+    else{
+      console.log('Wybrano!')
+      setIsNewCategoryOpen(true);
+    }
+    
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,12 +52,13 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   };
   return (
     <>
-      {isDialogOpen && (
+      {isNewCategoryOpen && <DialogNewCategory isDialogOpen={isNewCategoryOpen} closeDialog={closeNewCategoryDialog}/>}
+      {(isDialogOpen && !isNewCategoryOpen)&& (
         <div className="dialog-background fade-in">
           <dialog className="dialog slide-in" open={isDialogOpen}>
             <div className="dialog-top-bar">
               <span className="section-header dialog-title">
-                Planned Transactions
+                New Transaction
               </span>
               <button onClick={closeDialog} className="close-dialog-btn">
                 X
@@ -78,6 +92,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                         <option value ={category.name}>&nbsp;{category.name}</option>
                       ))
                     }
+                    <option value="newCategory">&nbsp;+ Create new category</option>
                   </select>
                 </div>
                 <div className="dialog-input-section">

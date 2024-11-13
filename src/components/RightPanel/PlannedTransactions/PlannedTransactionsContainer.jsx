@@ -15,7 +15,7 @@ const PlannedTransactionsContainer = () => {
 
   return (
     <div className="planned-transactions-container">
-      <h1>DODAC AUTOMATYCZNE PRZEDLUZANIE ON REPEAT</h1>
+       <h1>Po przekroczeniu daty, tranzakcja przechodzi automatycznie do listy 'Transactions', oraz jeśli jest on repeat tworzy sie nowa transakcja z nową datą</h1>
       <div className="planned-transactions-top">
         <div className="planned-transactions-add-new-transaction">
           <button onClick={openDialog}>+ Add new planned transaction</button>
