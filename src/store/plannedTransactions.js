@@ -21,7 +21,7 @@ const plannedTransactionsSlice = createSlice({
         repeat: "Every 6 months",
       },
       {
-        date: new Date("2024-11-14"),
+        date: new Date("2024-12-10"),
         price: 12,
         asset: "Cash",
         name: "Gym membership",
@@ -45,8 +45,15 @@ const plannedTransactionsSlice = createSlice({
     },
     updateTransactionDates(state, action) {
       const indexes = action.payload;
+      const repeatValues = {
+        'Every month': 1,
+        'Every 2 months': 2,
+        'Every 6 months': 6
+      };
       indexes.forEach(index => {
-          state.plannedTransactionsList[index].date = new Date('2024-12-01');
+          var result = new Date(state.plannedTransactionsList[index].date);
+          result.setMonth(result.getMonth() + repeatValues[state.plannedTransactionsList[index].repeat]);
+          state.plannedTransactionsList[index].date = result;
       });
     },
   },
