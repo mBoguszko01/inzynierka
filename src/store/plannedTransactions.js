@@ -5,36 +5,40 @@ const plannedTransactionsSlice = createSlice({
   initialState: {
     plannedTransactionsList: [
       {
-        date: new Date("2024-10-31"),
+        date: new Date("2024-11-11"),
         price: 100,
         asset: "ING",
-        name: "Netflix subscription",
+        name: "1 miesiac - data pocz 2024-11-11",
         category: "Grocieries",
-        repeat: "Every month",
+        repeatValue: '1',
+        repeatUnit: "months",
       },
       {
         date: new Date("2024-10-29"),
         price: 12,
         asset: "Cash",
-        name: "Gym membership",
+        name: "3 tygodnie - data pocz. 2024-10-29",
         category: "Petrol",
-        repeat: "Every 6 months",
+        repeatValue: '3',
+        repeatUnit: "weeks",
       },
       {
         date: new Date("2024-12-10"),
         price: 12,
         asset: "Cash",
-        name: "Gym membership",
+        name: "2 dni data pocz 2024-12-10",
         category: "Petrol",
-        repeat: "Every 6 months",
+        repeatValue: '2',
+        repeatUnit: "days",
       },
       {
         date: new Date("2024-11-12"),
         price: 12,
         asset: "Cash",
-        name: "Gym membership",
+        name: "1 mies data pocz 2024-11-12",
         category: "Petrol",
-        repeat: "Every 6 months",
+        repeatValue: '1',
+        repeatUnit: "months",
       },
     ],
     updatedTransactions: [],
@@ -45,14 +49,19 @@ const plannedTransactionsSlice = createSlice({
     },
     updateTransactionDates(state, action) {
       const indexes = action.payload;
-      const repeatValues = {
-        'Every month': 1,
-        'Every 2 months': 2,
-        'Every 6 months': 6
-      };
       indexes.forEach(index => {
-          var result = new Date(state.plannedTransactionsList[index].date);
-          result.setMonth(result.getMonth() + repeatValues[state.plannedTransactionsList[index].repeat]);
+          let result = new Date(state.plannedTransactionsList[index].date);
+          //result.setMonth(result.getMonth() + repeatValues[state.plannedTransactionsList[index].repeat]);
+          if(state.plannedTransactionsList[index].repeatUnit === 'months'){
+            //jesli data ustawiona na 29,30,31 to wyciagnij stary miesiac, dodaj do niego repeat value i sprawdz czy istnieje taki dzień (np. 31 luty) jeśli nie, ustaw na ostatni dzień lutego
+            result.setMonth(result.getMonth() + parseInt(state.plannedTransactionsList[index].repeatValue));
+          }
+          else{
+            let addingValue = state.plannedTransactionsList[index].repeatValue;
+            state.plannedTransactionsList[index].repeatUnit === 'weeks' ? addingValue *= 7 : addingValue;
+            result.setDate(result.getDate() + addingValue);
+            console.log(`adding value: ${addingValue}`)
+          }
           state.plannedTransactionsList[index].date = result;
       });
     },

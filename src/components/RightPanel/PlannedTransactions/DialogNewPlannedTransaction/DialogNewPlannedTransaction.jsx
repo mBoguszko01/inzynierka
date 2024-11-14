@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plannedTransactionActions } from "../../../../store/plannedTransactions";
 import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
+import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
@@ -11,14 +12,15 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     category: "",
     date: "",
     price: "",
-    repeat: "",
+    repeatValue: '1',
+    repeatUnit: "days",
     logoUrl: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
-  const closeNewCategoryDialog = () =>{
+  const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
-  }
+  };
   const categories = useSelector((state) => state.categories.categoryList);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +41,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       date: new Date(formData.date),
       price: parseFloat(formData.price),
     };
+    console.log(plannedTransactionData);
     dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
     setFormData(defaultFormData);
     closeDialog();
@@ -52,7 +55,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
           closeDialog={closeNewCategoryDialog}
         />
       )}
-      {(isDialogOpen && !isNewCategoryOpen) && (
+      {isDialogOpen && !isNewCategoryOpen && (
         <div className="dialog-background fade-in">
           <dialog className="dialog" open={isDialogOpen}>
             <div className="dialog-top-bar">
@@ -127,24 +130,32 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                   />
                 </div>
                 <div className="dialog-input-section">
-                  <label>Repeat</label>
-                  <select
-                    name="repeat"
-                    value={formData.repeat}
-                    onChange={handleChange}
-                  >
-                    <option value="">&nbsp;</option>
-                    <option value="Every month">
-                      &nbsp;Repeat every month
-                    </option>
-                    <option value="Every 2 months">
-                      &nbsp;Repeat every 2 months
-                    </option>
-                    <option value="Every 6 months">
-                      &nbsp;Repeat every 6 months
-                    </option>
-                    <option value="Custom">&nbsp;Custom</option>
-                  </select>
+                  <label>Repeat Every</label>
+                  <div className="dialog-input-section-repeat">
+                    <input
+                      name="repeatValue"
+                      type="text"
+                      value={formData.repeatValue}
+                      onChange={handleChange}
+                      className="dialog-input dialog-input-repeat"
+                    />
+                    <select
+                      name="repeatUnit"
+                      value={formData.repeatUnit}
+                      onChange={handleChange}
+                      className="dialog-select-repeat"
+                    >
+                      <option value="days" defaultValue>
+                        &nbsp;{formData.repeatValue === '1' ? 'day' : 'days'}
+                      </option>
+                      <option value="weeks">
+                        &nbsp;{formData.repeatValue === '1' ? 'week' : 'weeks'}
+                      </option>
+                      <option value="months">
+                        &nbsp;{formData.repeatValue === '1' ? 'month' : 'months'}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div className="dialog-input-section">
                   <label>Logo - wersja robocza</label>

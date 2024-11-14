@@ -1,0 +1,12 @@
+.dialog-input-section-repeat{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+.dialog-input-repeat{
+    width: 20%;
+}
+.dialog-select-repeat{
+    width: 100%;
+}

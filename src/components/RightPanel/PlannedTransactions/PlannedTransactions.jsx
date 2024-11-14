@@ -27,13 +27,13 @@ const PlannedTransactions = () => {
       </thead>
       <tbody>
         {limitedTransactions.map((transaction, index) => (
-          <tr key={index}>
+            <tr key={index}>
             <td>{transaction.name}</td>
             <td>{transaction.asset}</td>
             <td>{transaction.category}</td>
-            <td>{transaction.date.toLocaleDateString()}</td>
             <td>{transaction.price}</td>
-            <td>{transaction.repeat}</td>
+            <td>{transaction.date.toLocaleDateString()}</td>
+            <td>Every {transaction.repeatValue} {transaction.repeatUnit}</td>
             <td>DODAĆ LOGO</td>
           </tr>
         ))}
