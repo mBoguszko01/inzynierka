@@ -10,7 +10,7 @@ const plannedTransactionsSlice = createSlice({
         asset: "ING",
         name: "1 miesiac - data pocz 2024-11-11",
         category: "Grocieries",
-        repeatValue: '1',
+        repeatValue: "1",
         repeatUnit: "months",
       },
       {
@@ -19,7 +19,7 @@ const plannedTransactionsSlice = createSlice({
         asset: "Cash",
         name: "3 tygodnie - data pocz. 2024-10-29",
         category: "Petrol",
-        repeatValue: '3',
+        repeatValue: "3",
         repeatUnit: "weeks",
       },
       {
@@ -28,16 +28,16 @@ const plannedTransactionsSlice = createSlice({
         asset: "Cash",
         name: "2 dni data pocz 2024-12-10",
         category: "Petrol",
-        repeatValue: '2',
+        repeatValue: "2",
         repeatUnit: "days",
       },
       {
-        date: new Date("2024-11-12"),
+        date: new Date("2023-11-12"),
         price: 12,
         asset: "Cash",
-        name: "1 mies data pocz 2024-11-12",
+        name: "1 mies data pocz 2023-11-12",
         category: "Petrol",
-        repeatValue: '1',
+        repeatValue: "1",
         repeatUnit: "months",
       },
     ],
@@ -49,20 +49,25 @@ const plannedTransactionsSlice = createSlice({
     },
     updateTransactionDates(state, action) {
       const indexes = action.payload;
-      indexes.forEach(index => {
-          let result = new Date(state.plannedTransactionsList[index].date);
-          //result.setMonth(result.getMonth() + repeatValues[state.plannedTransactionsList[index].repeat]);
-          if(state.plannedTransactionsList[index].repeatUnit === 'months'){
+      indexes.forEach((index) => {
+        let result = new Date(state.plannedTransactionsList[index].date);
+        while (result < new Date()) {
+          if (state.plannedTransactionsList[index].repeatUnit === "months") {
             //jesli data ustawiona na 29,30,31 to wyciagnij stary miesiac, dodaj do niego repeat value i sprawdz czy istnieje taki dzień (np. 31 luty) jeśli nie, ustaw na ostatni dzień lutego
-            result.setMonth(result.getMonth() + parseInt(state.plannedTransactionsList[index].repeatValue));
-          }
-          else{
+            result.setMonth(
+              result.getMonth() +
+                parseInt(state.plannedTransactionsList[index].repeatValue)
+            );
+          } else {
             let addingValue = state.plannedTransactionsList[index].repeatValue;
-            state.plannedTransactionsList[index].repeatUnit === 'weeks' ? addingValue *= 7 : addingValue;
+            state.plannedTransactionsList[index].repeatUnit === "weeks"
+              ? (addingValue *= 7)
+              : addingValue;
             result.setDate(result.getDate() + addingValue);
-            console.log(`adding value: ${addingValue}`)
           }
-          state.plannedTransactionsList[index].date = result;
+        }
+
+        state.plannedTransactionsList[index].date = result;
       });
     },
   },

@@ -17,7 +17,7 @@ function App() {
       .filter((transaction,index) => {
         if (transaction.date <= new Date()) {
           indexes.push(index);
-          dispatch(transactionActions.addNewElement(transactions[index]))
+          dispatch(transactionActions.addNewElement(transactions[index])) // powinno się to wykonywać w pętli dopoki nowa data jest mniejsza od dzisiaj
           return true;
         }
         return false;
