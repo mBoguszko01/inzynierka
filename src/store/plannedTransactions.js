@@ -4,41 +4,42 @@ const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
   initialState: {
     plannedTransactionsList: [
+      // {
+      //   date: new Date("2024-11-11").toISOString(),
+      //   price: 100,
+      //   asset: "ING",
+      //   name: "1 miesiac - data pocz 2024-11-11",
+      //   category: "Grocieries",
+      //   repeatValue: "1",
+      //   repeatUnit: "months",
+      // },
+      // {
+      //   date: new Date("2024-10-29").toISOString(),
+      //   price: 12,
+      //   asset: "Cash",
+      //   name: "3 tygodnie - data pocz. 2024-10-29",
+      //   category: "Petrol",
+      //   repeatValue: "3",
+      //   repeatUnit: "weeks",
+      // },
+      // {
+      //   date: new Date("2024-12-10").toISOString(),
+      //   price: 12,
+      //   asset: "Cash",
+      //   name: "2 dni data pocz 2024-12-10",
+      //   category: "Petrol",
+      //   repeatValue: "2",
+      //   repeatUnit: "days",
+      // },
+
       {
-        date: new Date("2024-11-11"),
-        price: 100,
-        asset: "ING",
-        name: "1 miesiac - data pocz 2024-11-11",
-        category: "Grocieries",
-        repeatValue: "1",
-        repeatUnit: "months",
-      },
-      {
-        date: new Date("2024-10-29"),
+        date: new Date("2024-02-17").toJSON(),
         price: 12,
         asset: "Cash",
-        name: "3 tygodnie - data pocz. 2024-10-29",
+        name: "test",
         category: "Petrol",
-        repeatValue: "3",
+        repeatValue: "1",
         repeatUnit: "weeks",
-      },
-      {
-        date: new Date("2024-12-10"),
-        price: 12,
-        asset: "Cash",
-        name: "2 dni data pocz 2024-12-10",
-        category: "Petrol",
-        repeatValue: "2",
-        repeatUnit: "days",
-      },
-      {
-        date: new Date("2023-11-12"),
-        price: 12,
-        asset: "Cash",
-        name: "1 mies data pocz 2023-11-12",
-        category: "Petrol",
-        repeatValue: "1",
-        repeatUnit: "months",
       },
     ],
     updatedTransactions: [],
@@ -67,7 +68,7 @@ const plannedTransactionsSlice = createSlice({
           }
         }
 
-        state.plannedTransactionsList[index].date = result;
+        state.plannedTransactionsList[index].date = result.toISOString();
       });
     },
   },

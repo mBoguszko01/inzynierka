@@ -43,7 +43,7 @@ const RecentTransactions = (props) => {
             <tr key={index}>
               <td>{transaction.asset}</td>
               <td>{transaction.category}</td>
-              <td>{transaction.date.toLocaleDateString()}</td>
+              <td>{transaction.date}</td>
               <td>{transaction.price}</td>
             </tr>
           ))}

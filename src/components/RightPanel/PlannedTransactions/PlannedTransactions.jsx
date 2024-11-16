@@ -32,7 +32,7 @@ const PlannedTransactions = () => {
             <td>{transaction.asset}</td>
             <td>{transaction.category}</td>
             <td>{transaction.price}</td>
-            <td>{transaction.date.toLocaleDateString()}</td>
+            <td>{transaction.date.substring(0, 10)}</td>
             <td>Every {transaction.repeatValue} {transaction.repeatUnit}</td>
             <td>DODAĆ LOGO</td>
           </tr>

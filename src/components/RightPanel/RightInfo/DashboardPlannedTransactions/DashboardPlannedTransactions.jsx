@@ -36,9 +36,11 @@ const DashboardPlannedTransactions = () => {
       {limitedTransactions.map((transaction, index) => (
         <>
           <Transaction
-            paymentDate={transaction.date.toLocaleDateString()}
+          key={index}
+            paymentDate={transaction.date.Date}
             price={transaction.price}
             imgSrc={"/Netflix_icon.jpg"}
+            
           >
             {transaction.name}
           </Transaction>

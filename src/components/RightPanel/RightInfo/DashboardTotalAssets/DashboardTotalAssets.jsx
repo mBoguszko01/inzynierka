@@ -31,7 +31,7 @@ const DashboardTotalAssets = () => {
       </span>
       {topThreeAssets.map((asset,index) => (
         <>
-          <DashboardAsset imgSrc={asset.logo} balance={asset.value}>{asset.name}</DashboardAsset>
+          <DashboardAsset key={index} imgSrc={asset.logo} balance={asset.value}>{asset.name}</DashboardAsset>
         </>
       ))}
       <div className="separator"></div>
