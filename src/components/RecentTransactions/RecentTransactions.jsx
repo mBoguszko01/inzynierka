@@ -43,7 +43,7 @@ const RecentTransactions = (props) => {
             <tr key={index}>
               <td>{transaction.asset}</td>
               <td>{transaction.category}</td>
-              <td>{transaction.date}</td>
+              <td>{transaction.date.substring(0,10)}</td>
               <td>{transaction.price}</td>
             </tr>
           ))}
