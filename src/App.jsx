@@ -17,7 +17,6 @@ function App() {
       .filter((transaction, index) => {
         if (new Date(transaction.date) <= new Date()) {
           indexes.push(index);
-          //dispatch(transactionActions.addNewElement(transactions[index])) // powinno się to wykonywać w pętli dopoki nowa data jest mniejsza od dzisiaj
           return true;
         }
         return false;
@@ -25,39 +24,43 @@ function App() {
       .map((transaction) => {
         return { ...transaction };
       });
-    indexes.forEach(index => {
-        let result = new Date(transactions[index].date);
-        let firstElement = {...transactions[index]};
-        dispatch(transactionActions.addNewElement(firstElement));
-        while (true) {
-          let data = {...transactions[index]}
-          data.date = result.toJSON();
-          if (data.repeatUnit === "months") {
-            //jesli data ustawiona na 29,30,31 to wyciagnij stary miesiac, dodaj do niego repeat value i sprawdz czy istnieje taki dzień (np. 31 luty) jeśli nie, ustaw na ostatni dzień lutego
-            result.setMonth(
-              result.getMonth() +
-                parseInt(data.repeatValue)
-            );
+    indexes.forEach((index) => {
+      let result = new Date(transactions[index].date);
+      let firstElement = { ...transactions[index] };
+      let day = new Date(transactions[index].date).getDate();
 
-          } else {
-            let addingValue = data.repeatValue;
-            data.repeatUnit === "weeks"
-              ? (addingValue *= 7)
-              : addingValue;
-            result.setDate(result.getDate() + addingValue);
+      dispatch(transactionActions.addNewElement(firstElement));
+      let counter = 0;
+      while (true && counter < 50) {
+        let data = { ...transactions[index] };
+        if (data.repeatUnit === "months") {
+          if ((day >= 1) & (day <= 28)) {
+            result.setMonth(result.getMonth() + parseInt(data.repeatValue));
           }
-          if(result < new Date()){
-            data.date = result.toJSON();
-            dispatch(transactionActions.addNewElement(data));
-          }else{
-            break;
+          else{
+            result.setDate(1);
+            result.setMonth(result.getMonth() + parseInt(data.repeatValue));
+            result.setDate(day);
+            if(result.getDate() !== day){
+              result.setDate(0);
+            }
           }
-          
+        } else {
+          let addingValue = data.repeatValue;
+          data.repeatUnit === "weeks" ? (addingValue *= 7) : addingValue;
+          result.setDate(result.getDate() + addingValue);
         }
-        
+        if (result < new Date()) {
+          data.date = result.toJSON();
+          dispatch(transactionActions.addNewElement(data));
+        } else {
+          break;
+        }
+        counter++;
+      }
     });
     dispatch(plannedTransactionActions.updateTransactionDates(indexes));
-    hasAlreadyAdded.current = true; 
+    hasAlreadyAdded.current = true;
   }, [dispatch]);
 
   return (
