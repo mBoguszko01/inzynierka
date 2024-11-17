@@ -38,10 +38,9 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     e.preventDefault();
     const plannedTransactionData = {
       ...formData,
-      date: new Date(formData.date),
+      date: (new Date(formData.date)).toISOString(),
       price: parseFloat(formData.price),
     };
-    console.log(plannedTransactionData);
     dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
     setFormData(defaultFormData);
     closeDialog();
@@ -100,7 +99,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                   >
                     <option value="">&nbsp;Select a category</option>
                     {categories.map((category, index) => (
-                      <option value={category.name}>
+                      <option value={category.name} key={index}>
                         &nbsp;{category.name}
                       </option>
                     ))}

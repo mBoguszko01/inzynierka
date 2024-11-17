@@ -48,7 +48,6 @@ function App() {
           }
           if(result < new Date()){
             data.date = result.toJSON();
-            console.log(data.date)
             dispatch(transactionActions.addNewElement(data));
           }else{
             break;
@@ -58,7 +57,7 @@ function App() {
         
     });
     dispatch(plannedTransactionActions.updateTransactionDates(indexes));
-    hasAlreadyAdded.current = true;
+    hasAlreadyAdded.current = true; 
   }, [dispatch]);
 
   return (

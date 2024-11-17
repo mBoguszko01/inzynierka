@@ -41,7 +41,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
 
     const transactionData = {
       ...formData,
-      date: new Date(formData.date),
+      date: (new Date(formData.date)).toISOString(),
       price: parseFloat(formData.price),
     };
     console.log(transactionData);
@@ -88,7 +88,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                     <option value="">&nbsp;Select a category</option>
                     {
                       categories.map((category, index) => (
-                        <option value ={category.name}>&nbsp;{category.name}</option>
+                        <option value ={category.name} key={index}>&nbsp;{category.name}</option>
                       ))
                     }
                     <option value="newCategory">&nbsp;+ Create new category</option>

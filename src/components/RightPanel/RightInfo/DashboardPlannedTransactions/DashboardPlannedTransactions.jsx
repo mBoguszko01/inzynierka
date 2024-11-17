@@ -37,7 +37,7 @@ const DashboardPlannedTransactions = () => {
         <>
           <Transaction
           key={index}
-            paymentDate={transaction.date.Date}
+            paymentDate={transaction.date}
             price={transaction.price}
             imgSrc={"/Netflix_icon.jpg"}
             

@@ -4,43 +4,7 @@ const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
   initialState: {
     plannedTransactionsList: [
-      // {
-      //   date: new Date("2024-11-11").toISOString(),
-      //   price: 100,
-      //   asset: "ING",
-      //   name: "1 miesiac - data pocz 2024-11-11",
-      //   category: "Grocieries",
-      //   repeatValue: "1",
-      //   repeatUnit: "months",
-      // },
-      // {
-      //   date: new Date("2024-10-29").toISOString(),
-      //   price: 12,
-      //   asset: "Cash",
-      //   name: "3 tygodnie - data pocz. 2024-10-29",
-      //   category: "Petrol",
-      //   repeatValue: "3",
-      //   repeatUnit: "weeks",
-      // },
-      // {
-      //   date: new Date("2024-12-10").toISOString(),
-      //   price: 12,
-      //   asset: "Cash",
-      //   name: "2 dni data pocz 2024-12-10",
-      //   category: "Petrol",
-      //   repeatValue: "2",
-      //   repeatUnit: "days",
-      // },
 
-      {
-        date: new Date("2024-02-17").toJSON(),
-        price: 12,
-        asset: "Cash",
-        name: "test",
-        category: "Petrol",
-        repeatValue: "1",
-        repeatUnit: "weeks",
-      },
     ],
     updatedTransactions: [],
   },
@@ -48,7 +12,7 @@ const plannedTransactionsSlice = createSlice({
     addNewElement(state, action) {
       state.plannedTransactionsList.push(action.payload);
     },
-    updateTransactionDates(state, action) {
+    updateTransactionDates(state, action) { 
       const indexes = action.payload;
       indexes.forEach((index) => {
         let result = new Date(state.plannedTransactionsList[index].date);
@@ -67,7 +31,7 @@ const plannedTransactionsSlice = createSlice({
             result.setDate(result.getDate() + addingValue);
           }
         }
-
+        result.setHours(12);
         state.plannedTransactionsList[index].date = result.toISOString();
       });
     },
