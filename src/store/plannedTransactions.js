@@ -9,7 +9,7 @@ const plannedTransactionsSlice = createSlice({
       category: "Housing",
       date: "2024-01-31T12:00:00.000Z", // ISO format
       price: 1000,
-      repeatValue: 3, // np. co 1 miesiąc
+      repeatValue: 1, // np. co 1 miesiąc
       repeatUnit: "months", // możliwe wartości: "days", "weeks", "months"
       logoUrl: "https://example.com/logo.png",}
     ],

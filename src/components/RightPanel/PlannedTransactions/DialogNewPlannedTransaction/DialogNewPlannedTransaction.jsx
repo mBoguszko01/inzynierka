@@ -12,7 +12,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     category: "",
     date: "",
     price: "",
-    repeatValue: '1',
+    repeatValue: "1",
     repeatUnit: "days",
     logoUrl: "",
   };
@@ -33,12 +33,13 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     } else {
       setIsNewCategoryOpen(true);
     }
+    console.log(formData);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const plannedTransactionData = {
       ...formData,
-      date: (new Date(formData.date)).toISOString(),
+      date: new Date(formData.date).toISOString(),
       price: parseFloat(formData.price),
     };
     dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
@@ -108,22 +109,24 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     </option>
                   </select>
                 </div>
-                <div className="dialog-input-section">
-                  <label>Date</label>
-                  <input
-                    name="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    className="dialog-input"
-                  />
-                </div>
+
                 <div className="dialog-input-section">
                   <label>Price</label>
                   <input
                     name="price"
                     type="text"
                     value={formData.price}
+                    onChange={handleChange}
+                    className="dialog-input"
+                  />
+                </div>
+                <div className="dialog-input-section">
+                  <label>Date</label>
+                  <input
+                    name="date"
+                    type="date"
+                    value={formData.date}
+                    min={(new Date).toISOString().split('T')[0]}
                     onChange={handleChange}
                     className="dialog-input"
                   />
@@ -145,17 +148,29 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                       className="dialog-select-repeat"
                     >
                       <option value="days" defaultValue>
-                        &nbsp;{formData.repeatValue === '1' ? 'day' : 'days'}
+                        &nbsp;{formData.repeatValue === "1" ? "day" : "days"}
                       </option>
                       <option value="weeks">
-                        &nbsp;{formData.repeatValue === '1' ? 'week' : 'weeks'}
+                        &nbsp;{formData.repeatValue === "1" ? "week" : "weeks"}
                       </option>
                       <option value="months">
-                        &nbsp;{formData.repeatValue === '1' ? 'month' : 'months'}
+                        &nbsp;
+                        {formData.repeatValue === "1" ? "month" : "months"}
                       </option>
                     </select>
                   </div>
                 </div>
+                {(new Date(formData.date).getDate() === 31 ||
+                  new Date(formData.date).getDate() === 30 ||
+                  new Date(formData.date).getDate() === 29) &&
+                  formData.repeatUnit === "months" && (
+                    <div>
+                      <span className="info-29-30-31">
+                        &#9432;
+                        The transaction is repeated on the {new Date(formData.date).getDate() === 31 ? new Date(formData.date).getDate() + 'st' : new Date(formData.date).getDate()+'th'} day of the month; if it does not occur, then on the last day of the month.
+                      </span>
+                    </div>
+                  )}
                 <div className="dialog-input-section">
                   <label>Logo - wersja robocza</label>
                   <input
