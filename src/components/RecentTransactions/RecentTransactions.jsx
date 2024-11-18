@@ -6,11 +6,9 @@ import "./RecentTransactions.css";
 const RecentTransactions = (props) => {
   const dispatch = useDispatch();
   const currView = useSelector((state) => state.view);
-  const transactions = useSelector(
-    (state) => state.transactions.transactionsList
-  );
-  const [limiter, setLimiter] = useState(currView.selectedView === 'Dashboard' ? 7 : 50);
+  const {limiter, transactions} = props;
   
+  console.log(transactions)
   let limitedTransactions = [];
   limitedTransactions = [...transactions] // Tworzymy nową kopię tablicy - był z tym error bo chciałem zmieniać bezpośrednio transactions (redux wyrzucał błąd)
     .sort((a, b) => new Date(b.date) - new Date(a.date))
