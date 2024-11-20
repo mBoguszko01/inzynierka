@@ -15,8 +15,6 @@ const PlannedTransactionsContainer = () => {
 
   return (
     <div className="planned-transactions-container">
-       <h1>Po przekroczeniu daty, tranzakcja przechodzi automatycznie do listy 'Transactions', oraz jeśli jest on repeat tworzy sie nowa transakcja z nową datą</h1>
-       <h1>Powinna być blokada na daty - tylko dziś albo w przyszłość</h1>
       <div className="planned-transactions-top">
         <div className="planned-transactions-add-new-transaction">
           <button onClick={openDialog}>+ Add new planned transaction</button>

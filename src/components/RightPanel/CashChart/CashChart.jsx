@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-//dummy data stanu konta
 const cashChartDummyData = [
   { date: "2024-10-01", balance: 1554.45 },
   { date: "2024-10-02", balance: 4180.57 },

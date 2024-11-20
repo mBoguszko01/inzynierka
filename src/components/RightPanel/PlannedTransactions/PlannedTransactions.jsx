@@ -33,7 +33,7 @@ const PlannedTransactions = () => {
             <td>{transaction.category}</td>
             <td>{transaction.price}</td>
             <td>{transaction.date.substring(0,10)}</td>
-            <td>Every {transaction.repeatValue} {transaction.repeatValue === '1' ? transaction.repeatUnit.substring(0,transaction.repeatUnit.length - 1) : transaction.repeatUnit}</td>
+            <td>Every {transaction.repeatValue} {transaction.repeatValue === 1 ? transaction.repeatUnit.substring(0,transaction.repeatUnit.length - 1) : transaction.repeatUnit}</td>
             <td>DODAĆ LOGO</td>
           </tr>
         ))}

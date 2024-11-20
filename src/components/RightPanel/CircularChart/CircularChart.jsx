@@ -20,8 +20,12 @@ const CircularChart = (props) => {
   }
   else{
     const transactions = useSelector((state) => state.transactions.transactionsList)
+    const filteredTransactions = transactions.filter(({date}) => {
+      const transactionDate = new Date(date);
+      return transactionDate.getMonth() === (new Date()).getMonth() && transactionDate.getFullYear() === (new Date()).getFullYear()
+    })
     chartData = Object.entries(
-      transactions.reduce((acc, { category, price }) => {
+      filteredTransactions.reduce((acc, { category, price }) => {
         acc[category] = (acc[category] || 0) + price;
         return acc;
       }, {})

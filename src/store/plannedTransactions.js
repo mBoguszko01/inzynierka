@@ -8,10 +8,10 @@ const plannedTransactionsSlice = createSlice({
         name: "Rent",
         asset: "ING",
         category: "Housing",
-        date: "2023-01-31T12:00:00.000Z",
+        date: "2024-01-31T12:00:00.000Z",
         price: 1000,
-        repeatValue: 1,
-        repeatUnit: "weeks",
+        repeatValue: 6,
+        repeatUnit: "months",
         logoUrl: "https://example.com/logo.png",
       },
       {
@@ -47,13 +47,12 @@ const plannedTransactionsSlice = createSlice({
         const firstDate = new Date(state.plannedTransactionsList[index].date);
         const day = firstDate.getDate();
         if (state.plannedTransactionsList[index].repeatUnit === "months") {
-          firstDate.setMonth(
-            firstDate.getMonth() +
-              parseInt(state.plannedTransactionsList[index].repeatValue) <
-              new Date()
-              ? new Date().getMonth()
-              : new Date().getMonth() + 1
-          );
+          while(true){
+            firstDate.setMonth(firstDate.getMonth() + parseInt(state.plannedTransactionsList[index].repeatValue));
+            if(firstDate > new Date()){
+              break;
+            }
+          }
           if (firstDate.getDate() != day) {
             firstDate.setDate(0);
           }
