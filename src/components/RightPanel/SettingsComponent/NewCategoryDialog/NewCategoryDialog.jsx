@@ -4,7 +4,7 @@ import { TwitterPicker } from "react-color";
 import { categoryActions } from "../../../../store/categories";
 import './NewCategoryDialog.css';
 //LOGO, nazwa, wartosc
-const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
+const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
   const dispatch = useDispatch();
   const defaultFormData = {
     name: "",
@@ -33,8 +33,12 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog }) => {
       ...formData,
     };
     dispatch(categoryActions.addNewElement(newCategoryData));
+    setGeneralFormData((prevData) => ({
+      ...prevData,
+      category: newCategoryData.name
+      
+    }))
     setFormData(defaultFormData);
-    console.log(newCategoryData)
     closeDialog();
   };
 

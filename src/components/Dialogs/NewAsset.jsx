@@ -1,15 +1,24 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { assetsActions } from "../../../../store/assets";
+import { TwitterPicker } from "react-color";
+import { assetsActions } from "../../store/assets";
 //LOGO, nazwa, wartosc
-const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
+const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
   const dispatch = useDispatch();
   const defaultFormData = {
     logo: "",
     name: "",
-    value: "",
+    value:"",
+    color: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
+
+  const handleColorChange = (color) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      color: color.hex,
+    }));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +31,12 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
     e.preventDefault();
     const newAssetData = {
       ...formData,
-      value: parseFloat(formData.value),
     };
     dispatch(assetsActions.addNewElement(newAssetData));
+    setGeneralFormData((prevData) => ({
+      ...prevData,
+      asset: newAssetData.name
+    }))
     setFormData(defaultFormData);
     closeDialog();
   };
@@ -72,6 +84,13 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
                     className="dialog-input"
                   />
                 </div>
+                <div className="dialog-input-section">
+                  <label>Color</label>
+                  <TwitterPicker
+                    color={formData.color}
+                    onChange={handleColorChange}
+                  />
+                </div>
               </div>
             </form>
             <div className="dialog-bottom-btns-container">
@@ -90,3 +109,4 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog }) => {
 };
 
 export default DialogNewAsset;
+

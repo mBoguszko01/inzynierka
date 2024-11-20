@@ -13,7 +13,17 @@ const assetsSlice = createSlice({
     reducers: {
         addNewElement(state, action) {
             state.totalAssets.push(action.payload);
-          }
+          },
+        updateValue(state,action){
+            const { asset, value } = action.payload;
+            const account = state.totalAssets.find(account => account.name === asset); 
+    
+            if (account) {
+                account.value -= value;
+            } else {
+                console.log(`Something went wrong`);
+            }
+        }
     }
 })
 export const assetsActions = assetsSlice.actions;

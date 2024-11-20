@@ -22,6 +22,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     setIsNewCategoryOpen(false);
   };
   const categories = useSelector((state) => state.categories.categoryList);
+  const assets = useSelector((state) => state.assets.totalAssets);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -76,6 +77,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     value={formData.name}
                     onChange={handleChange}
                     className="dialog-input"
+                    autocomplete="off"
                   />
                 </div>
                 <div className="dialog-input-section">
@@ -86,9 +88,11 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select an asset</option>
-                    <option value="ING">&nbsp;ING</option>
-                    <option value="Revolut">&nbsp;Revolut</option>
-                    <option value="Cash">&nbsp;Cash</option>
+                    {
+                      assets.map((asset, index) => (
+                        <option value ={asset.name} key={index}>&nbsp;{asset.name}</option>
+                      ))
+                    }
                   </select>
                 </div>
                 <div className="dialog-input-section">
@@ -118,6 +122,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     value={formData.price}
                     onChange={handleChange}
                     className="dialog-input"
+                    autocomplete="off"
                   />
                 </div>
                 <div className="dialog-input-section">
@@ -140,6 +145,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                       value={formData.repeatValue}
                       onChange={handleChange}
                       className="dialog-input dialog-input-repeat"
+                      autocomplete="off"
                     />
                     <select
                       name="repeatUnit"
@@ -179,6 +185,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     value={formData.logoUrl}
                     onChange={handleChange}
                     className="dialog-input"
+                    autocomplete="off"
                   />
                 </div>
               </div>

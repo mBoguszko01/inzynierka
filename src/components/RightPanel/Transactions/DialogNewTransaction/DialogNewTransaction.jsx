@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../../store/transactions";
+import { assetsActions } from "../../../../store/assets";
 
 import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
 import "./DialogNewTransaction.css";
+
+import DialogNewAsset from "../../../Dialogs/NewAsset";
+
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
 
-  const categories = useSelector(
-    (state) => state.categories.categoryList
-  );
-
+  const categories = useSelector((state) => state.categories.categoryList);
+  const assets = useSelector((state) => state.assets.totalAssets);
   const defaultFormData = {
     asset: "",
     category: "",
@@ -19,40 +21,64 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
-  const closeNewCategoryDialog = () =>{
+  const [isNewAssetOpen, setIsNewAssetOpen] = useState(false);
+
+  const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
-  }
+  };
+  const closeNewAssetDialog = () => {
+    setIsNewAssetOpen(false);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(value !== 'newCategory')
+    if (value === "newAsset") {
+      setIsNewAssetOpen(true);
+    } else if (value === "newCategory") {
+      setIsNewCategoryOpen(true);
+    } else
     {
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     }
-    else{
-      setIsNewCategoryOpen(true);
-    }
-    
   };
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const transactionData = {
       ...formData,
-      date: (new Date(formData.date)).toISOString(),
+      date: new Date(formData.date).toISOString(),
       price: parseFloat(formData.price),
     };
-    console.log(transactionData);
+    //powinnismy tez zaktualizowac asseta i odjac od niego price'a
+    dispatch(
+      assetsActions.updateValue({
+        asset: transactionData.asset,
+        value: transactionData.price,
+      })
+    );
     dispatch(transactionActions.addNewElement(transactionData));
     setFormData(defaultFormData);
     closeDialog();
   };
   return (
     <>
-      {isNewCategoryOpen && <DialogNewCategory isDialogOpen={isNewCategoryOpen} closeDialog={closeNewCategoryDialog}/>}
-      {(isDialogOpen && !isNewCategoryOpen)&& (
+      {isNewCategoryOpen && !isNewAssetOpen && (
+        <DialogNewCategory
+          isDialogOpen={isNewCategoryOpen}
+          closeDialog={closeNewCategoryDialog}
+          setGeneralFormData={setFormData}
+        />
+      )}
+      {isNewAssetOpen && !isNewCategoryOpen && (
+        <DialogNewAsset
+          isDialogOpen={isNewAssetOpen}
+          closeDialog={closeNewAssetDialog}
+          setGeneralFormData={setFormData}
+        />
+      )}
+      {isDialogOpen && !isNewCategoryOpen && !isNewAssetOpen && (
         <div className="dialog-background fade-in">
           <dialog className="dialog slide-in" open={isDialogOpen}>
             <div className="dialog-top-bar">
@@ -73,9 +99,12 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select an asset</option>
-                    <option value="ING">&nbsp;ING</option>
-                    <option value="Revolut">&nbsp;Revolut</option>
-                    <option value="Cash">&nbsp;Cash</option>
+                    {assets.map((asset, index) => (
+                      <option value={asset.name} key={index}>
+                        &nbsp;{asset.name}
+                      </option>
+                    ))}
+                    <option value="newAsset">&nbsp;+ Create new asset</option>
                   </select>
                 </div>
                 <div className="dialog-input-section">
@@ -86,12 +115,14 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select a category</option>
-                    {
-                      categories.map((category, index) => (
-                        <option value ={category.name} key={index}>&nbsp;{category.name}</option>
-                      ))
-                    }
-                    <option value="newCategory">&nbsp;+ Create new category</option>
+                    {categories.map((category, index) => (
+                      <option value={category.name} key={index}>
+                        &nbsp;{category.name}
+                      </option>
+                    ))}
+                    <option value="newCategory">
+                      &nbsp;+ Create new category
+                    </option>
                   </select>
                 </div>
                 <div className="dialog-input-section">
@@ -112,6 +143,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                     value={formData.price}
                     onChange={handleChange}
                     className="dialog-input"
+                    autocomplete="off"
                   />
                 </div>
               </div>

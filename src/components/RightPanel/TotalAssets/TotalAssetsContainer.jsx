@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Assets from "./Assets";
 import "./TotalAssetsContainer.css";
-import DialogNewAsset from "./DialogNewAsset/DialogNewAsset";
+import DialogNewAsset from "../../Dialogs/NewAsset";
 const TotalAssetsContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
