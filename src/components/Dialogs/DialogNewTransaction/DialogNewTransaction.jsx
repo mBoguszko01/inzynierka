@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../store/transactions";
 import { assetsActions } from "../../../store/assets";
 
-
-import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog"; 
+import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import "./DialogNewTransaction.css";
 
 import DialogNewAsset from "../DialogNewAsset";
@@ -24,6 +23,11 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
   const [isNewAssetOpen, setIsNewAssetOpen] = useState(false);
 
+  const [isAssetValid, setIsAssetValid] = useState(true);
+  const [isCategoryValid, setIsCategoryValid] = useState(true);
+  const [isDateValid, setIsDateValid] = useState(true);
+  const [isPriceValid, setIsPriceValid] = useState(true);
+
   const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
   };
@@ -36,31 +40,89 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       setIsNewAssetOpen(true);
     } else if (value === "newCategory") {
       setIsNewCategoryOpen(true);
-    } else
-    {
+    } else {
+      if (!isAssetValid && name === "asset") {
+        if (value !== "") {
+          setIsAssetValid(true);
+        }
+      }
+      if (!isCategoryValid && name === "category") {
+        if (value !== "") {
+          setIsCategoryValid(true);
+        }
+      }
+      if (!isDateValid && name === "date") {
+        if (value !== "") {
+          setIsDateValid(true);
+        }
+      }
+      if (!isPriceValid && name === "price") {
+        if (value !== "") {
+          setIsPriceValid(true);
+        }
+      }
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     }
   };
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      price: parseFloat(value).toFixed(2),
+    }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const transactionData = {
+    let transactionData = {
       ...formData,
-      date: new Date(formData.date).toISOString(),
-      price: parseFloat(formData.price),
     };
-    //powinnismy tez zaktualizowac asseta i odjac od niego price'a
-    dispatch(
-      assetsActions.updateValue({
-        asset: transactionData.asset,
-        value: transactionData.price,
-      })
-    );
-    dispatch(transactionActions.addNewElement(transactionData));
+    if (
+      transactionData.asset !== "" &&
+      transactionData.category !== "" &&
+      transactionData.date !== "" &&
+      transactionData.price !== ""
+    ) {
+      transactionData = {
+        ...formData,
+        date: new Date(formData.date).toISOString(),
+        price: parseFloat(formData.price).toFixed(2),
+      };
+      dispatch(
+        assetsActions.updateValue({
+          asset: transactionData.asset,
+          value: transactionData.price,
+        })
+      );
+      dispatch(transactionActions.addNewElement(transactionData));
+      setFormData(defaultFormData);
+      closeDialog();
+    } else {
+      if (transactionData.asset === "") {
+        setIsAssetValid(false);
+      }
+      if (transactionData.category === "") {
+        setIsCategoryValid(false);
+      }
+      if (transactionData.date === "") {
+        setIsDateValid(false);
+      }
+      if (transactionData.price === "") {
+        setIsPriceValid(false);
+      }
+    }
+  };
+
+  const handleClose = () => {
     setFormData(defaultFormData);
+    setIsAssetValid(true);
+    setIsCategoryValid(true);
+    setIsDateValid(true);
+    setIsPriceValid(true);
     closeDialog();
   };
   return (
@@ -86,7 +148,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
               <span className="section-header dialog-title">
                 New Transaction
               </span>
-              <button onClick={closeDialog} className="close-dialog-btn">
+              <button onClick={handleClose} className="close-dialog-btn">
                 X
               </button>
             </div>
@@ -94,6 +156,11 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
               <div className="input-container">
                 <div className="dialog-input-section">
                   <label>Asset</label>
+                  {!isAssetValid && (
+                    <span className="validation-warning">
+                      You must select an asset!
+                    </span>
+                  )}
                   <select
                     name="asset"
                     value={formData.asset}
@@ -110,6 +177,11 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Category</label>
+                  {!isCategoryValid && (
+                    <span className="validation-warning">
+                      You must select a category!
+                    </span>
+                  )}
                   <select
                     name="category"
                     value={formData.category}
@@ -128,6 +200,11 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Date</label>
+                  {!isDateValid && (
+                    <span className="validation-warning">
+                      You must select a date!
+                    </span>
+                  )}
                   <input
                     name="date"
                     type="date"
@@ -138,19 +215,26 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Price</label>
+                  {!isPriceValid && (
+                    <span className="validation-warning">
+                      You must select a price!
+                    </span>
+                  )}
                   <input
                     name="price"
-                    type="text"
+                    type="number"
+                    step="0.01"
                     value={formData.price}
                     onChange={handleChange}
                     className="dialog-input"
                     autocomplete="off"
+                    onBlur={handleBlur}
                   />
                 </div>
               </div>
             </form>
             <div className="dialog-bottom-btns-container">
-              <button className="dialog-btn-cancel" onClick={closeDialog}>
+              <button className="dialog-btn-cancel" onClick={handleClose}>
                 Cancel
               </button>
               <button className="dialog-btn-submit" onClick={handleSubmit}>

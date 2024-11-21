@@ -75,6 +75,7 @@ dialog form select{
   color: #535C91;
   font-size: 14px;
 }
+
 .dialog-input{
   height: 28.4px;
   border-radius: 10px;
@@ -100,4 +101,9 @@ input{
 .dialog-input-section label{
   font-size: 14px;
   color: #9290C3;
+}
+.validation-warning{
+  font-weight: bold;
+  font-size: 12px;
+  color: #cc3300;
 }
