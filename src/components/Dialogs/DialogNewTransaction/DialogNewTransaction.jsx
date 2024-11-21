@@ -4,7 +4,7 @@ import { transactionActions } from "../../../store/transactions";
 import { assetsActions } from "../../../store/assets";
 
 
-import DialogNewCategory from "../NewCategoryDialog/NewCategoryDialog";
+import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog"; 
 import "./DialogNewTransaction.css";
 
 import DialogNewAsset from "../DialogNewAsset";

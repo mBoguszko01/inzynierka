@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plannedTransactionActions } from "../../../store/plannedTransactions";
-import DialogNewCategory from "../NewCategoryDialog/NewCategoryDialog";
+import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
+import DialogNewAsset from "../DialogNewAsset";
 import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
@@ -18,23 +19,28 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
+  const [isNewAssetOpen, setIsNewAssetOpen] = useState(false);
+
   const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
   };
+  const closeNewAssetDialog = () => {
+    setIsNewAssetOpen(false);
+  }
   const categories = useSelector((state) => state.categories.categoryList);
   const assets = useSelector((state) => state.assets.totalAssets);
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (value !== "newCategory") {
+    if (value === "newAsset") {
+      setIsNewAssetOpen(true);
+    } else if (value === "newCategory") {
+      setIsNewCategoryOpen(true);
+    } else {
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
-    } else {
-      setIsNewCategoryOpen(true);
     }
-    console.log(formData);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,16 +53,25 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     setFormData(defaultFormData);
     closeDialog();
   };
-
+  let firstPossibleDay = new Date();
+  firstPossibleDay.setDate(firstPossibleDay.getDate() + 1); //mozna rozpoczac planned transactions od jutra
   return (
     <>
       {isNewCategoryOpen && (
         <DialogNewCategory
           isDialogOpen={isNewCategoryOpen}
           closeDialog={closeNewCategoryDialog}
+          setGeneralFormData={setFormData}
         />
       )}
-      {isDialogOpen && !isNewCategoryOpen && (
+      {isNewAssetOpen && !isNewCategoryOpen && (
+        <DialogNewAsset
+          isDialogOpen={isNewAssetOpen}
+          closeDialog={closeNewAssetDialog}
+          setGeneralFormData={setFormData}
+        />
+      )}
+      {isDialogOpen && !isNewCategoryOpen && !isNewAssetOpen && (
         <div className="dialog-background fade-in">
           <dialog className="dialog" open={isDialogOpen}>
             <div className="dialog-top-bar">
@@ -88,11 +103,12 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select an asset</option>
-                    {
-                      assets.map((asset, index) => (
-                        <option value ={asset.name} key={index}>&nbsp;{asset.name}</option>
-                      ))
-                    }
+                    {assets.map((asset, index) => (
+                      <option value={asset.name} key={index}>
+                        &nbsp;{asset.name}
+                      </option>
+                    ))}
+                    <option value="newAsset">&nbsp;+ Create new asset</option>
                   </select>
                 </div>
                 <div className="dialog-input-section">
@@ -131,7 +147,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     name="date"
                     type="date"
                     value={formData.date}
-                    min={(new Date).toISOString().split('T')[0]}
+                    min={firstPossibleDay.toISOString().split("T")[0]}
                     onChange={handleChange}
                     className="dialog-input"
                   />
@@ -172,8 +188,12 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                   formData.repeatUnit === "months" && (
                     <div>
                       <span className="info-29-30-31">
-                        &#9432;
-                        The transaction is repeated on the {new Date(formData.date).getDate() === 31 ? new Date(formData.date).getDate() + 'st' : new Date(formData.date).getDate()+'th'} day of the month; if it does not occur, then on the last day of the month.
+                        &#9432; The transaction is repeated on the{" "}
+                        {new Date(formData.date).getDate() === 31
+                          ? new Date(formData.date).getDate() + "st"
+                          : new Date(formData.date).getDate() + "th"}{" "}
+                        day of the month; if it does not occur, then on the last
+                        day of the month.
                       </span>
                     </div>
                   )}

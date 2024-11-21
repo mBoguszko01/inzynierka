@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DialogNewCategory from "./NewCategoryDialog/NewCategoryDialog";
+import DialogNewCategory from "../../Dialogs/DialogNewCategory/NewCategoryDialog";  
+
 const SettingsComponent = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categoryList);
