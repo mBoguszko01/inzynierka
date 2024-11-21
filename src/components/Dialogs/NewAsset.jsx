@@ -40,7 +40,7 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
     setFormData(defaultFormData);
     closeDialog();
   };
-
+  console.log(isDialogOpen);
   return (
     <>
       {isDialogOpen && (

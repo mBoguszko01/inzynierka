@@ -24,6 +24,7 @@ const TotalAssetsContainer = () => {
         <DialogNewAsset
           isDialogOpen={isDialogOpen}
           closeDialog={closeDialog}
+          setGeneralFormData={()=>{}}
         />
       }
     </div>

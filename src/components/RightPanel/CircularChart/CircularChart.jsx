@@ -17,6 +17,7 @@ const CircularChart = (props) => {
   let colors = [...COLORS];
   if(chartName === 'Distribution of Financial Assets'){
     chartData = useSelector((state) => state.assets).totalAssets;
+    colors = chartData.map(asset => asset.color);
   }
   else{
     const transactions = useSelector((state) => state.transactions.transactionsList)
