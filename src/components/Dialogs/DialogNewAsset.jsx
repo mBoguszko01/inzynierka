@@ -13,6 +13,10 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
   };
   const [formData, setFormData] = useState(defaultFormData);
 
+
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isValueValid, setIsValueValid] = useState(true);
+
   const handleColorChange = (color) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -22,6 +26,16 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if(!isNameValid && name === "name"){
+      if(value !== ""){
+        setIsNameValid(true)
+      }
+    }
+    if(!isValueValid && name === "value"){
+      if(value !== ""){
+        setIsValueValid(true)
+      }
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -32,15 +46,39 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
     const newAssetData = {
       ...formData,
     };
-    dispatch(assetsActions.addNewElement(newAssetData));
-    setGeneralFormData((prevData) => ({
-      ...prevData,
-      asset: newAssetData.name
-    }))
+    if(newAssetData.name !== "" && newAssetData.value !== ""){
+      dispatch(assetsActions.addNewElement(newAssetData));
+      setGeneralFormData((prevData) => ({
+        ...prevData,
+        asset: newAssetData.name
+      }))
+      setFormData(defaultFormData);
+      closeDialog();
+    }
+    else{
+      if (newAssetData.name === "") {
+        setIsNameValid(false);
+      }
+      if(newAssetData.value === ""){
+        setIsValueValid(false);
+      }
+    }
+    
+  };
+  const handleClose = () => {
     setFormData(defaultFormData);
+    setIsNameValid(true);
+    setIsValueValid(true);
     closeDialog();
   };
-  console.log(isDialogOpen);
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      value: parseFloat(value).toFixed(2),
+    }));
+  };
   return (
     <>
       {isDialogOpen && (
@@ -48,7 +86,7 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
           <dialog className="dialog" open={isDialogOpen}>
             <div className="dialog-top-bar">
               <span className="section-header dialog-title">New Asset</span>
-              <button onClick={closeDialog} className="close-dialog-btn">
+              <button onClick={handleClose} className="close-dialog-btn">
                 X
               </button>
             </div>
@@ -62,26 +100,40 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
                     value={formData.logo}
                     onChange={handleChange}
                     className="dialog-input"
+                    autoComplete="off"
                   />
                 </div>
                 <div className="dialog-input-section">
                   <label>Name</label>
+                  {!isNameValid && (
+                    <span className="validation-warning">
+                      You must select a name!
+                    </span>
+                  )}
                   <input
                     name="name"
                     type="text"
                     value={formData.name}
                     onChange={handleChange}
                     className="dialog-input"
+                    autoComplete="off"
                   />
                 </div>
                 <div className="dialog-input-section">
                   <label>Value</label>
+                  {!isValueValid && (
+                    <span className="validation-warning">
+                      You must provide a value!
+                    </span>
+                  )}
                   <input
                     name="value"
-                    type="text"
+                    type="number"
+                    autoComplete="off"
                     value={formData.value}
                     onChange={handleChange}
                     className="dialog-input"
+                    onBlur={handleBlur}
                   />
                 </div>
                 <div className="dialog-input-section">
@@ -94,7 +146,7 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
               </div>
             </form>
             <div className="dialog-bottom-btns-container">
-              <button className="dialog-btn-cancel" onClick={closeDialog}>
+              <button className="dialog-btn-cancel" onClick={handleClose}>
                 Cancel
               </button>
               <button className="dialog-btn-submit" onClick={handleSubmit}>

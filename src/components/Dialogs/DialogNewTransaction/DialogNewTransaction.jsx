@@ -111,7 +111,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       if (transactionData.date === "") {
         setIsDateValid(false);
       }
-      if (transactionData.price === "") {
+      if (transactionData.price === "" || isNaN(transactionData.price)) {
         setIsPriceValid(false);
       }
     }
@@ -223,7 +223,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                   <input
                     name="price"
                     type="number"
-                    step="0.01"
+                    step="1"
                     value={formData.price}
                     onChange={handleChange}
                     className="dialog-input"

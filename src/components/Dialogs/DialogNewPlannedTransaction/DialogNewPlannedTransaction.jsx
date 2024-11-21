@@ -21,12 +21,20 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
   const [isNewAssetOpen, setIsNewAssetOpen] = useState(false);
 
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isAssetValid, setIsAssetValid] = useState(true);
+  const [isCategoryValid, setIsCategoryValid] = useState(true);
+  const [isDateValid, setIsDateValid] = useState(true);
+  const [invalidDateReason, setInvalidDateReason] = useState();
+  const [isPriceValid, setIsPriceValid] = useState(true);
+  const [isRepeatValueValid, setIsRepeatValueValid] = useState(true);
+
   const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
   };
   const closeNewAssetDialog = () => {
     setIsNewAssetOpen(false);
-  }
+  };
   const categories = useSelector((state) => state.categories.categoryList);
   const assets = useSelector((state) => state.assets.totalAssets);
   const handleChange = (e) => {
@@ -36,6 +44,36 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     } else if (value === "newCategory") {
       setIsNewCategoryOpen(true);
     } else {
+      if (!isNameValid && name === "name") {
+        if (value !== "") {
+          setIsNameValid(true);
+        }
+      }
+      if (!isAssetValid && name === "asset") {
+        if (value !== "") {
+          setIsAssetValid(true);
+        }
+      }
+      if (!isCategoryValid && name === "category") {
+        if (value !== "") {
+          setIsCategoryValid(true);
+        }
+      }
+      if (!isDateValid && name === "date") {
+        if (value !== "") {
+          setIsDateValid(true);
+        }
+      }
+      if (!isPriceValid && name === "price") {
+        if (value !== "") {
+          setIsPriceValid(true);
+        }
+      }
+      if (!isRepeatValueValid && name === "repeatValue") {
+        if (value !== "") {
+          setIsRepeatValueValid(true);
+        }
+      }
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -44,13 +82,72 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const plannedTransactionData = {
+    let plannedTransactionData = {
       ...formData,
-      date: new Date(formData.date).toISOString(),
-      price: parseFloat(formData.price),
     };
-    dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+    if (
+      plannedTransactionData.name !== "" &&
+      plannedTransactionData.asset !== "" &&
+      plannedTransactionData.category !== "" &&
+      plannedTransactionData.date !== "" &&
+      (plannedTransactionData.price !== "" && !isNaN(plannedTransactionData.price)) &&
+      plannedTransactionData.repeatValue !== ""
+    ) {
+      plannedTransactionData = {
+        ...formData,
+        date: new Date(formData.date).toISOString(),
+        price: parseFloat(formData.price),
+      };
+      dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+      setFormData(defaultFormData);
+      closeDialog();
+    } else {
+      if (plannedTransactionData.name === "") {
+        setIsNameValid(false);
+      }
+      if (plannedTransactionData.asset === "") {
+        setIsAssetValid(false);
+      }
+      if (plannedTransactionData.category === "") {
+        setIsCategoryValid(false);
+      }
+      if (plannedTransactionData.date === "" || new Date(plannedTransactionData.date) < new Date()) {
+        setIsDateValid(false);
+        setInvalidDateReason(plannedTransactionData.date === "" ? 'You must select a date!' : 'The planned transaction must have a date in the future!')
+      }
+      if (plannedTransactionData.price === "" || isNaN(plannedTransactionData.price)) {
+        setIsPriceValid(false);
+      }
+      if (parseInt(plannedTransactionData.repeatValue) == 0 || plannedTransactionData.repeatValue === "") {
+        setIsRepeatValueValid(false);
+      }
+    }
+    console.log(plannedTransactionData);
+  };
+
+  const handlePriceBlur = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      price: parseFloat(value).toFixed(2),
+    }));
+  };
+  const handleRepeatValueBlur = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      repeatValue: parseInt(value).toString(),
+    }));
+  }
+  const handleClose = () => {
     setFormData(defaultFormData);
+    setIsNameValid(true);
+    setIsAssetValid(true);
+    setIsCategoryValid(true);
+    setIsDateValid(true);
+    setIsPriceValid(true);
+    setIsRepeatValueValid(true);
     closeDialog();
   };
   let firstPossibleDay = new Date();
@@ -78,7 +175,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
               <span className="section-header dialog-title">
                 Planned Transactions
               </span>
-              <button onClick={closeDialog} className="close-dialog-btn">
+              <button onClick={handleClose} className="close-dialog-btn">
                 X
               </button>
             </div>
@@ -86,6 +183,11 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
               <div className="input-container">
                 <div className="dialog-input-section">
                   <label>Name</label>
+                  {!isNameValid && (
+                    <span className="validation-warning">
+                      You must select a name!
+                    </span>
+                  )}
                   <input
                     name="name"
                     type="text"
@@ -97,6 +199,11 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Asset</label>
+                  {!isAssetValid && (
+                    <span className="validation-warning">
+                      You must select an asset!
+                    </span>
+                  )}
                   <select
                     name="asset"
                     value={formData.asset}
@@ -113,6 +220,11 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Category</label>
+                  {!isCategoryValid && (
+                    <span className="validation-warning">
+                      You must select a category!
+                    </span>
+                  )}
                   <select
                     name="category"
                     value={formData.category}
@@ -132,17 +244,29 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
 
                 <div className="dialog-input-section">
                   <label>Price</label>
+                  {!isPriceValid && (
+                    <span className="validation-warning">
+                      You must select a price!
+                    </span>
+                  )}
                   <input
                     name="price"
-                    type="text"
+                    type="number"
+                    step="1"
                     value={formData.price}
                     onChange={handleChange}
                     className="dialog-input"
                     autocomplete="off"
+                    onBlur={handlePriceBlur}
                   />
                 </div>
                 <div className="dialog-input-section">
                   <label>Date</label>
+                  {!isDateValid && (
+                    <span className="validation-warning">
+                      {invalidDateReason}
+                    </span>
+                  )}
                   <input
                     name="date"
                     type="date"
@@ -154,14 +278,31 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                 </div>
                 <div className="dialog-input-section">
                   <label>Repeat Every</label>
+                  {!isRepeatValueValid && (
+                    <span className="validation-warning">
+                      You must select a repeat value!
+                    </span>
+                  )}
                   <div className="dialog-input-section-repeat">
                     <input
                       name="repeatValue"
-                      type="text"
+                      type="number"
                       value={formData.repeatValue}
                       onChange={handleChange}
+                      onKeyDown={(e) => {
+                        if (
+                          e.key === "." ||
+                          e.key === "," ||
+                          e.key === "-" ||
+                          e.key === "+"
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
+                      min={1}
                       className="dialog-input dialog-input-repeat"
                       autocomplete="off"
+                      onBlur={handleRepeatValueBlur}
                     />
                     <select
                       name="repeatUnit"
@@ -170,7 +311,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                       className="dialog-select-repeat"
                     >
                       <option value="days" defaultValue>
-                        &nbsp;{formData.repeatValue === "1" ? "day" : "days"}
+                        &nbsp;{(formData.repeatValue === "1") ? "day" : "days"}
                       </option>
                       <option value="weeks">
                         &nbsp;{formData.repeatValue === "1" ? "week" : "weeks"}
@@ -211,7 +352,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
               </div>
             </form>
             <div className="dialog-bottom-btns-container">
-              <button className="dialog-btn-cancel" onClick={closeDialog}>
+              <button className="dialog-btn-cancel" onClick={handleClose}>
                 Cancel
               </button>
               <button className="dialog-btn-submit" onClick={handleSubmit}>

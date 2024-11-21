@@ -11,7 +11,7 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
     color: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
-
+  const [isNameValid, setIsNameValid] = useState(true);
   const handleColorChange = (color) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -25,6 +25,9 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
       ...prevData,
       [name]: value,
     }));
+    if(name === "name" && value !== ""){
+      setIsNameValid(true);
+    }
   };
   const handleSubmit = (e) => {
     
@@ -32,16 +35,27 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
     const newCategoryData = {
       ...formData,
     };
-    dispatch(categoryActions.addNewElement(newCategoryData));
-    setGeneralFormData((prevData) => ({
-      ...prevData,
-      category: newCategoryData.name
-      
-    }))
-    setFormData(defaultFormData);
-    closeDialog();
+    if(newCategoryData.name !== "")
+    {
+      dispatch(categoryActions.addNewElement(newCategoryData));
+      setFormData((prevData) => ({
+        ...prevData,
+        category: newCategoryData.name
+        
+      }))
+      setFormData(defaultFormData);
+      closeDialog();
+    }
+    else{
+      setIsNameValid(false);
+    }
+    
   };
-
+  const handleClose = () => {
+    setFormData(defaultFormData);
+    setIsNameValid(true);
+    closeDialog();
+  }
   return (
     <>
       {isDialogOpen && (
@@ -49,7 +63,7 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
           <dialog className="dialog" open={isDialogOpen}>
             <div className="dialog-top-bar">
               <span className="section-header dialog-title">New Category</span>
-              <button onClick={closeDialog} className="close-dialog-btn">
+              <button onClick={handleClose} className="close-dialog-btn">
                 X
               </button>
             </div>
@@ -57,12 +71,18 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
               <div className="input-container">
                 <div className="dialog-input-section">
                   <label>Category Name</label>
+                  {!isNameValid && (
+                    <span className="validation-warning">
+                      You must provide an name!
+                    </span>
+                  )}
                   <input
                     name="name"
                     type="text"
                     value={formData.name}
                     onChange={handleChange}
                     className="dialog-input"
+                    autoComplete="off"
                   />
                 </div>
                 <div className="dialog-input-section">
@@ -73,7 +93,7 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
               </div>
             </form>
             <div className="dialog-bottom-btns-container">
-              <button className="dialog-btn-cancel" onClick={closeDialog}>
+              <button className="dialog-btn-cancel" onClick={handleClose}>
                 Cancel
               </button>
               <button className="dialog-btn-submit" onClick={handleSubmit}>
