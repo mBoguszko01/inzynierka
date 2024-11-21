@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PlannedTransactions from "./PlannedTransactions";
 import "./PlannedTransactionsContainer.css";
-import DialogNewPlannedTransaction from "./DialogNewPlannedTransaction/DialogNewPlannedTransaction";
+import DialogNewPlannedTransaction from "../../Dialogs/DialogNewPlannedTransaction/DialogNewPlannedTransaction";
 
 const PlannedTransactionsContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

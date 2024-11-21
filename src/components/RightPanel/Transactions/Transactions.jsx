@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import RecentTransactions from "../../RecentTransactions/RecentTransactions";
 import "./Transactions.css";
-import DialogNewTransaction from "./DialogNewTransaction/DialogNewTransaction";
+import DialogNewTransaction from "../../Dialogs/DialogNewTransaction/DialogNewTransaction";
 const Transactions = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const currView = useSelector((state) => state.view);

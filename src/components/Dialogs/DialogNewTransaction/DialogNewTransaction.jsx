@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { transactionActions } from "../../../../store/transactions";
-import { assetsActions } from "../../../../store/assets";
+import { transactionActions } from "../../../store/transactions";
+import { assetsActions } from "../../../store/assets";
 
-import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
+
+import DialogNewCategory from "../NewCategoryDialog/NewCategoryDialog";
 import "./DialogNewTransaction.css";
 
-import DialogNewAsset from "../../../Dialogs/NewAsset";
+import DialogNewAsset from "../DialogNewAsset";
 
 const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();

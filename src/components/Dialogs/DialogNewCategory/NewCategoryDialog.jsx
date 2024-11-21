@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TwitterPicker } from "react-color";
-import { categoryActions } from "../../../../store/categories";
+import { categoryActions } from "../../../store/categories";
 import './NewCategoryDialog.css';
 //LOGO, nazwa, wartosc
 const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {

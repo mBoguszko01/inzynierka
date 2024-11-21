@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { plannedTransactionActions } from "../../../../store/plannedTransactions";
-import DialogNewCategory from "../../SettingsComponent/NewCategoryDialog/NewCategoryDialog";
+import { plannedTransactionActions } from "../../../store/plannedTransactions";
+import DialogNewCategory from "../NewCategoryDialog/NewCategoryDialog";
 import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
