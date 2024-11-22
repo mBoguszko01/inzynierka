@@ -136,6 +136,8 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     setIsPriceValid(true);
     closeDialog();
   };
+
+
   return (
     <>
       {showAssetLowerThanZeroAlertWindow &&
@@ -144,7 +146,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
           <DialogValueLowerThanZero
             isDialogOpen={true}
             closeDialog={() => {setShowAssetLowerThanZeroAlertWindow(false); handleClose()}}
-            selectedAsset = {formData}
+            selectedAsset = {formData.asset}
             setFormData = {() => setFormData(defaultFormData)}
           />
         )}

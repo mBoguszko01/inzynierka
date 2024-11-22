@@ -14,7 +14,7 @@ const assetsSlice = createSlice({
         addNewElement(state, action) {
             state.totalAssets.push(action.payload);
           },
-        updateValue(state,action){
+        updateValue(state,action){ //zmienic nazwe na proceed transaction
             const { asset, value } = action.payload;
             const account = state.totalAssets.find(account => account.name === asset); 
     
@@ -22,6 +22,15 @@ const assetsSlice = createSlice({
                 account.value -= value;
             } else {
                 console.log(`Something went wrong`);
+            }
+        },
+        updateValue2(state,action){
+            const { asset, value } = action.payload;
+            const account = state.totalAssets.find(account => account.name === asset); 
+            if (account) {
+                account.value = value;
+            } else {
+                console.log(`Something went wronggg`);
             }
         }
     }

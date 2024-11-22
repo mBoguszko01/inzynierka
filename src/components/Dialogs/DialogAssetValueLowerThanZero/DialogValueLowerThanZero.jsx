@@ -22,18 +22,18 @@ const DialogValueLowerThanZero = (props) => {
     closeDialog();
   };
   return (
-    <>{showUpdateWindow && <DialogUpdateAsset closeDialog={() => {setShowUpdateWindow(false)}} asset={selectedAsset.asset}/>}
+    <>{showUpdateWindow && <DialogUpdateAsset closeDialog={() => {setShowUpdateWindow(false)}} asset={selectedAsset}/>}
       {!showUpdateWindow && <div className="dialog-background fade-in">
         <dialog className="dialog slide-in" open={true}>
           <div className="dialog-top-bar">
             <span className="section-header dialog-title">
-              {selectedAsset.asset}
+              {selectedAsset}
             </span>
             <button onClick={closeDialog} className="close-dialog-btn">
               X
             </button>
           </div>
-
+            The transaction price is exceeding your {selectedAsset.asset} balance. Are you sure you want to proceed?
           <div className="dialog-bottom-btns-container">
             <button className="dialog-btn-cancel" onClick={closeDialog}>
               Cancel
