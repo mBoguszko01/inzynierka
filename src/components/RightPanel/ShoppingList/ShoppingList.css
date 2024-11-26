@@ -42,3 +42,8 @@
     min-height: 75vh;
     width: 30%;
 }
+.shopping-list-items-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

@@ -15,7 +15,18 @@ const ShoppingList = (props) => {
             </div>
             <div className="separator"></div>
           </div>
-          <ShoppingListItem itemName = "test" itemQuantity = "5"></ShoppingListItem>
+          <div className="shopping-list-items-container">
+            <ShoppingListItem
+              itemName="test"
+              itemQuantity="5"
+              itemCategory=""
+            ></ShoppingListItem>
+            <ShoppingListItem
+              itemName="test"
+              itemQuantity="5"
+              itemCategory=""
+            ></ShoppingListItem>
+          </div>
         </div>
         <div className="products-container"></div>
       </div>

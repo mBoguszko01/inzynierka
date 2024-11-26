@@ -1,6 +1,6 @@
 import './ShoppingListItem.css';
 const ShoppingListItem = (props) => {
-    const {itemName, itemQuantity} = props;
+    const {itemName, itemQuantity,itemCategory} = props;
     return <>
         <div className='shopping-list-item-container'>
             <input type='radio'></input>
