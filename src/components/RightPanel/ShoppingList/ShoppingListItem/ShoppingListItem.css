@@ -1,0 +1,6 @@
+.shopping-list-item-container{
+    width: auto;
+    border: 1px solid #000;
+    display: flex;
+    padding: 10px 10px;
+}
