@@ -40,6 +40,9 @@ const LeftPanel = (props) => {
         <div className="options-section">
           <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Tools</span>
           <li>
+            <ListElement name="Shopping List" isSidebarOpen={isSidebarOpen}/>
+          </li>
+          <li>
             <ListElement name="Split Bill" isSidebarOpen={isSidebarOpen}/>
           </li>
           <li>

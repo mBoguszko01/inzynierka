@@ -27,6 +27,7 @@ const ListElement = (props) => {
       "total assets": mdiWalletOutline,
       "transactions": mdiSwapHorizontal,
       "split bill": mdiReceiptTextOutline,
+      "shopping list": mdiReceiptTextOutline,
       "savings planner": mdiFinance,
       "settings": mdiCog,
     };
