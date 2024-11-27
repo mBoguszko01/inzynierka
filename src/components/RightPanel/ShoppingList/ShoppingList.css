@@ -2,12 +2,15 @@
     padding: 25px 30px 30px 30px;
     display: flex;
     gap: 16px;
+    overflow: hidden;
 }
 .shopping-list-container{
-    width: 70%;
+    
+    width: 55%;
     background-color: #fff;
     border-radius: 10px;
     min-height: 75vh;
+    max-height: 75vh;
     padding: 0 22px;
 }
 .shopping-list-title-container{
@@ -19,6 +22,8 @@
     margin-bottom: 0px;
 }
 .shopping-list-title-search-container{
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -40,10 +45,13 @@
     border-radius: 10px;
     max-height: 75vh;
     min-height: 75vh;
-    width: 30%;
+    width: 45%;
 }
 .shopping-list-items-container{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow: hidden;
+    max-height: 400px;
+    overflow-y: auto
 }
