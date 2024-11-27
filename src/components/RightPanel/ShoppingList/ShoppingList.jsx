@@ -1,27 +1,52 @@
 import { useState } from "react";
 import ShoppingListItem from "./ShoppingListItem/ShoppingListItem";
+import ShoppingListItemInfo from "./ShoppingListItemInfo/ShoppingListItemInfo";
 import "./ShoppingList.css";
 
 const ShoppingList = (props) => {
   const [search, setSearch] = useState("");
-  const allItems = [
-    { itemName: "ser", itemQuantity: "1", itemCategory: "Diary Products" },
-    { itemName: "karma", itemQuantity: "1", itemCategory: "Pet Products" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-    { itemName: "dorsz", itemQuantity: "1", itemCategory: "Fish" },
-  ];
-
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [allItems, setAllItems] = useState([
+    {
+      itemId: 1,
+      itemName: "ser",
+      itemQuantity: "1",
+      itemUnity: "",
+      itemCategory: "Diary Products",
+    },
+    {
+      itemId: 2,
+      itemName: "karma",
+      itemQuantity: "1",
+      itemUnity: "",
+      itemCategory: "Pet Products",
+    },
+    {
+      itemId: 3,
+      itemName: "dorsz",
+      itemQuantity: "1",
+      itemUnity: "",
+      itemCategory: "Fish",
+    },
+    {
+      itemId: 4,
+      itemName: "mąka",
+      itemQuantity: "1",
+      itemUnity: "",
+      itemCategory: "Dry Products",
+    },
+  ]);
+  const updateItem = (updatedItem) => {
+    setAllItems((prevItems) =>
+      prevItems.map((item) =>
+        item.itemId === updatedItem.itemId ? updatedItem : item
+      )
+    );
+  };
   const filteredItems = allItems.filter((item) =>
     item.itemName.toLowerCase().includes(search.toLocaleLowerCase())
   );
-
+  console.log(selectedItem);
   return (
     <>
       <div className="shopping-list-main-container">
@@ -31,7 +56,12 @@ const ShoppingList = (props) => {
               <span className="section-header shopping-list-title">
                 Nazwa listy
               </span>
-              <input type="text" className="shopping-list-search" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+              <input
+                type="text"
+                className="shopping-list-search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              ></input>
             </div>
             <div className="separator"></div>
           </div>
@@ -43,6 +73,7 @@ const ShoppingList = (props) => {
                   itemName={item.itemName}
                   itemQuantity={item.itemQuantity}
                   itemCategory={item.itemCategory}
+                  handleSelect={() => setSelectedItem(item)}
                 />
               ))
             ) : (
@@ -50,7 +81,15 @@ const ShoppingList = (props) => {
             )}
           </div>
         </div>
-        <div className="products-container"></div>
+        <div className="shopping-list-right-panel">
+          {selectedItem !== null && (
+            <ShoppingListItemInfo
+              item={selectedItem}
+              exitInfo={() => setSelectedItem(null)}
+              changeHandler={updateItem}
+            />
+          )}
+        </div>
       </div>
     </>
   );

@@ -1,0 +1,78 @@
+.shopping-list-item-info-wrapper{
+    position: relative;
+    height: calc(100% - 31px);
+    padding: 31px 22px 0 22px;
+}
+.shopping-list-item-info-exit-btn{
+    float: right;
+    font-size: 1.5em;
+    color: #535C91;
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+.shopping-list-item-info-exit-btn:hover{
+    background-color: #f5f5f5;
+    cursor: pointer
+    ;
+}
+.shopping-list-item-info-container{
+    display: flex;
+    flex-direction: column; 
+    gap: 15px
+}
+.shopping-list-item-info-container input{
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #535C91;
+    color: #535C91;
+    font-size: 14px;
+}
+.shopping-list-item-info-container-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25%;
+}
+.shopping-list-item-info-container-img img{
+    width: 50px;
+}
+
+.shopping-list-item-info-horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.shopping-list-item-info-vertical{
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+.shopping-list-item-info-confirmation-btn{
+    position: absolute;
+    bottom: 31px;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.shopping-list-item-info-confirmation-btn button{
+    height: 40px;
+    width: 300px;
+    background-color: #3B2E75;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+.shopping-list-item-info-confirmation-btn button:hover{
+    cursor: pointer;
+    background-color: #352A6D;
+}
+
+.shopping-list-item-info-confirmation-btn button:active{
+    box-shadow:  3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}

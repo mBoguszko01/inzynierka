@@ -43,9 +43,6 @@ const LeftPanel = (props) => {
             <ListElement name="Shopping List" isSidebarOpen={isSidebarOpen}/>
           </li>
           <li>
-            <ListElement name="Split Bill" isSidebarOpen={isSidebarOpen}/>
-          </li>
-          <li>
             <ListElement name="Savings Planner" isSidebarOpen={isSidebarOpen}/>
           </li>
         </div>
