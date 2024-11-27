@@ -1,0 +1,4 @@
+.shopping-list-add-new-item-wrapper{
+    height: calc(100% - 31px);
+    padding: 31px 22px 0 22px;
+}

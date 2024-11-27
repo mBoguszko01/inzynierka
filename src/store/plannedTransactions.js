@@ -17,7 +17,7 @@ const plannedTransactionsSlice = createSlice({
       {
         name: "Netflix Subscription",
         asset: "ING",
-        category: "Enterainment",
+        category: "Entertainment",
         date: "2024-11-27T12:00:00.000Z", // ISO format
         price: 15,
         repeatValue: 1, // np. co 1 miesiąc

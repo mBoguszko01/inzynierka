@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ShoppingListItem from "./ShoppingListItem/ShoppingListItem";
 import ShoppingListItemInfo from "./ShoppingListItemInfo/ShoppingListItemInfo";
+import ShoppingListAddItems from "./ShoppingListAddItems/ShoppingListAddItems";
 import "./ShoppingList.css";
 
 const ShoppingList = (props) => {
@@ -89,6 +90,7 @@ const ShoppingList = (props) => {
               changeHandler={updateItem}
             />
           )}
+          {selectedItem === null && <ShoppingListAddItems/>}
         </div>
       </div>
     </>
