@@ -14,7 +14,7 @@ const ShoppingListAddItems = (props) => {
       itemId: allItems.length + 1,
       itemName: product.product_name,
       itemQuantity: "1",
-      itemUnity: "",
+      itemUnit: "",
       itemCategory: product.category,
     };
 
@@ -55,8 +55,8 @@ const ShoppingListAddItems = (props) => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className="test">
-        <h4>Suggested</h4>
+      <div className="shopping-list-suggested-products-wrapper">
+        <h4 style={{marginBottom: '16px', marginTop: '16px'}}>Suggested</h4>
         <div className="shopping-list-suggested-products-container">
           {filteredItems.map((product, index) => (
             <div

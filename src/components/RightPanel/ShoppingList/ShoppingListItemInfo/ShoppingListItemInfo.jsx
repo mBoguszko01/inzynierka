@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import "./ShoppingListItemInfo.css";
-
+import Icon from '@mdi/react';
+import { mdiTrashCanOutline } from '@mdi/js';
 const ShoppingListItemInfo = (props) => {
   //nazwa , ilosc, jednostka , kategoria jako obrazek,
-  const { item, exitInfo, changeHandler } = props;
+  const { item, exitInfo, changeHandler, deleteHandler } = props;
   const [editedItem, setEditedItem] = useState({ ...item });
   useEffect(() => {
     setEditedItem({ ...item });
   }, [item]);
-  console.log(item);
-  console.log(editedItem);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedItem((prev) => ({
@@ -51,6 +51,9 @@ const ShoppingListItemInfo = (props) => {
           </div>
         </div>
       </form>
+
+      <button className="shopping-list-item-info-delete-btn" onClick={()=>{deleteHandler(item)}}><Icon path={mdiTrashCanOutline} size={1} /></button>
+
       <div className="shopping-list-item-info-confirmation-btn">
         <button onClick={confirmChanges}>Confirm</button>
       </div>

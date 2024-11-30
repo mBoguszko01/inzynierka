@@ -61,7 +61,7 @@
 }
 .shopping-list-item-info-confirmation-btn button{
     height: 40px;
-    width: 300px;
+    width: 60%;
     background-color: #3B2E75;
     color: #fff;
     border: none;
@@ -76,16 +76,18 @@
 .shopping-list-item-info-confirmation-btn button:active{
     box-shadow:  3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
-.shopping-list-delete-item{
-    width: 19px;
-    height: 19px;
-    aspect-ratio: 1;
+.shopping-list-item-info-delete-btn{
+    position: absolute;
+    bottom: 31px;
+    background-color: transparent;
+    border: 2px solid #bd3c3a;
+    border-radius: 10px;
+    color: #BD3D3A;
+    width: 10%;
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #BD3D3A;
-}
-.shopping-list-delete-item:hover{
-    background-color: #bd3c3a2c;
-    border-radius: 10px;
+    justify-content: space-around;
+    font-weight: bold;
+    z-index: 1;
 }

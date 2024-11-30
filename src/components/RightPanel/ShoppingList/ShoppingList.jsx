@@ -14,10 +14,18 @@ const ShoppingList = (props) => {
         item.itemId === updatedItem.itemId ? updatedItem : item
       )
     );
+    setSelectedItem(null);
   };
+  const deleteItem = (itemToDelete) => {
+    setAllItems((prevProducts) =>
+      prevProducts.filter((item) => item.itemName !== itemToDelete.itemName)
+    );
+    setSelectedItem(null);
+  }
   const filteredItems = allItems.filter((item) =>
     item.itemName.toLowerCase().includes(search.toLocaleLowerCase())
   );
+  
   return (
     <>
       <div className="shopping-list-main-container">
@@ -43,6 +51,7 @@ const ShoppingList = (props) => {
                   key={index}
                   itemName={item.itemName}
                   itemQuantity={item.itemQuantity}
+                  itemUnit={item.itemUnit}
                   itemCategory={item.itemCategory}
                   handleSelect={() => setSelectedItem(item)}
                 />
@@ -58,6 +67,7 @@ const ShoppingList = (props) => {
               item={selectedItem}
               exitInfo={() => setSelectedItem(null)}
               changeHandler={updateItem}
+              deleteHandler={deleteItem}
             />
           )}
           {selectedItem === null && <ShoppingListAddItems updateItemsHandler = {setAllItems} allItems = {allItems}/>}

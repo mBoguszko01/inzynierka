@@ -52,6 +52,6 @@
     flex-direction: column;
     gap: 16px;
     overflow: hidden;
-    max-height: 400px;
+    height: calc(75vh - (38px + 15%));
     overflow-y: auto
 }

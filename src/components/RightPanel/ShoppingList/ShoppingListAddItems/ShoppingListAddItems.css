@@ -13,10 +13,10 @@
     font-size: 14px;
     width: -webkit-fill-available;
 }
-.test{
+.shopping-list-suggested-products-wrapper{
     display: flex;
     flex-direction: column;
-    height: calc(75vh - 110px); /* policzyć potem dokładnie ile odejmujemy*/
+    height: calc(75vh - 110px);
 }
 .shopping-list-suggested-products-container{
     overflow-y: auto;
@@ -44,4 +44,17 @@
 }
 .shopping-list-add-product-plus:hover{
     cursor: pointer;
+}
+.shopping-list-delete-item{
+    width: 19px;
+    height: 19px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BD3D3A;
+}
+.shopping-list-delete-item:hover{
+    background-color: #bd3c3a2c;
+    border-radius: 10px;
 }
