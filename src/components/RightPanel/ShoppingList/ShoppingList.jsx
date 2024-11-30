@@ -7,36 +7,7 @@ import "./ShoppingList.css";
 const ShoppingList = (props) => {
   const [search, setSearch] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
-  const [allItems, setAllItems] = useState([
-    {
-      itemId: 1,
-      itemName: "ser",
-      itemQuantity: "1",
-      itemUnity: "",
-      itemCategory: "Diary Products",
-    },
-    {
-      itemId: 2,
-      itemName: "karma",
-      itemQuantity: "1",
-      itemUnity: "",
-      itemCategory: "Pet Products",
-    },
-    {
-      itemId: 3,
-      itemName: "dorsz",
-      itemQuantity: "1",
-      itemUnity: "",
-      itemCategory: "Fish",
-    },
-    {
-      itemId: 4,
-      itemName: "mąka",
-      itemQuantity: "1",
-      itemUnity: "",
-      itemCategory: "Dry Products",
-    },
-  ]);
+  const [allItems, setAllItems] = useState([]);
   const updateItem = (updatedItem) => {
     setAllItems((prevItems) =>
       prevItems.map((item) =>
@@ -47,7 +18,6 @@ const ShoppingList = (props) => {
   const filteredItems = allItems.filter((item) =>
     item.itemName.toLowerCase().includes(search.toLocaleLowerCase())
   );
-  console.log(selectedItem);
   return (
     <>
       <div className="shopping-list-main-container">
@@ -90,7 +60,7 @@ const ShoppingList = (props) => {
               changeHandler={updateItem}
             />
           )}
-          {selectedItem === null && <ShoppingListAddItems/>}
+          {selectedItem === null && <ShoppingListAddItems updateItemsHandler = {setAllItems} allItems = {allItems}/>}
         </div>
       </div>
     </>

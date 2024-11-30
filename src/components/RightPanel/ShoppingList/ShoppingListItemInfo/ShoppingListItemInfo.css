@@ -76,3 +76,16 @@
 .shopping-list-item-info-confirmation-btn button:active{
     box-shadow:  3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
+.shopping-list-delete-item{
+    width: 19px;
+    height: 19px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BD3D3A;
+}
+.shopping-list-delete-item:hover{
+    background-color: #bd3c3a2c;
+    border-radius: 10px;
+}
