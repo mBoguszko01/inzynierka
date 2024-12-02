@@ -38,6 +38,7 @@ function App() {
       let result = new Date(transactions[index].date);
       let firstElement = { ...transactions[index] };
       let day = new Date(transactions[index].date).getDate();
+      //dodaj do bazy danych
       dispatch(transactionActions.addNewElement(firstElement));
       let counter = 0;
       while (true && counter < 50) {
@@ -61,6 +62,7 @@ function App() {
         }
         if (result < new Date()) {
           data.date = result.toJSON();
+          //dodaj do bazy danych
           dispatch(transactionActions.addNewElement(data));
         } else {
           break;
@@ -68,7 +70,7 @@ function App() {
         counter++;
       }
     });
-
+    //zaktualizuj planned transaction w bazie danych
     dispatch(plannedTransactionActions.updateTransactionDates(indexes));
   }, [dispatch, transactions]);
 

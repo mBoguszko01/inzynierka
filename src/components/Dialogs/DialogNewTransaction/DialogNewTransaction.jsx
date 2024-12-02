@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../store/transactions";
+import { addTransactionToDatabase } from "../../../store/transactions";
+
 import { assetsActions } from "../../../store/assets";
 
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
@@ -93,7 +95,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     ) {
       transactionData = {
         ...formData,
-        date: new Date(formData.date).toISOString(),
+        date: new Date(new Date(formData.date).setHours(12)).toISOString(),
         price: parseFloat(formData.price).toFixed(2),
       };
       const selectedAssetObj = assets.find(
@@ -108,7 +110,9 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
             value: transactionData.price,
           })
         );
-        dispatch(transactionActions.addNewElement(transactionData));
+        
+        //dispatch(transactionActions.addNewElement(transactionData));
+        dispatch(addTransactionToDatabase(transactionData));
         setFormData(defaultFormData);
         closeDialog();
       }

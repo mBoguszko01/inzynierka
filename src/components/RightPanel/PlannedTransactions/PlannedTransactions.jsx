@@ -31,7 +31,7 @@ const PlannedTransactions = () => {
       <tbody>
         {limitedTransactions.map((transaction, index) => (
             <tr key={index}>
-            <td>{transaction.name}</td>
+            <td>{transaction.transaction_name}</td>
             <td>{transaction.asset_name}</td>
             <td>{transaction.category_name}</td>
             <td>{transaction.price}</td>
