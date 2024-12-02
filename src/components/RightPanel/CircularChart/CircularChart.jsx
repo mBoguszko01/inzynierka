@@ -1,3 +1,4 @@
+import { mdiCardsPlayingSpadeMultiple } from "@mdi/js";
 import { useSelector } from "react-redux";
 import {
   PieChart,
@@ -8,19 +9,22 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-//useSelector((state) => state.transactions).transactionsList
-//useSelector((state) => state.assets).totalAssets
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const CircularChart = (props) => {
   const { chartName } = props;
   let chartData;
-  let colors = [...COLORS];
+  let colors = [];
   if(chartName === 'Distribution of Financial Assets'){
     chartData = useSelector((state) => state.assets).totalAssets;
-    colors = chartData.map(asset => asset.color);
+    colors = chartData.map((asset, index) => asset.color || "#abc121");
+    chartData = chartData.map(({ name, value }) => ({
+      name: name || "Unknown",
+      value: typeof value === "string" ? parseFloat(value) : value,
+    }));
+
   }
   else{
     const transactions = useSelector((state) => state.transactions.transactionsList)
+    console.log(transactions);
     const filteredTransactions = transactions.filter(({date}) => {
       const transactionDate = new Date(date);
       return transactionDate.getMonth() === (new Date()).getMonth() && transactionDate.getFullYear() === (new Date()).getFullYear()
@@ -56,7 +60,7 @@ const CircularChart = (props) => {
             {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={colors[index % COLORS.length]}
+                fill={colors[index % colors.length]}
               />
             ))}
           </Pie>
