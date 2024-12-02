@@ -24,7 +24,6 @@ const CircularChart = (props) => {
   }
   else{
     const transactions = useSelector((state) => state.transactions.transactionsList)
-    console.log(transactions);
     const filteredTransactions = transactions.filter(({date}) => {
       const transactionDate = new Date(date);
       return transactionDate.getMonth() === (new Date()).getMonth() && transactionDate.getFullYear() === (new Date()).getFullYear()

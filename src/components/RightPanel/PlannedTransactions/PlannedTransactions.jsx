@@ -5,12 +5,15 @@ const PlannedTransactions = () => {
   const transactions = useSelector(
     (state) => state.plannedTransactions.plannedTransactionsList
   );
+  console.log(transactions);
   const [limiter, setLimiter] = useState(50);
 
   let limitedTransactions = [];
   limitedTransactions = [...transactions]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, limiter);
+
+  console.log(limitedTransactions);
   return (
     <table className="recent-transactions">
 
@@ -29,11 +32,11 @@ const PlannedTransactions = () => {
         {limitedTransactions.map((transaction, index) => (
             <tr key={index}>
             <td>{transaction.name}</td>
-            <td>{transaction.asset}</td>
-            <td>{transaction.category}</td>
+            <td>{transaction.asset_name}</td>
+            <td>{transaction.category_name}</td>
             <td>{transaction.price}</td>
             <td>{transaction.date.substring(0,10)}</td>
-            <td>Every {transaction.repeatValue} {transaction.repeatValue === 1 ? transaction.repeatUnit.substring(0,transaction.repeatUnit.length - 1) : transaction.repeatUnit}</td>
+            <td>Every {transaction.repeat_value} {transaction.repeat_value === 1 ? transaction.repeat_unit.substring(0,transaction.repeat_unit.length - 1) : transaction.repeat_unit}</td>
             <td>DODAĆ LOGO</td>
           </tr>
         ))}

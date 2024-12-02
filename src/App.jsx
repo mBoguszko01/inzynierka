@@ -4,14 +4,24 @@ import { plannedTransactionActions } from "./store/plannedTransactions";
 import { transactionActions } from "./store/transactions";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
+import {fetchCategories} from "./store/categories.js"
+import {fetchPlannedTransactions} from "./store/plannedTransactions.js"
+
 function App() {
   const dispatch = useDispatch();
   const transactions = useSelector(
     (state) => state.plannedTransactions.plannedTransactionsList
   );
-  const hasAlreadyAdded = useRef(false); // USUNĄĆ W WERSJI PROD! --- OBCHODZI TO BŁĄD SPOWODOWANY PRZEZ StrictMode (tranzakcje dodają się dwa razy)
+  const plannedTransactionsStatus = useSelector(
+    (state) => state.plannedTransactions.status
+  );
   useEffect(() => {
-    if (hasAlreadyAdded.current) return;
+    dispatch(fetchPlannedTransactions())
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    if (plannedTransactionsStatus !== "succedded") return;
     const indexes = [];
     const archivedTransactions = transactions // lista zawierająca tranzakcje które należy zupdatować
       .filter((transaction, index) => {
@@ -28,7 +38,6 @@ function App() {
       let result = new Date(transactions[index].date);
       let firstElement = { ...transactions[index] };
       let day = new Date(transactions[index].date).getDate();
-
       dispatch(transactionActions.addNewElement(firstElement));
       let counter = 0;
       while (true && counter < 50) {
@@ -59,9 +68,9 @@ function App() {
         counter++;
       }
     });
+
     dispatch(plannedTransactionActions.updateTransactionDates(indexes));
-    hasAlreadyAdded.current = true;
-  }, [dispatch]);
+  }, [dispatch, transactions]);
 
   return (
     <div className="main-container">
