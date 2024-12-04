@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { viewActions } from "../../store/view";
 import { useState } from "react";
 import "./RecentTransactions.css";
+import Icon from '@mdi/react';
+import { mdiPencilOutline } from '@mdi/js';
 
 const RecentTransactions = (props) => {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ const RecentTransactions = (props) => {
             <th>Category</th>
             <th>Date</th>
             <th>Amount</th>
+            {currView.selectedView!== "Dashboard" && <th></th>}
           </tr>
         </thead>
         <tbody>
@@ -52,6 +55,7 @@ const RecentTransactions = (props) => {
               <td>{categoryName}</td>
               <td>{transaction.date.substring(0,10)}</td>
               <td>{transaction.price}</td>
+              {currView.selectedView !== "Dashboard" && <td><button className="edit-button"><Icon path={mdiPencilOutline} size={0.8} /></button></td>}
             </tr>)
           })}
         </tbody>

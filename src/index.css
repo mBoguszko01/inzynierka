@@ -26,3 +26,15 @@
     width: 100%;
     background-color: #f5f5f5;
 }
+.edit-button{
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    color: #535C91;
+    border-radius: 10px;
+}
+.edit-button:hover{
+    cursor: pointer;
+    background-color: #F6F6F6;
+}

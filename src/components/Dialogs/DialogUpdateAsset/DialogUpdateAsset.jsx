@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assetsActions } from "../../../store/assets";
 import { TwitterPicker } from "react-color";
+import { compose } from "@reduxjs/toolkit";
+import { changeAssetValue } from "../../../store/assets";
 const DialogUpdateAsset = (props) => {
   const dispatch = useDispatch();
 
@@ -9,8 +11,7 @@ const DialogUpdateAsset = (props) => {
   const assets = useSelector((state) => state.assets.totalAssets);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isValueValid, setIsValueValid] = useState(true);
-
-  const selectedAssetObj = assets.find((element) => element.name === asset);
+  const selectedAssetObj = typeof(asset) === 'object' ? asset : assets.find((element) => element.name === asset);
 
   const handleColorChange = (color) => {
     setFormData((prevData) => ({
@@ -50,7 +51,8 @@ const DialogUpdateAsset = (props) => {
     };
     if(newAssetData.name !== "" && newAssetData.value !== ""){
       console.log(newAssetData.name)
-      dispatch(assetsActions.updateValue2({logo: newAssetData.logo, asset: newAssetData.name, value: newAssetData.value, color: newAssetData.color}));
+      //dispatch(assetsActions.updateValue2({logo: newAssetData.logo, asset: newAssetData.name, value: newAssetData.value, color: newAssetData.color}));
+      dispatch(changeAssetValue({asset:asset,value:newAssetData.value,proceedTransaction:false}));
       setFormData(defaultFormData);
       closeDialog();
     }
@@ -76,7 +78,7 @@ const DialogUpdateAsset = (props) => {
       <dialog className="dialog slide-in" open={true}>
         <div className="dialog-top-bar">
           <span className="section-header dialog-title">
-            Update asset: {asset}
+            Update asset: {asset.name}
           </span>
           <button onClick={closeDialog} className="close-dialog-btn">
             X

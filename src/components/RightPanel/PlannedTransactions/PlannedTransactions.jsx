@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-
+import Icon from '@mdi/react';
+import { mdiPencilOutline } from '@mdi/js';
 const PlannedTransactions = () => {
   const assets = useSelector((state) => state.assets.totalAssets);
   const categories = useSelector((state) => state.categories.categoryList);
@@ -26,6 +27,7 @@ const PlannedTransactions = () => {
           <th>Date</th>
           <th>Repeat</th>
           <th>Logo</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,7 +41,7 @@ const PlannedTransactions = () => {
             <td>{transaction.date.substring(0,10)}</td>
             <td>Every {transaction.repeat_value} {transaction.repeat_value === 1 ? transaction.repeat_unit.substring(0,transaction.repeat_unit.length - 1) : transaction.repeat_unit}</td>
             <td>DODAĆ LOGO</td>
-          
+            <td><button className="edit-button"><Icon path={mdiPencilOutline} size={0.8} /></button></td>
           </tr>
           )
         })}
