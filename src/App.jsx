@@ -6,8 +6,10 @@ import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import {fetchCategories} from "./store/categories.js"
 import {fetchPlannedTransactions} from "./store/plannedTransactions.js"
+import { fetchTransactions } from "./store/transactions";
 import { addTransactionToDatabase } from "./store/transactions";
 import { updatePlannedTransactionsDate } from "./store/plannedTransactions";
+
 function App() {
   const dispatch = useDispatch();
   const transactions = useSelector(
@@ -20,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchPlannedTransactions())
     dispatch(fetchCategories());
+    dispatch(fetchTransactions());
   }, [dispatch]);
   
   useEffect(() => {

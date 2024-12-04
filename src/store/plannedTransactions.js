@@ -15,21 +15,23 @@ export const fetchPlannedTransactions = createAsyncThunk(
     }
   }
 );
-export const updatePlannedTransaction = createAsyncThunk(
-  "plannedTransactions/updatePlannedTransaction",
-  async (updatedTransaction, thunkAPI) => {
+
+export const addPlannedTransactionToDB = createAsyncThunk(
+  "plannedTransactions/addPllanedTransactionToDB",
+  async (newPlannedTransaction, thunkAPI) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/planned-transactions/${updatedTransaction.id}`,
-        updatedTransaction
+      const response = await axios.post(
+        "http://localhost:5000/api/planned-transactions",
+        newPlannedTransaction
       );
+
       return response.data;
     } catch (error) {
+      console.error("Error adding planned transaction:", error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
 export const updatePlannedTransactionsDate = createAsyncThunk(
   "plannedTransactions/updatePlannedTransactionsDate",
   async (indexes, { getState, dispatch, rejectWithValue }) => {
@@ -76,15 +78,14 @@ export const updatePlannedTransactionsDate = createAsyncThunk(
         );
       });
       const responses = await Promise.all(
-        updatedTransactions.map((transaction) =>
-        {
+        updatedTransactions.map((transaction) => {
           console.log(transaction);
           axios.put(
             `http://localhost:5000/api/planned-transactions/${transaction.transaction_id}`,
-            transaction)
-        }
-        
-      ));
+            transaction
+          );
+        })
+      );
       return responses.map((response) => response.data);
     } catch (error) {
       console.error("Error updating planned transactions:", error);
@@ -128,15 +129,19 @@ const plannedTransactionsSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      .addCase(updatePlannedTransactionsDate.fulfilled, (state, action) => {
-        console.log(
-          "Planned transactions updated successfully:",
-          action.payload
-        );
+      .addCase(updatePlannedTransactionsDate.fulfilled, (state, action) => {})
+      .addCase(updatePlannedTransactionsDate.rejected, (state, action) => {})
+      .addCase(addPlannedTransactionToDB.pending, (state) => {
+        state.status = "loading";
       })
-      .addCase(updatePlannedTransactionsDate.rejected, (state, action) => {
-        console.error("Error updating planned transactions:", action.payload);
-      });
+      .addCase(addPlannedTransactionToDB.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.plannedTransactionsList.push(action.payload); // Dodaj nową transakcję do Store
+      })
+      .addCase(addPlannedTransactionToDB.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload; // Przechowaj komunikat błędu
+      });;
   },
 });
 export const plannedTransactionActions = plannedTransactionsSlice.actions;

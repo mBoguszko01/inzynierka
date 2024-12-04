@@ -1,5 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { act } from "react";
+
+export const fetchTransactions = createAsyncThunk(
+  "transactions/fetchTransactions",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/transactions"
+      );
+      return response.data;
+    }catch (error){
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
 
 export const addTransactionToDatabase = createAsyncThunk(
   "transactions/addTransactionToDatabase",
@@ -11,7 +26,7 @@ export const addTransactionToDatabase = createAsyncThunk(
         "http://localhost:5000/api/transactions",
         newTransaction
       );
-      return response.data; // Zwraca nowo dodaną transakcję
+      return response.data;
     } catch (error) {
 
       return thunkAPI.rejectWithValue(error.message);
@@ -31,6 +46,13 @@ const transactionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchTransactions.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        state.status = "succedded";
+        state.transactionsList = action.payload;
+      })
       .addCase(addTransactionToDatabase.pending, (state) => {
         state.status = "loading";
       })

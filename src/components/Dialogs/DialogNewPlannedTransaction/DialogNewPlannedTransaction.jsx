@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plannedTransactionActions } from "../../../store/plannedTransactions";
+import { addPlannedTransactionToDB } from "../../../store/plannedTransactions";
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import DialogNewAsset from "../DialogNewAsset";
 import "./DialogNewPlannedTransaction.css";
@@ -9,8 +10,8 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
   const defaultFormData = {
     name: "",
-    asset: "",
-    category: "",
+    asset_id: "",
+    category_id: "",
     date: "",
     price: "",
     repeatValue: "1",
@@ -49,13 +50,13 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
           setIsNameValid(true);
         }
       }
-      if (!isAssetValid && name === "asset") {
-        if (value !== "") {
+      if (!isAssetValid && name === "asset_id") {
+        if (value != "") {
           setIsAssetValid(true);
         }
       }
-      if (!isCategoryValid && name === "category") {
-        if (value !== "") {
+      if (!isCategoryValid && name === "category_id") {
+        if (value != "") {
           setIsCategoryValid(true);
         }
       }
@@ -87,8 +88,8 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     };
     if (
       plannedTransactionData.name !== "" &&
-      plannedTransactionData.asset !== "" &&
-      plannedTransactionData.category !== "" &&
+      plannedTransactionData.asset_id !== "" &&
+      plannedTransactionData.category_id !== "" &&
       plannedTransactionData.date !== "" &&
       (plannedTransactionData.price !== "" && !isNaN(plannedTransactionData.price)) &&
       plannedTransactionData.repeatValue !== ""
@@ -98,17 +99,18 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
         date: new Date(formData.date).toISOString(),
         price: parseFloat(formData.price),
       };
-      dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+      //dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
+      dispatch(addPlannedTransactionToDB(plannedTransactionData));
       setFormData(defaultFormData);
       closeDialog();
     } else {
       if (plannedTransactionData.name === "") {
         setIsNameValid(false);
       }
-      if (plannedTransactionData.asset === "") {
+      if (plannedTransactionData.asset_id == "") {
         setIsAssetValid(false);
       }
-      if (plannedTransactionData.category === "") {
+      if (plannedTransactionData.category_id == "") {
         setIsCategoryValid(false);
       }
       if (plannedTransactionData.date === "" || new Date(plannedTransactionData.date) < new Date()) {
@@ -122,7 +124,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
         setIsRepeatValueValid(false);
       }
     }
-    console.log(plannedTransactionData);
+
   };
 
   const handlePriceBlur = (e) => {
@@ -205,13 +207,13 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     </span>
                   )}
                   <select
-                    name="asset"
-                    value={formData.asset}
+                    name="asset_id"
+                    value={formData.asset_id}
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select an asset</option>
                     {assets.map((asset, index) => (
-                      <option value={asset.name} key={index}>
+                      <option value={asset.id} key={index}>
                         &nbsp;{asset.name}
                       </option>
                     ))}
@@ -226,13 +228,13 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     </span>
                   )}
                   <select
-                    name="category"
-                    value={formData.category}
+                    name="category_id"
+                    value={formData.category_id}
                     onChange={handleChange}
                   >
                     <option value="">&nbsp;Select a category</option>
                     {categories.map((category, index) => (
-                      <option value={category.name} key={index}>
+                      <option value={category.id} key={index}>
                         &nbsp;{category.name}
                       </option>
                     ))}

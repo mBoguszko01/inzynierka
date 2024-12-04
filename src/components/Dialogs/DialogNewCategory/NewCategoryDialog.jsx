@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TwitterPicker } from "react-color";
-import { categoryActions } from "../../../store/categories";
-import './NewCategoryDialog.css';
+import { addCategoryToDB } from "../../../store/categories";
+
 //LOGO, nazwa, wartosc
 const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
       setIsNameValid(true);
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     
     e.preventDefault();
     const newCategoryData = {
@@ -37,7 +37,8 @@ const DialogNewCategory = ({ isDialogOpen, closeDialog, setGeneralFormData }) =>
     };
     if(newCategoryData.name !== "")
     {
-      dispatch(categoryActions.addNewElement(newCategoryData));
+      const result  = await dispatch(addCategoryToDB(newCategoryData)).unwrap();
+      console.log(result);
       setFormData((prevData) => ({
         ...prevData,
         category: newCategoryData.name

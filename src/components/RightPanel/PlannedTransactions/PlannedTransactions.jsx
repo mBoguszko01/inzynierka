@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 const PlannedTransactions = () => {
+  const assets = useSelector((state) => state.assets.totalAssets);
+  const categories = useSelector((state) => state.categories.categoryList);
   const transactions = useSelector(
     (state) => state.plannedTransactions.plannedTransactionsList
   );
@@ -27,17 +29,20 @@ const PlannedTransactions = () => {
         </tr>
       </thead>
       <tbody>
-        {limitedTransactions.map((transaction, index) => (
+        {limitedTransactions.map((transaction, index) => {
+          return(
             <tr key={index}>
-            <td>{transaction.transaction_name}</td>
-            <td>{transaction.asset_name}</td>
-            <td>{transaction.category_name}</td>
+            <td>{transaction.transaction_name !== undefined ? transaction.transaction_name : transaction.name}</td>
+            <td>{transaction.asset_name !== undefined ? transaction.asset_name : assets.find((asset) => asset.id === transaction.asset_id).name}</td>
+            <td>{transaction.category_name !== undefined ? transaction.category_name : categories.find((category) => category.id === transaction.category_id).name}</td>
             <td>{transaction.price}</td>
             <td>{transaction.date.substring(0,10)}</td>
             <td>Every {transaction.repeat_value} {transaction.repeat_value === 1 ? transaction.repeat_unit.substring(0,transaction.repeat_unit.length - 1) : transaction.repeat_unit}</td>
             <td>DODAĆ LOGO</td>
+          
           </tr>
-        ))}
+          )
+        })}
       </tbody>
     </table>
   );
