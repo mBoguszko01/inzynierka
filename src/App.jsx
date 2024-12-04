@@ -73,8 +73,9 @@ function App() {
       }
     });
     //zaktualizuj planned transaction w bazie danych
+    console.log(transactions[0]);
     dispatch(updatePlannedTransaction(''));
-    dispatch(plannedTransactionActions.updateTransactionDates(indexes));
+    //dispatch(plannedTransactionActions.updateTransactionDates(indexes));
   }, [dispatch, transactions]);
 
   return (
