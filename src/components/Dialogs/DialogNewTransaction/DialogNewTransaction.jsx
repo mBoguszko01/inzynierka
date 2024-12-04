@@ -17,15 +17,14 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const categories = useSelector((state) => state.categories.categoryList);
   const assets = useSelector((state) => state.assets.totalAssets);
   const defaultFormData = {
-    asset: "",
-    category: "",
+    asset_id: "",
+    category_id: "",
     date: "",
     price: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
   const [isNewAssetOpen, setIsNewAssetOpen] = useState(false);
-
   const [isAssetValid, setIsAssetValid] = useState(true);
   const [isCategoryValid, setIsCategoryValid] = useState(true);
   const [isDateValid, setIsDateValid] = useState(true);
@@ -88,7 +87,7 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       ...formData,
     };
     if (
-      transactionData.asset !== "" &&
+      transactionData.asset_id !== "" &&
       transactionData.category !== "" &&
       transactionData.date !== "" &&
       transactionData.price !== ""
@@ -99,28 +98,26 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
         price: parseFloat(formData.price).toFixed(2),
       };
       const selectedAssetObj = assets.find(
-        (asset) => asset.name === transactionData.asset
-      ); // powinno byc po ID a nie po nazwie
+        (asset) => asset.id == transactionData.asset_id
+      );
       if (selectedAssetObj.value - transactionData.price < 0) {
         setShowAssetLowerThanZeroAlertWindow(true);
       } else {
         dispatch(
-          assetsActions.updateValue({
-            asset: transactionData.asset,
+          assetsActions.updateValueLocally({
+            asset_Id: transactionData.asset_id,
             value: transactionData.price,
           })
         );
-        
-        //dispatch(transactionActions.addNewElement(transactionData));
         dispatch(addTransactionToDatabase(transactionData));
         setFormData(defaultFormData);
         closeDialog();
       }
     } else {
-      if (transactionData.asset === "") {
+      if (transactionData.asset_id === "") {
         setIsAssetValid(false);
       }
-      if (transactionData.category === "") {
+      if (transactionData.category_id === "") {
         setIsCategoryValid(false);
       }
       if (transactionData.date === "") {
@@ -140,7 +137,6 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
     setIsPriceValid(true);
     closeDialog();
   };
-
 
   return (
     <>
@@ -196,13 +192,13 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                       </span>
                     )}
                     <select
-                      name="asset"
-                      value={formData.asset}
+                      name="asset_id"
+                      value={formData.asset_id}
                       onChange={handleChange}
                     >
                       <option value="">&nbsp;Select an asset</option>
                       {assets.map((asset, index) => (
-                        <option value={asset.name} key={index}>
+                        <option value={asset.id} key={index}>
                           &nbsp;{asset.name}
                         </option>
                       ))}
@@ -217,13 +213,13 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
                       </span>
                     )}
                     <select
-                      name="category"
-                      value={formData.category}
+                      name="category_id"
+                      value={formData.category_id}
                       onChange={handleChange}
                     >
                       <option value="">&nbsp;Select a category</option>
                       {categories.map((category, index) => (
-                        <option value={category.name} key={index}>
+                        <option value={category.id} key={index}>
                           &nbsp;{category.name}
                         </option>
                       ))}

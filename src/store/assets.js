@@ -20,17 +20,7 @@ export const fetchAssets = createAsyncThunk(
 const assetsSlice = createSlice({
   name: "assets",
   initialState: {
-    totalAssets: [
-    //   { logo: "/ING_icon.jpg", name: "ING", value: 10300, color: "#FF8042" },
-    //   {
-    //     logo: "/Revolut_icon.jpg",
-    //     name: "Revolut",
-    //     value: 1000,
-    //     color: "#00C49F",
-    //   },
-    //   { logo: "/Cash_icon.jpg", name: "Cash", value: 500, color: "#FFBB28" },
-    //   { name: "PayPal", value: 500, color: "#0088FE" },
-    ],
+    totalAssets: [],
     status: 'idle',
     error: null,
   },
@@ -38,13 +28,13 @@ const assetsSlice = createSlice({
     addNewElement(state, action) {
       state.totalAssets.push(action.payload);
     },
-    updateValue(state, action) {
+    updateValueLocally(state, action) {
       //zmienic nazwe na proceed transaction -- używamy tego gdy wykonamy tranzakcje
-      const { asset, value } = action.payload;
+      const { asset_Id, value } = action.payload;
       const account = state.totalAssets.find(
-        (account) => account.name === asset
+        (account) => account.id == asset_Id
       );
-
+      console.log(JSON.parse(JSON.stringify(state.totalAssets)));
       if (account) {
         account.value -= value;
       } else {

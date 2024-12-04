@@ -38,8 +38,8 @@ const RecentTransactions = (props) => {
         <tbody>
           {limitedTransactions.map((transaction, index) => (
             <tr key={index}>
-              <td>{transaction.asset}</td>
-              <td>{transaction.category}</td>
+              <td>{transaction.asset_name}</td>
+              <td>{transaction.category_name}</td>
               <td>{transaction.date.substring(0,10)}</td>
               <td>{transaction.price}</td>
             </tr>

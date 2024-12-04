@@ -5,7 +5,6 @@ const PlannedTransactions = () => {
   const transactions = useSelector(
     (state) => state.plannedTransactions.plannedTransactionsList
   );
-  console.log(transactions);
   const [limiter, setLimiter] = useState(50);
 
   let limitedTransactions = [];
@@ -13,7 +12,6 @@ const PlannedTransactions = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, limiter);
 
-  console.log(limitedTransactions);
   return (
     <table className="recent-transactions">
 
