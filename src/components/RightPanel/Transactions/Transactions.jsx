@@ -28,6 +28,7 @@ const Transactions = () => {
   const openDialog = () => {
     setIsDialogOpen(true);
   };
+  console.log(transactions);
   return (
     <div className="transactions-container">
       <div className="transactions-top">

@@ -6,15 +6,18 @@ import "./RecentTransactions.css";
 const RecentTransactions = (props) => {
   const dispatch = useDispatch();
   const currView = useSelector((state) => state.view);
+  const categories = useSelector((state) => state.categories.categoryList);
+  const assets = useSelector((state) => state.assets.totalAssets);
   const {limiter, transactions} = props;
-  
   let limitedTransactions = [];
-  limitedTransactions = [...transactions] // Tworzymy nową kopię tablicy - był z tym error bo chciałem zmieniać bezpośrednio transactions (redux wyrzucał błąd)
+  limitedTransactions = [...transactions]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, limiter);
+  
   const changeViewHandler = () => {
     dispatch(viewActions.changeView("Transactions"));
   };
+
   return (
     <>
       {currView.selectedView === "Dashboard" && (
@@ -36,14 +39,21 @@ const RecentTransactions = (props) => {
           </tr>
         </thead>
         <tbody>
-          {limitedTransactions.map((transaction, index) => (
+          {limitedTransactions.map((transaction, index) => {
+            const asset = assets.find((asset) => asset.id === transaction.asset_id);
+            const assetName = asset ? asset.name : "Unknown";
+
+            const category = categories.find((category) => category.id === transaction.category_id);
+            const categoryName = category ? category.name : "Unknown";
+            
+            return ( 
             <tr key={index}>
-              <td>{transaction.asset_name}</td>
-              <td>{transaction.category_name}</td>
+              <td>{assetName}</td>
+              <td>{categoryName}</td>
               <td>{transaction.date.substring(0,10)}</td>
               <td>{transaction.price}</td>
-            </tr>
-          ))}
+            </tr>)
+          })}
         </tbody>
       </table>
     </>

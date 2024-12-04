@@ -7,6 +7,7 @@ import RightPanel from "./components/RightPanel/RightPanel";
 import {fetchCategories} from "./store/categories.js"
 import {fetchPlannedTransactions} from "./store/plannedTransactions.js"
 import { addTransactionToDatabase } from "./store/transactions";
+import { updatePlannedTransaction } from "./store/plannedTransactions";
 function App() {
   const dispatch = useDispatch();
   const transactions = useSelector(
@@ -72,6 +73,7 @@ function App() {
       }
     });
     //zaktualizuj planned transaction w bazie danych
+    dispatch(updatePlannedTransaction(''));
     dispatch(plannedTransactionActions.updateTransactionDates(indexes));
   }, [dispatch, transactions]);
 

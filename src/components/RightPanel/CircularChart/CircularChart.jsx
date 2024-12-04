@@ -29,8 +29,8 @@ const CircularChart = (props) => {
       return transactionDate.getMonth() === (new Date()).getMonth() && transactionDate.getFullYear() === (new Date()).getFullYear()
     })
     chartData = Object.entries(
-      filteredTransactions.reduce((acc, { category, price }) => {
-        acc[category] = (acc[category] || 0) + price;
+      filteredTransactions.reduce((acc, { category_name, price }) => {
+        acc[category_name] = (acc[category_name] || 0) + price;
         return acc;
       }, {})
     ).map(([name, value]) => ({ name, value }));

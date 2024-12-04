@@ -4,7 +4,6 @@ import axios from "axios";
 export const addTransactionToDatabase = createAsyncThunk(
   "transactions/addTransactionToDatabase",
   async (newTransaction, thunkAPI) => {
-    console.log(newTransaction);
     newTransaction.asset_id = parseInt(newTransaction.asset_id);
     newTransaction.category_id = parseInt(newTransaction.category_id);
     try {
