@@ -30,22 +30,14 @@ export const updatePlannedTransaction = createAsyncThunk(
   }
 );
 
-const plannedTransactionsSlice = createSlice({
-  name: "plannedTransactions",
-  initialState: {
-    plannedTransactionsList: [],
-    status: "idle",
-    error: null,
-    updatedTransactions: [],
-  },
-  reducers: {
-    addNewElement(state, action) {
-      state.plannedTransactionsList.push(action.payload);
-    },
-    updateTransactionDates(state, action) {
-      const indexes = action.payload;
-      indexes.forEach((index) => {
-        const transaction = state.plannedTransactionsList[index];
+export const updatePlannedTransactionsDate = createAsyncThunk(
+  "plannedTransactions/updatePlannedTransactionsDate",
+  async (indexes, { getState, dispatch, rejectWithValue }) => {
+    const state = getState().plannedTransactions;
+
+    try {
+      const updatedTransactions = indexes.map((index) => {
+        const transaction = { ...state.plannedTransactionsList[index] };
         const firstDate = new Date(transaction.date);
 
         const day = firstDate.getDate();
@@ -58,7 +50,7 @@ const plannedTransactionsSlice = createSlice({
               break;
             }
           }
-          if (firstDate.getDate() != day) {
+          if (firstDate.getDate() !== day) {
             firstDate.setDate(0);
           }
         } else {
@@ -68,9 +60,59 @@ const plannedTransactionsSlice = createSlice({
             : addingValue;
           firstDate.setDate(firstDate.getDate() + addingValue);
         }
+
         firstDate.setHours(12);
         transaction.date = new Date(firstDate).toISOString();
+
+        return transaction;
       });
+
+      updatedTransactions.forEach((updatedTransaction) => {
+        dispatch(
+          plannedTransactionActions.updateSingleTransaction({
+            id: updatedTransaction.id,
+            updatedTransaction,
+          })
+        );
+      });
+      const responses = await Promise.all(
+        updatedTransactions.map((transaction) =>
+        {
+          console.log(transaction);
+          axios.put(
+            `http://localhost:5000/api/planned-transactions/${transaction.transaction_id}`,
+            transaction)
+        }
+        
+      ));
+      return responses.map((response) => response.data);
+    } catch (error) {
+      console.error("Error updating planned transactions:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+const plannedTransactionsSlice = createSlice({
+  name: "plannedTransactions",
+  initialState: {
+    plannedTransactionsList: [],
+    status: "idle",
+    error: null,
+    updatedTransactions: [],
+  },
+  reducers: {
+    addNewElement(state, action) {
+      state.plannedTransactionsList.push(action.payload);
+    },
+    updateSingleTransaction(state, action) {
+      const { id, updatedTransaction } = action.payload;
+      const index = state.plannedTransactionsList.findIndex(
+        (transaction) => transaction.id === id
+      );
+      if (index !== -1) {
+        state.plannedTransactionsList[index] = updatedTransaction;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -85,6 +127,15 @@ const plannedTransactionsSlice = createSlice({
       .addCase(fetchPlannedTransactions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      .addCase(updatePlannedTransactionsDate.fulfilled, (state, action) => {
+        console.log(
+          "Planned transactions updated successfully:",
+          action.payload
+        );
+      })
+      .addCase(updatePlannedTransactionsDate.rejected, (state, action) => {
+        console.error("Error updating planned transactions:", action.payload);
       });
   },
 });

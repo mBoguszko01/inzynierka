@@ -7,7 +7,7 @@ import RightPanel from "./components/RightPanel/RightPanel";
 import {fetchCategories} from "./store/categories.js"
 import {fetchPlannedTransactions} from "./store/plannedTransactions.js"
 import { addTransactionToDatabase } from "./store/transactions";
-import { updatePlannedTransaction } from "./store/plannedTransactions";
+import { updatePlannedTransactionsDate } from "./store/plannedTransactions";
 function App() {
   const dispatch = useDispatch();
   const transactions = useSelector(
@@ -72,9 +72,7 @@ function App() {
         counter++;
       }
     });
-    //zaktualizuj planned transaction w bazie danych
-    console.log(transactions[0]);
-    dispatch(updatePlannedTransaction(''));
+    dispatch(updatePlannedTransactionsDate(indexes));
     //dispatch(plannedTransactionActions.updateTransactionDates(indexes));
   }, [dispatch, transactions]);
 
