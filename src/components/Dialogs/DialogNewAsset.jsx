@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TwitterPicker } from "react-color";
 import { assetsActions } from "../../store/assets";
+import { addAssetToDB } from "../../store/assets";
 //LOGO, nazwa, wartosc
 const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const DialogNewAsset = ({ isDialogOpen, closeDialog, setGeneralFormData }) => {
       ...formData,
     };
     if(newAssetData.name !== "" && newAssetData.value !== ""){
-      dispatch(assetsActions.addNewElement(newAssetData));
+      dispatch(addAssetToDB(newAssetData))
       setGeneralFormData((prevData) => ({
         ...prevData,
         asset: newAssetData.name

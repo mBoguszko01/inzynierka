@@ -16,7 +16,7 @@ const DashboardPlannedTransactions = () => {
 
   let totalPriceOfPlannedTransactions = 0;
   transactions.forEach((transaction) => {
-    totalPriceOfPlannedTransactions += transaction.price;
+    totalPriceOfPlannedTransactions += parseFloat(transaction.price);
   });
 
   let limitedTransactions = [];
@@ -42,7 +42,7 @@ const DashboardPlannedTransactions = () => {
             imgSrc={"/Netflix_icon.jpg"}
             
           >
-            {transaction.name}
+            {transaction.transaction_name}
           </Transaction>
         </>
       ))}

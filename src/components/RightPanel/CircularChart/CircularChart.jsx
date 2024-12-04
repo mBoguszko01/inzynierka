@@ -13,6 +13,8 @@ const CircularChart = (props) => {
   const { chartName } = props;
   let chartData;
   let colors = [];
+  const categories = useSelector((state) => state.categories.categoryList);
+
   if(chartName === 'Distribution of Financial Assets'){
     chartData = useSelector((state) => state.assets).totalAssets;
     colors = chartData.map((asset, index) => asset.color || "#abc121");
@@ -29,13 +31,15 @@ const CircularChart = (props) => {
       return transactionDate.getMonth() === (new Date()).getMonth() && transactionDate.getFullYear() === (new Date()).getFullYear()
     })
     chartData = Object.entries(
-      filteredTransactions.reduce((acc, { category_name, price }) => {
-        acc[category_name] = (acc[category_name] || 0) + price;
+      filteredTransactions.reduce((acc, { category_id, price }) => {
+        const category = categories.find((cat) => cat.id === category_id)
+        const categoryName = category ? category.name : "Unknown";
+
+        acc[categoryName] = (acc[categoryName] || 0) + parseFloat(price);
         return acc;
       }, {})
     ).map(([name, value]) => ({ name, value }));
 
-    let categories = useSelector((state) => state.categories.categoryList)
     colors = categories.map(category => category.color);
   }
   return (

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionActions } from "../../../store/transactions";
 import { addTransactionToDatabase } from "../../../store/transactions";
-
+import { changeAssetValue } from "../../../store/assets";
 import { assetsActions } from "../../../store/assets";
 
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
@@ -103,11 +103,10 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       if (selectedAssetObj.value - transactionData.price < 0) {
         setShowAssetLowerThanZeroAlertWindow(true);
       } else {
+        
+        const transactionsAsset = assets.find((asset) => asset.id == transactionData.asset_id);
         dispatch(
-          assetsActions.updateValueLocally({
-            asset_Id: transactionData.asset_id,
-            value: transactionData.price,
-          })
+          changeAssetValue({asset: transactionsAsset, value: parseFloat(transactionData.price), proceedTransaction: true})
         );
         dispatch(addTransactionToDatabase(transactionData));
         setFormData(defaultFormData);

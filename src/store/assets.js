@@ -16,12 +16,42 @@ export const fetchAssets = createAsyncThunk(
     }
   }
 );
+export const addAssetToDB = createAsyncThunk(
+  "assets/addAssetToDB",
+  async (newAsset, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/assets",
+        newAsset
+      );
 
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const changeAssetValue = createAsyncThunk(
+  "assets/changeAssetValue",
+  async ({ asset, value, proceedTransaction }, thunkAPI) => {
+    try {
+      const id = asset.id;
+      const newValue = proceedTransaction ? asset.value - value : value;
+      const response = await axios.put(
+        `http://localhost:5000/api/assets/${id}`,
+        {value: newValue}
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 const assetsSlice = createSlice({
   name: "assets",
   initialState: {
     totalAssets: [],
-    status: 'idle',
+    status: "idle",
     error: null,
   },
   reducers: {
@@ -56,7 +86,7 @@ const assetsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(fetchAssets.pending, (state) => {
+      .addCase(fetchAssets.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchAssets.fulfilled, (state, action) => {
@@ -67,7 +97,32 @@ const assetsSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-  }
+      .addCase(addAssetToDB.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.totalAssets.push(action.payload);
+      })
+      .addCase(addAssetToDB.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(changeAssetValue.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(changeAssetValue.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const updatedAsset = action.payload;
+        const existingAsset = state.totalAssets.find(
+          (asset) => asset.id === updatedAsset.id
+        );
+        if (existingAsset) {
+          existingAsset.value = updatedAsset.value; 
+        }
+      })
+      .addCase(changeAssetValue.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });
+  },
 });
 export const assetsActions = assetsSlice.actions;
 export default assetsSlice.reducer;
