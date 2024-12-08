@@ -50,8 +50,6 @@ const DialogUpdateAsset = (props) => {
       ...formData,
     };
     if(newAssetData.name !== "" && newAssetData.value !== ""){
-      console.log(newAssetData.name)
-      //dispatch(assetsActions.updateValue2({logo: newAssetData.logo, asset: newAssetData.name, value: newAssetData.value, color: newAssetData.color}));
       dispatch(changeAssetValue({asset:asset,value:newAssetData.value,proceedTransaction:false}));
       setFormData(defaultFormData);
       closeDialog();

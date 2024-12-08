@@ -26,7 +26,22 @@ export const addCategoryToDB = createAsyncThunk(
     }
   }
 );
-
+export const changeCategory = createAsyncThunk(
+  "assets/changeAssetValue",
+  async (category, thunkAPI) => {
+    try {
+      const id = category.id;
+      console.log(category);
+      const response = await axios.put(
+        `http://localhost:5000/api/categories/${id}`,
+        { name: category.name, color: category.color }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 const categorySlice = createSlice({
   name: "category",
   initialState: {
@@ -34,9 +49,11 @@ const categorySlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {addNewElement(state, action) {
-    state.categoryList.push(action.payload);
-  },},
+  reducers: {
+    addNewElement(state, action) {
+      state.categoryList.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.pending, (state) => {
@@ -58,6 +75,24 @@ const categorySlice = createSlice({
         state.categoryList.push(action.payload);
       })
       .addCase(addCategoryToDB.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(changeCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(changeCategory.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const updatedCategory = action.payload;
+        const existingCategory = state.categoryList.find(
+          (category) => category.id === updatedCategory.id
+        );
+        if (existingCategory) {
+          existingCategory.name = updatedCategory.name;
+          existingCategory.color = updatedCategory.color;
+        }
+      })
+      .addCase(changeCategory.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
