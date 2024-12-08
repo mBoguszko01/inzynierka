@@ -5,6 +5,9 @@ import "./RecentTransactions.css";
 import Icon from '@mdi/react';
 import { mdiPencilOutline } from '@mdi/js';
 
+import DialogUpdateTransaction from "../Dialogs/DialogUpdateTransaction/DialogUpdateTransaction.jsx";
+
+
 const RecentTransactions = (props) => {
   const dispatch = useDispatch();
   const currView = useSelector((state) => state.view);
@@ -19,9 +22,16 @@ const RecentTransactions = (props) => {
   const changeViewHandler = () => {
     dispatch(viewActions.changeView("Transactions"));
   };
-
+  const handleEdit = (transaction) => {
+    console.log(transaction);
+    setIsDialogOpen(true);
+    setSelectedTransaction(transaction);
+  }
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   return (
     <>
+      {isDialogOpen  && <DialogUpdateTransaction transaction={selectedTransaction} isDialogOpen={isDialogOpen} closeDialog={()=> setIsDialogOpen(!isDialogOpen)} />}
       {currView.selectedView === "Dashboard" && (
         <div className="recent-transactions-top">
           <span className="section-header">Recent Transactions</span>
@@ -55,7 +65,7 @@ const RecentTransactions = (props) => {
               <td>{categoryName}</td>
               <td>{transaction.date.substring(0,10)}</td>
               <td>{transaction.price}</td>
-              {currView.selectedView !== "Dashboard" && <td><button className="edit-button"><Icon path={mdiPencilOutline} size={0.8} /></button></td>}
+              {currView.selectedView !== "Dashboard" && <td><button className="edit-button" onClick={() => handleEdit(transaction)}><Icon path={mdiPencilOutline} size={0.8} /></button></td>}
             </tr>)
           })}
         </tbody>

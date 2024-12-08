@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
+
 
 export const fetchTransactions = createAsyncThunk(
   "transactions/fetchTransactions",
@@ -29,6 +29,23 @@ export const addTransactionToDatabase = createAsyncThunk(
       return response.data;
     } catch (error) {
 
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changeTransaction = createAsyncThunk(
+  "assets/changeTransaction",
+  async (transaction, thunkAPI) => {
+    try {
+      console.log(transaction);
+      const id = transaction.id;
+      const response = await axios.put(
+        `http://localhost:5000/api/transactions/${id}`,
+        { asset_id: transaction.asset_id, category_id: transaction.category_id, date: transaction.date, price: transaction.price}
+      );
+      return response.data;
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -63,7 +80,27 @@ const transactionsSlice = createSlice({
       .addCase(addTransactionToDatabase.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload
-      });
+      })
+      .addCase(changeTransaction.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(changeTransaction.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const updatedTransaction = action.payload;
+        const existingTransaction = state.transactionsList.find(
+          (transaction) => transaction.id === updatedTransaction.id
+        );
+        if (existingTransaction) {
+          existingTransaction.asset_id = updatedTransaction.asset_id;
+          existingTransaction.category_id = updatedTransaction.category_id;
+          existingTransaction.date = updatedTransaction.date;
+          existingTransaction.price = updatedTransaction.price;
+        }
+      })
+      .addCase(changeTransaction.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });;
   },
 });
 export const transactionActions = transactionsSlice.actions;

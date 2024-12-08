@@ -93,6 +93,31 @@ export const updatePlannedTransactionsDate = createAsyncThunk(
     }
   }
 );
+export const changePlannedTransaction = createAsyncThunk(
+  "plannedTransactions/changePlannedTransaction",
+  async (plannedTransaction, thunkAPI) => {
+    try {
+      console.log(plannedTransaction);
+      const id = plannedTransaction.id;
+      const response = await axios.put(
+        `http://localhost:5000/api/plannedTransactions/${id}`,
+        {
+          asset_id: plannedTransaction.asset_id,
+          category_id: plannedTransaction.category_id,
+          date: plannedTransaction.date,
+          logo_url: plannedTransaction.logoUrl,
+          name: plannedTransaction.name,
+          price: plannedTransaction.price,
+          repeat_unit: plannedTransaction.repeatUnit,
+          repeat_value: plannedTransaction.repeatValue
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
@@ -141,7 +166,7 @@ const plannedTransactionsSlice = createSlice({
       .addCase(addPlannedTransactionToDB.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Przechowaj komunikat błędu
-      });;
+      });
   },
 });
 export const plannedTransactionActions = plannedTransactionsSlice.actions;
