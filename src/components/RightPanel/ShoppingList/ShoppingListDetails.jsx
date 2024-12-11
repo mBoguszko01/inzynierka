@@ -6,11 +6,12 @@ import ShoppingListAddItems from "./ShoppingListAddItems/ShoppingListAddItems";
 import { fetchShoppingListItems } from "../../../store/shoppingLists";
 
 const ShoppingListDetails = (props) => {
-
-  const {selectedShoppingList} = props;
+  const { selectedShoppingList } = props;
 
   const dispatch = useDispatch();
-  const allItems = useSelector((state) => state.shoppingLists.items[selectedShoppingList.id] || []);
+  const allItems = useSelector(
+    (state) => state.shoppingLists.items[selectedShoppingList.id] || []
+  );
   const status = useSelector((state) => state.shoppingLists.status);
 
   const [search, setSearch] = useState("");
@@ -23,14 +24,14 @@ const ShoppingListDetails = (props) => {
   if (status === "loading") return <p>Loading items...</p>;
   if (status === "failed") return <p>Error loading items!</p>;
 
-  // const updateItem = (updatedItem) => {
-  //   setAllItems((prevItems) =>
-  //     prevItems.map((item) =>
-  //       item.itemId === updatedItem.itemId ? updatedItem : item
-  //     )
-  //   );
-  //   setSelectedItem(null);
-  // };
+  const updateItem = (updatedItem) => {
+    setAllItems((prevItems) =>
+      prevItems.map((item) =>
+        item.itemId === updatedItem.itemId ? updatedItem : item
+      )
+    );
+    setSelectedItem(null);
+  };
 
   // const deleteItem = (itemToDelete) => {
   //   setAllItems((prevProducts) =>
@@ -39,13 +40,10 @@ const ShoppingListDetails = (props) => {
   //   setSelectedItem(null);
   // }
 
-  const filteredItems = allItems.filter((item) =>
-    {
-      console.log(item.name);
-      return item.name.toLowerCase().includes(search.toLocaleLowerCase())
-    }
-  );
-  
+  const filteredItems = allItems.filter((item) => {
+    return item.name.toLowerCase().includes(search.toLocaleLowerCase());
+  });
+
   return (
     <>
       <div className="shopping-list-main-container">
@@ -66,16 +64,18 @@ const ShoppingListDetails = (props) => {
           </div>
           <div className="shopping-list-items-container">
             {filteredItems.length > 0 ? (
-              filteredItems.map((item, index) => (
-                <ShoppingListItem
-                  key={index}
-                  itemName={item.name}
-                  itemQuantity={item.itemQuantity}
-                  itemUnit={item.itemUnit}
-                  itemCategory={item.itemCategory}
-                  handleSelect={() => setSelectedItem(item)}
-                />
-              ))
+              filteredItems.map((item, index) => {
+                return (
+                  <ShoppingListItem
+                    key={index}
+                    name={item.name}
+                    quantity={item.quantity}
+                    unit={item.unit}
+                    category={item.category}
+                    handleSelect={() => setSelectedItem(item)}
+                  />
+                );
+              })
             ) : (
               <p>No items found.</p>
             )}
@@ -94,8 +94,12 @@ const ShoppingListDetails = (props) => {
               deleteHandler={deleteItem}
             /> */
           )}
-          {selectedItem === null && <ShoppingListAddItems allItems = {allItems}/>}
-          {/* {selectedItem === null && <ShoppingListAddItems updateItemsHandler = {setAllItems} allItems = {allItems}/>} */}
+          {selectedItem === null && (
+            <ShoppingListAddItems
+              allItems={allItems}
+              shoppingListId={selectedShoppingList.id}
+            />
+          )}
         </div>
       </div>
     </>

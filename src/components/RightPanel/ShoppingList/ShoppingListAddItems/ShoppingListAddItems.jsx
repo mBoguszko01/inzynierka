@@ -1,47 +1,57 @@
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import "./ShoppingListAddItems.css";
 import suggestedProducts from "../../../../data/sugestedProducts";
+import {
+  addShoppingListItem,
+  fetchShoppingListItems,
+  increaseItemQuantity,
+} from "../../../../store/shoppingLists";
+
 const ShoppingListAddItems = (props) => {
-  const { updateItemsHandler, allItems } = props;
+  const dispatch = useDispatch();
+  const { shoppingListId, allItems } = props;
   const sugestedProducts = suggestedProducts;
 
   const [search, setSearch] = useState("");
   const filteredItems = sugestedProducts.filter((item) =>
     item.product_name.toLowerCase().includes(search.toLocaleLowerCase())
   );
-  const handleAddItem = (product) => {
+  const handleAddItem = async (product) => {
     const newItem = {
-      itemId: allItems.length + 1,
-      itemName: product.product_name,
-      itemQuantity: "1",
-      itemUnit: "",
-      itemCategory: product.category,
+      name: product.product_name,
+      quantity: "1",
+      unit: "",
+      category: product.category,
     };
-
-    updateItemsHandler((prevProducts) => {
-      const alreadyExists = prevProducts.some(
-        (item) => item.itemName === newItem.itemName
-      );
-      if (alreadyExists) {
-        return prevProducts.map((item) =>
-          item.itemName === newItem.itemName
-            ? {
-                ...item,
-                itemQuantity: (parseInt(item.itemQuantity) + 1).toString(),
-              }
-            : item
-        );
+    try {
+      const existingItem = allItems.find((item) => item.name === newItem.name);
+      console.log(existingItem);
+      if (existingItem) {
+await dispatch(
+          increaseItemQuantity({
+            shoppingListId,
+            itemId: existingItem.item_id,
+          })
+        ).unwrap();
       } else {
-        return [...prevProducts, newItem];
+        // Dodaj nowy element, jeśli nie istnieje
+        const addedItem = await dispatch(
+          addShoppingListItem({ shoppingListId, item: newItem })
+        ).unwrap();
       }
-    });
+      
+    } catch (error) {
+      console.error("Błąd podczas dodawania elementu:", error);
+    }
   };
-  const handleDeleteItem = (product,e) => {
+  const handleDeleteItem = (product, e) => {
     e.stopPropagation();
     updateItemsHandler((prevProducts) =>
       prevProducts.filter((item) => item.itemName !== product.product_name)
     );
-  }
+  };
+
   return (
     <div className="shopping-list-add-new-item-wrapper">
       <div>
@@ -56,7 +66,7 @@ const ShoppingListAddItems = (props) => {
         />
       </div>
       <div className="shopping-list-suggested-products-wrapper">
-        <h4 style={{marginBottom: '16px', marginTop: '16px'}}>Suggested</h4>
+        <h4 style={{ marginBottom: "16px", marginTop: "16px" }}>Suggested</h4>
         <div className="shopping-list-suggested-products-container">
           {filteredItems.map((product, index) => (
             <div
@@ -64,18 +74,23 @@ const ShoppingListAddItems = (props) => {
               key={index}
               onClick={() => handleAddItem(product)}
             >
-              <div className="shopping-list-add-product-plus"style={{
+              <div
+                className="shopping-list-add-product-plus"
+                style={{
                   backgroundColor: allItems.some(
-                    (item) => item.itemName === product.product_name
+                    (item) => item.name === product.product_name
                   )
                     ? "blue"
-                    : "#aaaaaa", // Jeżeli produkt już istnieje, zmień tło na niebieskie
+                    : "#aaaaaa",
                   transform: allItems.some(
-                    (item) => item.itemName === product.product_name
+                    (item) => item.name === product.product_name
                   )
                     ? "rotate(90deg)"
                     : "rotate(0deg)",
-                }}>+</div>
+                }}
+              >
+                +
+              </div>
               <div
                 style={{
                   width: "-webkit-fill-available",
@@ -88,7 +103,12 @@ const ShoppingListAddItems = (props) => {
                 {allItems.some(
                   (item) => item.itemName === product.product_name
                 ) ? (
-                  <div className="shopping-list-delete-item" onClick={(e)=>handleDeleteItem(product,e)}>x</div>
+                  <div
+                    className="shopping-list-delete-item"
+                    onClick={(e) => handleDeleteItem(product, e)}
+                  >
+                    x
+                  </div>
                 ) : (
                   ""
                 )}

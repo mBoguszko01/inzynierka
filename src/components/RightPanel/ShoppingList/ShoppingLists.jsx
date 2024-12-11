@@ -5,7 +5,7 @@ import ShoppingListDetails from "./ShoppingListDetails";
 import Icon from "@mdi/react";
 import { mdiPencilOutline } from "@mdi/js";
 import { fetchShoppingLists } from "../../../store/shoppingLists";
-
+import DialogNewShoppingList from "../../Dialogs/DialogNewShoppingList/DialogNewShoppingList";
 const ShoppingLists = () => {
   const dispatch = useDispatch();
   const shoppingLists = useSelector(
@@ -21,76 +21,88 @@ const ShoppingLists = () => {
   const [selectedList, setSelectedList] = useState(null);
   const handleSelect = (shoppingList) => {
     setSelectedList(shoppingList);
-  }
+  };
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
     <>
       {!selectedList && (
-        <div className="all-shopping-lists-container">
-          <div style={{ alignSelf: "end" }}>
-            <button className="new-shopping-list-button">
-              +Add new shopping list
-            </button>
-          </div>
+        <>
+          <DialogNewShoppingList isDialogOpen={isDialogOpen} handleClose={() => setIsDialogOpen(false)} setSelected={setSelectedList}/>
+          <div className="all-shopping-lists-container">
+            <div style={{ alignSelf: "end" }}>
+              <button className="new-shopping-list-button" onClick={()=>setIsDialogOpen(true)}>
+                +Add new shopping list
+              </button>
+            </div>
 
-          {shoppingLists.map((shoppingList, index) => (
-            <div
-              className="shopping-list"
-              onClick={() => handleSelect(shoppingList)}
-              index={index}
-            >
+            {shoppingLists.map((shoppingList, index) => (
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignContent: "center",
-                }}
-              >
-                <span style={{ display: "flex", alignItems: "center" }}>
-                  {shoppingList.name}
-                </span>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "16px" }}
-                >
-                  <span>
-                    {shoppingList.purchased_items}/{shoppingList.total_items}
-                  </span>
-                  <button
-                    className="edit-button"
-                    onClick={() => handleClick(asset)}
-                  >
-                    <Icon path={mdiPencilOutline} size={0.8} />
-                  </button>
-                </div>
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "20px",
-                  backgroundColor: "#f5f5f5",
-                  borderRadius: "10px",
-                }}
+                className="shopping-list"
+                onClick={() => handleSelect(shoppingList)}
+                index={index}
               >
                 <div
                   style={{
-                    backgroundColor: "#3B2E75",
-                    width: `${
-                      shoppingList.total_items > 0
-                        ? (shoppingList.purchased_items /
-                            shoppingList.total_items) *
-                          100
-                        : 0
-                    }%`,
-                    height: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                  }}
+                >
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    {shoppingList.name}
+                  </span>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                    }}
+                  >
+                    <span>
+                      {shoppingList.total_items > 0 ?  `${shoppingList.purchased_items}/${shoppingList.total_items}` : 'The list is empty'}
+                    </span>
+                    <button
+                      className="edit-button"
+                      onClick={() => handleClick(asset)}
+                    >
+                      <Icon path={mdiPencilOutline} size={0.8} />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "20px",
+                    backgroundColor: "#f5f5f5",
                     borderRadius: "10px",
                   }}
-                ></div>
+                >
+                  <div
+                    style={{
+                      backgroundColor: "#3B2E75",
+                      width: `${
+                        shoppingList.total_items > 0
+                          ? (shoppingList.purchased_items /
+                              shoppingList.total_items) *
+                            100
+                          : 0
+                      }%`,
+                      height: "100%",
+                      borderRadius: "10px",
+                    }}
+                  ></div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       )}
 
-      {selectedList && <ShoppingListDetails selectedShoppingList={selectedList} />}
+      {selectedList && (
+        <ShoppingListDetails selectedShoppingList={selectedList} />
+      )}
     </>
   );
 };

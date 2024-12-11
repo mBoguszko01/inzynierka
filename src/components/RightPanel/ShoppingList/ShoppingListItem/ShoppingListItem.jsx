@@ -1,7 +1,7 @@
 import "./ShoppingListItem.css";
 
 const ShoppingListItem = (props) => {
-  const { name, itemQuantity,itemUnit, itemCategory, handleSelect } = props;
+  const { name, quantity,unit, category, handleSelect } = props;
   const handleCheckboxClick = (e) => {
       e.stopPropagation();
   }
@@ -11,12 +11,12 @@ const ShoppingListItem = (props) => {
         <div>
           <input type="checkbox" onClick={handleCheckboxClick}/>
           <span>{name}</span>
-          {(itemUnit !== "") && <span style={{marginLeft:'15px'}}>{itemQuantity} {itemUnit}</span>}
-          {(itemUnit === "" && itemQuantity > 1) &&  <span style={{marginLeft:'15px'}}>{itemQuantity} {itemUnit}</span>}
+          {(unit !== "") && <span style={{marginLeft:'15px'}}>{quantity} {unit}</span>}
+          {(unit === "" && quantity > 1) &&  <span style={{marginLeft:'15px'}}>{quantity} {unit}</span>}
         </div>
 
         <img
-          src={`${name.toLowerCase()}.svg`}
+          src={`${category.toLowerCase()}.svg`}
           className="shopping-list-category-img"
         />
       </div>

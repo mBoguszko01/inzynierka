@@ -38,6 +38,7 @@ export const addShoppingListItem = createAsyncThunk(
         `http://localhost:5000/api/shopping-lists/${shoppingListId}/items`,
         item
       );
+
       return { shoppingListId, item: response.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -59,6 +60,21 @@ export const fetchShoppingListItems = createAsyncThunk(
   }
 );
 
+export const increaseItemQuantity = createAsyncThunk(
+  "shoppingLists/increaseItemQuantity",
+  async ({ shoppingListId, itemId }, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/shopping-lists/${shoppingListId}/items/${itemId}`
+      );
+      return { shoppingListId, item: response.data };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
 const shoppingListsSlice = createSlice({
   name: "shoppingLists",
   initialState: {
@@ -67,7 +83,8 @@ const shoppingListsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchShoppingLists.pending, (state) => {
@@ -90,11 +107,11 @@ const shoppingListsSlice = createSlice({
       })
       .addCase(addShoppingListItem.fulfilled, (state, action) => {
         const { shoppingListId, item } = action.payload;
-        const list = state.shoppingLists.find(
-          (list) => list.id === shoppingListId
-        );
-        if (list) {
-          list.shoppingLists.push(item);
+        const normalizedItem = { ...item, item_id: item.id || item.item_id };
+        if (state.items[shoppingListId]) {
+          state.items[shoppingListId].push(normalizedItem);
+        } else {
+          state.items[shoppingListId] = [normalizedItem];
         }
       })
       .addCase(addShoppingListItem.rejected, (state, action) => {
@@ -111,6 +128,21 @@ const shoppingListsSlice = createSlice({
       .addCase(fetchShoppingListItems.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      .addCase(increaseItemQuantity.fulfilled, (state, action) => {
+        const { shoppingListId, item } = action.payload;
+        if (state.items[shoppingListId]) {
+          const existingItem = state.items[shoppingListId].find(
+            (listItem) => listItem.item_id === item.id
+          );
+
+          if (existingItem) {
+            existingItem.quantity = item.quantity;
+          }
+        }
+      })
+      .addCase(increaseItemQuantity.rejected, (state, action) => {
+        console.error("Error increasing item quantity:", action.payload);
       });
   },
 });
