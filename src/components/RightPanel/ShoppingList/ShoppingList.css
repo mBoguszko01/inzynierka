@@ -55,3 +55,29 @@
     height: calc(75vh - (38px + 15%));
     overflow-y: auto
 }
+.shopping-list{
+    width: calc(100% - 64px);
+    height: 80px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 32px 32px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20%;
+}
+.all-shopping-lists-container{
+    padding: 25px 150px 30px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.new-shopping-list-button{
+    height: 40px;
+    padding: 0 8px;
+    width: auto;
+    border: 1px solid #3B2E75;
+    color: #3B2E75;
+    border-radius: 10px;
+    font-size: 1em;
+}

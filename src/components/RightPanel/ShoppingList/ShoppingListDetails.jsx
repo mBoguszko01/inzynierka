@@ -1,29 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ShoppingListItem from "./ShoppingListItem/ShoppingListItem";
 import ShoppingListItemInfo from "./ShoppingListItemInfo/ShoppingListItemInfo";
 import ShoppingListAddItems from "./ShoppingListAddItems/ShoppingListAddItems";
-import "./ShoppingList.css";
+import { fetchShoppingListItems } from "../../../store/shoppingLists";
 
-const ShoppingList = (props) => {
+const ShoppingListDetails = (props) => {
+
+  const {selectedShoppingList} = props;
+
+  const dispatch = useDispatch();
+  const allItems = useSelector((state) => state.shoppingLists.items[selectedShoppingList.id] || []);
+  const status = useSelector((state) => state.shoppingLists.status);
+
   const [search, setSearch] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
-  const [allItems, setAllItems] = useState([]);
-  const updateItem = (updatedItem) => {
-    setAllItems((prevItems) =>
-      prevItems.map((item) =>
-        item.itemId === updatedItem.itemId ? updatedItem : item
-      )
-    );
-    setSelectedItem(null);
-  };
-  const deleteItem = (itemToDelete) => {
-    setAllItems((prevProducts) =>
-      prevProducts.filter((item) => item.itemName !== itemToDelete.itemName)
-    );
-    setSelectedItem(null);
-  }
+
+  useEffect(() => {
+    dispatch(fetchShoppingListItems(selectedShoppingList.id));
+  }, [dispatch, selectedShoppingList.id]);
+
+  if (status === "loading") return <p>Loading items...</p>;
+  if (status === "failed") return <p>Error loading items!</p>;
+
+  // const updateItem = (updatedItem) => {
+  //   setAllItems((prevItems) =>
+  //     prevItems.map((item) =>
+  //       item.itemId === updatedItem.itemId ? updatedItem : item
+  //     )
+  //   );
+  //   setSelectedItem(null);
+  // };
+
+  // const deleteItem = (itemToDelete) => {
+  //   setAllItems((prevProducts) =>
+  //     prevProducts.filter((item) => item.itemName !== itemToDelete.itemName)
+  //   );
+  //   setSelectedItem(null);
+  // }
+
   const filteredItems = allItems.filter((item) =>
-    item.itemName.toLowerCase().includes(search.toLocaleLowerCase())
+    {
+      console.log(item.name);
+      return item.name.toLowerCase().includes(search.toLocaleLowerCase())
+    }
   );
   
   return (
@@ -33,7 +53,7 @@ const ShoppingList = (props) => {
           <div className="shopping-list-title-container">
             <div className="shopping-list-title-search-container">
               <span className="section-header shopping-list-title">
-                Nazwa listy
+                {selectedShoppingList.name}
               </span>
               <input
                 type="text"
@@ -49,7 +69,7 @@ const ShoppingList = (props) => {
               filteredItems.map((item, index) => (
                 <ShoppingListItem
                   key={index}
-                  itemName={item.itemName}
+                  itemName={item.name}
                   itemQuantity={item.itemQuantity}
                   itemUnit={item.itemUnit}
                   itemCategory={item.itemCategory}
@@ -66,14 +86,19 @@ const ShoppingList = (props) => {
             <ShoppingListItemInfo
               item={selectedItem}
               exitInfo={() => setSelectedItem(null)}
+            />
+            /* <ShoppingListItemInfo
+              item={selectedItem}
+              exitInfo={() => setSelectedItem(null)}
               changeHandler={updateItem}
               deleteHandler={deleteItem}
-            />
+            /> */
           )}
-          {selectedItem === null && <ShoppingListAddItems updateItemsHandler = {setAllItems} allItems = {allItems}/>}
+          {selectedItem === null && <ShoppingListAddItems allItems = {allItems}/>}
+          {/* {selectedItem === null && <ShoppingListAddItems updateItemsHandler = {setAllItems} allItems = {allItems}/>} */}
         </div>
       </div>
     </>
   );
 };
-export default ShoppingList;
+export default ShoppingListDetails;
