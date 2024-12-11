@@ -27,14 +27,27 @@ export const addCategoryToDB = createAsyncThunk(
   }
 );
 export const changeCategory = createAsyncThunk(
-  "assets/changeAssetValue",
+  "categories/changeCategory",
   async (category, thunkAPI) => {
     try {
       const id = category.id;
-      console.log(category);
       const response = await axios.put(
         `http://localhost:5000/api/categories/${id}`,
         { name: category.name, color: category.color }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteCategory = createAsyncThunk(
+  "categories/deleteCategory",
+  async (category, thunkAPI) => {
+    try {
+      const id = category.id;
+      const response = await axios.delete(
+        `http://localhost:5000/api/categories/${id}`
       );
       return response.data;
     } catch (error) {
@@ -95,7 +108,22 @@ const categorySlice = createSlice({
       .addCase(changeCategory.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
-      });
+      })
+      .addCase(deleteCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        console.log(action.payload);
+        const id = action.payload.id;
+        state.categoryList = state.categoryList.filter(
+          (category) => category.id !== id
+        );
+      })
+      .addCase(deleteCategory.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });;
   },
 });
 export const categoryActions = categorySlice.actions;

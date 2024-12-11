@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { assetsActions } from "../../../store/assets";
 import { TwitterPicker } from "react-color";
-import { compose } from "@reduxjs/toolkit";
 import { changeAssetValue } from "../../../store/assets";
+import Icon from "@mdi/react";
+import { mdiTrashCanOutline } from "@mdi/js";
+import { deleteAsset } from "../../../store/assets";
 const DialogUpdateAsset = (props) => {
   const dispatch = useDispatch();
 
@@ -11,7 +12,10 @@ const DialogUpdateAsset = (props) => {
   const assets = useSelector((state) => state.assets.totalAssets);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isValueValid, setIsValueValid] = useState(true);
-  const selectedAssetObj = typeof(asset) === 'object' ? asset : assets.find((element) => element.name === asset);
+  const selectedAssetObj =
+    typeof asset === "object"
+      ? asset
+      : assets.find((element) => element.name === asset);
 
   const handleColorChange = (color) => {
     setFormData((prevData) => ({
@@ -49,20 +53,24 @@ const DialogUpdateAsset = (props) => {
     const newAssetData = {
       ...formData,
     };
-    if(newAssetData.name !== "" && newAssetData.value !== ""){
-      dispatch(changeAssetValue({asset:asset,value:newAssetData.value,proceedTransaction:false}));
+    if (newAssetData.name !== "" && newAssetData.value !== "") {
+      dispatch(
+        changeAssetValue({
+          asset: asset,
+          value: newAssetData.value,
+          proceedTransaction: false,
+        })
+      );
       setFormData(defaultFormData);
       closeDialog();
-    }
-    else{
+    } else {
       if (newAssetData.name === "") {
         setIsNameValid(false);
       }
-      if(newAssetData.value === ""){
+      if (newAssetData.value === "") {
         setIsValueValid(false);
       }
     }
-    
   };
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -70,7 +78,12 @@ const DialogUpdateAsset = (props) => {
     setFormData((prev) => ({
       ...prev,
       value: parseFloat(value).toFixed(2),
-    }))};
+    }));
+  };
+  const handleDelete = () => {
+    dispatch(deleteAsset(asset.id));
+    closeDialog();
+  }
   return (
     <div className="dialog-background fade-in">
       <dialog className="dialog slide-in" open={true}>
@@ -140,14 +153,20 @@ const DialogUpdateAsset = (props) => {
             </div>
           </div>
         </form>
-
-        <div className="dialog-bottom-btns-container">
-          <button className="dialog-btn-cancel" onClick={closeDialog}>
-            Cancel
-          </button>
-          <button className="dialog-btn-submit" onClick={handleSubmit}>
-            Submit
-          </button>
+        <div>
+          <div style={{ float: "left" }}>
+            <button className="delete-button" onClick={handleDelete}>
+              <Icon path={mdiTrashCanOutline} size={1} />
+            </button>
+          </div>
+          <div className="dialog-bottom-btns-container">
+            <button className="dialog-btn-cancel" onClick={closeDialog}>
+              Cancel
+            </button>
+            <button className="dialog-btn-submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
         </div>
       </dialog>
     </div>

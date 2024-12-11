@@ -38,7 +38,6 @@ export const changeTransaction = createAsyncThunk(
   "assets/changeTransaction",
   async (transaction, thunkAPI) => {
     try {
-      console.log(transaction);
       const id = transaction.id;
       const response = await axios.put(
         `http://localhost:5000/api/transactions/${id}`,
@@ -50,6 +49,19 @@ export const changeTransaction = createAsyncThunk(
     }
   }
 );
+
+export const deleteTransaction = createAsyncThunk(
+  "assets/deleteTransaction",
+  async (transactionId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/transactions/${transactionId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
+
 
 const transactionsSlice = createSlice({
   name: "transactions",
@@ -100,7 +112,20 @@ const transactionsSlice = createSlice({
       .addCase(changeTransaction.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
-      });;
+      })
+      .addCase(deleteTransaction.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const transactionId = action.payload.id;
+        state.transactionsList = state.transactionsList.filter((transaction) => transaction.id !== transactionId);
+      })
+      .addCase(deleteTransaction.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });
+      
   },
 });
 export const transactionActions = transactionsSlice.actions;

@@ -5,12 +5,19 @@ import { addPlannedTransactionToDB } from "../../../store/plannedTransactions";
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import DialogNewAsset from "../DialogNewAsset";
 import { changePlannedTransaction } from "../../../store/plannedTransactions";
-const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, closeDialog }) => {
+import { deletePlannedTransaction } from "../../../store/plannedTransactions";
+import Icon from "@mdi/react";
+import { mdiTrashCanOutline } from "@mdi/js";
+const DialogUpdatePlannedTransaction = ({
+  plannedTransaction,
+  isDialogOpen,
+  closeDialog,
+}) => {
   const dispatch = useDispatch();
   console.log(plannedTransaction);
   const defaultFormData = {
-    id: plannedTransaction.transaction_id,
-    name: plannedTransaction.transaction_name,
+    id: plannedTransaction.id,
+    name: plannedTransaction.name,
     asset_id: plannedTransaction.asset_id,
     category_id: plannedTransaction.category_id,
     date: plannedTransaction.date,
@@ -92,7 +99,8 @@ const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, close
       plannedTransactionData.asset_id !== "" &&
       plannedTransactionData.category_id !== "" &&
       plannedTransactionData.date !== "" &&
-      (plannedTransactionData.price !== "" && !isNaN(plannedTransactionData.price)) &&
+      plannedTransactionData.price !== "" &&
+      !isNaN(plannedTransactionData.price) &&
       plannedTransactionData.repeatValue !== ""
     ) {
       plannedTransactionData = {
@@ -114,20 +122,35 @@ const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, close
       if (plannedTransactionData.category_id == "") {
         setIsCategoryValid(false);
       }
-      if (plannedTransactionData.date === "" || new Date(plannedTransactionData.date) < new Date()) {
+      if (
+        plannedTransactionData.date === "" ||
+        new Date(plannedTransactionData.date) < new Date()
+      ) {
         setIsDateValid(false);
-        setInvalidDateReason(plannedTransactionData.date === "" ? 'You must select a date!' : 'The planned transaction must have a date in the future!')
+        setInvalidDateReason(
+          plannedTransactionData.date === ""
+            ? "You must select a date!"
+            : "The planned transaction must have a date in the future!"
+        );
       }
-      if (plannedTransactionData.price === "" || isNaN(plannedTransactionData.price)) {
+      if (
+        plannedTransactionData.price === "" ||
+        isNaN(plannedTransactionData.price)
+      ) {
         setIsPriceValid(false);
       }
-      if (parseInt(plannedTransactionData.repeatValue) == 0 || plannedTransactionData.repeatValue === "") {
+      if (
+        parseInt(plannedTransactionData.repeatValue) == 0 ||
+        plannedTransactionData.repeatValue === ""
+      ) {
         setIsRepeatValueValid(false);
       }
     }
-
   };
-
+  const handleDelete = () =>{
+    dispatch(deletePlannedTransaction(plannedTransaction.id));
+    closeDialog();
+  }
   const handlePriceBlur = (e) => {
     const { name, value } = e.target;
 
@@ -142,7 +165,7 @@ const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, close
       ...prev,
       repeatValue: parseInt(value).toString(),
     }));
-  }
+  };
   const handleClose = () => {
     setFormData(defaultFormData);
     setIsNameValid(true);
@@ -314,7 +337,7 @@ const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, close
                       className="dialog-select-repeat"
                     >
                       <option value="days" defaultValue>
-                        &nbsp;{(formData.repeatValue === "1") ? "day" : "days"}
+                        &nbsp;{formData.repeatValue === "1" ? "day" : "days"}
                       </option>
                       <option value="weeks">
                         &nbsp;{formData.repeatValue === "1" ? "week" : "weeks"}
@@ -354,13 +377,20 @@ const DialogUpdatePlannedTransaction = ({ plannedTransaction,isDialogOpen, close
                 </div>
               </div>
             </form>
-            <div className="dialog-bottom-btns-container">
-              <button className="dialog-btn-cancel" onClick={handleClose}>
-                Cancel
-              </button>
-              <button className="dialog-btn-submit" onClick={handleSubmit}>
-                Submit
-              </button>
+            <div>
+              <div style={{ float: "left" }}>
+                <button className="delete-button" onClick={handleDelete}>
+                  <Icon path={mdiTrashCanOutline} size={1} />
+                </button>
+              </div>
+              <div className="dialog-bottom-btns-container">
+                <button className="dialog-btn-cancel" onClick={closeDialog}>
+                  Cancel
+                </button>
+                <button className="dialog-btn-submit" onClick={handleSubmit}>
+                  Submit
+                </button>
+              </div>
             </div>
           </dialog>
         </div>

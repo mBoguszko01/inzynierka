@@ -119,6 +119,18 @@ export const changePlannedTransaction = createAsyncThunk(
   }
 );
 
+export const deletePlannedTransaction = createAsyncThunk(
+  "assets/deletePlannedTransaction",
+  async (plannedTransactionId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/planned-transactions/${plannedTransactionId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
+
 const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
   initialState: {
@@ -166,7 +178,19 @@ const plannedTransactionsSlice = createSlice({
       .addCase(addPlannedTransactionToDB.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload; // Przechowaj komunikat błędu
-      });
+      })
+      .addCase(deletePlannedTransaction.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deletePlannedTransaction.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const plannedTransactionId = action.payload.id;
+        state.plannedTransactionsList = state.plannedTransactionsList.filter((plannedTransaction) => plannedTransaction.id !== plannedTransactionId);
+      })
+      .addCase(deletePlannedTransaction.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });;
   },
 });
 export const plannedTransactionActions = plannedTransactionsSlice.actions;

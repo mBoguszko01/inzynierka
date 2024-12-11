@@ -39,7 +39,7 @@ export const changeAssetValue = createAsyncThunk(
       const newValue = proceedTransaction ? asset.value - value : value;
       const response = await axios.put(
         `http://localhost:5000/api/assets/${id}`,
-        {value: newValue}
+        { value: newValue }
       );
       return response.data;
     } catch (error) {
@@ -47,6 +47,20 @@ export const changeAssetValue = createAsyncThunk(
     }
   }
 );
+export const deleteAsset = createAsyncThunk(
+  "assets/deleteAsset",
+  async (assetId, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/assets/${assetId}`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const assetsSlice = createSlice({
   name: "assets",
   initialState: {
@@ -115,10 +129,24 @@ const assetsSlice = createSlice({
           (asset) => asset.id === updatedAsset.id
         );
         if (existingAsset) {
-          existingAsset.value = updatedAsset.value; 
+          existingAsset.value = updatedAsset.value;
         }
       })
       .addCase(changeAssetValue.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(deleteAsset.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteAsset.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const assetId = action.payload.id;
+        state.totalAssets = state.totalAssets.filter(
+          (asset) => asset.id !== assetId
+        );
+      })
+      .addCase(deleteAsset.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

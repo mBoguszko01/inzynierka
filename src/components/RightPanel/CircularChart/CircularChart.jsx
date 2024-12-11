@@ -34,13 +34,15 @@ const CircularChart = (props) => {
       filteredTransactions.reduce((acc, { category_id, price }) => {
         const category = categories.find((cat) => cat.id === category_id)
         const categoryName = category ? category.name : "Unknown";
-
         acc[categoryName] = (acc[categoryName] || 0) + parseFloat(price);
         return acc;
       }, {})
     ).map(([name, value]) => ({ name, value }));
-
-    colors = categories.map(category => category.color);
+    colors = filteredTransactions.map(({ category_id }) => {
+      const category = categories.find((cat) => cat.id === category_id);
+      return category ? category.color : "#CCCCCC";
+    });
+    
   }
   return (
     <>

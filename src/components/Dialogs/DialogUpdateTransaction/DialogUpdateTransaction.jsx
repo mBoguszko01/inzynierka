@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeTransaction } from "../../../store/transactions";
 import { changeAssetValue } from "../../../store/assets";
-
+import { deleteTransaction } from "../../../store/transactions";
 
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 
 import DialogNewAsset from "../DialogNewAsset";
 
 import DialogValueLowerThanZero from "../DialogAssetValueLowerThanZero/DialogValueLowerThanZero";
+
+import Icon from "@mdi/react";
+import { mdiTrashCanOutline } from "@mdi/js";
 const DialogUpdateTransaction = ({ transaction,isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
 
@@ -127,6 +130,10 @@ const DialogUpdateTransaction = ({ transaction,isDialogOpen, closeDialog }) => {
       }
     }
   };
+  const handleDelete = () =>{
+    dispatch(deleteTransaction(transaction.id));
+    closeDialog();
+  }
 
   const handleClose = () => {
     setFormData(defaultFormData);
@@ -262,14 +269,21 @@ const DialogUpdateTransaction = ({ transaction,isDialogOpen, closeDialog }) => {
                   </div>
                 </div>
               </form>
-              <div className="dialog-bottom-btns-container">
-                <button className="dialog-btn-cancel" onClick={handleClose}>
-                  Cancel
-                </button>
-                <button className="dialog-btn-submit" onClick={handleSubmit}>
-                  Submit
-                </button>
-              </div>
+              <div>
+            <div style={{ float: "left" }}>
+              <button className="delete-button" onClick={handleDelete}>
+                <Icon path={mdiTrashCanOutline} size={1} />
+              </button>
+            </div>
+            <div className="dialog-bottom-btns-container">
+              <button className="dialog-btn-cancel" onClick={closeDialog}>
+                Cancel
+              </button>
+              <button className="dialog-btn-submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          </div>
             </dialog>
           </div>
         )}
