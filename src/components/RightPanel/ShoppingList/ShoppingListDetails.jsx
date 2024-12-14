@@ -24,26 +24,9 @@ const ShoppingListDetails = (props) => {
   if (status === "loading") return <p>Loading items...</p>;
   if (status === "failed") return <p>Error loading items!</p>;
 
-  const updateItem = (updatedItem) => {
-    setAllItems((prevItems) =>
-      prevItems.map((item) =>
-        item.itemId === updatedItem.itemId ? updatedItem : item
-      )
-    );
-    setSelectedItem(null);
-  };
-
-  // const deleteItem = (itemToDelete) => {
-  //   setAllItems((prevProducts) =>
-  //     prevProducts.filter((item) => item.itemName !== itemToDelete.itemName)
-  //   );
-  //   setSelectedItem(null);
-  // }
-
   const filteredItems = allItems.filter((item) => {
     return item.name.toLowerCase().includes(search.toLocaleLowerCase());
   });
-
   return (
     <>
       <div className="shopping-list-main-container">
@@ -68,10 +51,8 @@ const ShoppingListDetails = (props) => {
                 return (
                   <ShoppingListItem
                     key={index}
-                    name={item.name}
-                    quantity={item.quantity}
-                    unit={item.unit}
-                    category={item.category}
+                    shoppingListId={selectedShoppingList.id}
+                    item={item}
                     handleSelect={() => setSelectedItem(item)}
                   />
                 );
@@ -84,6 +65,7 @@ const ShoppingListDetails = (props) => {
         <div className="shopping-list-right-panel">
           {selectedItem !== null && (
             <ShoppingListItemInfo
+              shoppingListId={selectedShoppingList.id}
               item={selectedItem}
               exitInfo={() => setSelectedItem(null)}
             />

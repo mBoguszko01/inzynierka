@@ -1,22 +1,28 @@
+import { useDispatch } from "react-redux";
 import "./ShoppingListItem.css";
-
+import { updateShoppingListItem } from "../../../../store/shoppingLists";
 const ShoppingListItem = (props) => {
-  const { name, quantity,unit, category, handleSelect } = props;
+  const dispatch = useDispatch();
+
+  const { shoppingListId, item, handleSelect } = props;
   const handleCheckboxClick = (e) => {
       e.stopPropagation();
+      const updatedItem = {...item, is_purchased: !item.is_purchased}
+      dispatch(updateShoppingListItem({ shoppingListId, itemId: item.item_id, updatedItem }))
   }
+
   return (
     <>
       <div className="shopping-list-item-container" onClick={handleSelect}>
         <div>
-          <input type="checkbox" onClick={handleCheckboxClick}/>
-          <span>{name}</span>
-          {(unit !== "") && <span style={{marginLeft:'15px'}}>{quantity} {unit}</span>}
-          {(unit === "" && quantity > 1) &&  <span style={{marginLeft:'15px'}}>{quantity} {unit}</span>}
+          <input type="checkbox" onClick={handleCheckboxClick} checked={item.is_purchased}/>
+          <span>{item.name}</span>
+          {(item.unit !== "") && <span style={{marginLeft:'15px'}}>{item.quantity} {item.unit}</span>}
+          {(item.unit === "" && item.quantity > 1) &&  <span style={{marginLeft:'15px'}}>{item.quantity} {item.unit}</span>}
         </div>
 
         <img
-          src={`${category.toLowerCase()}.svg`}
+          src={`${item.category.toLowerCase()}.svg`}
           className="shopping-list-category-img"
         />
       </div>
