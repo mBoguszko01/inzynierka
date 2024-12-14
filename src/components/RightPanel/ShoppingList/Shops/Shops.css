@@ -1,0 +1,47 @@
+.shops-wrapper{
+    padding: 25px 30px 0 30px;
+}
+.shops-container{
+    min-height: 20vh;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.shop-container{
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    aspect-ratio: 1;
+    height: 17vh;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+.shop-container:hover{
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+.shop-logo{
+    width: 50px;
+    margin-bottom: 8px;
+}
+.shop-logo-grey{
+    filter: grayscale(100%);
+}
+.coupons-amount{
+    position: absolute;
+    color: #fff;
+    background-color: red;
+    aspect-ratio: 1;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left:85%;
+    top:-5%;
+    border-radius: 20px;
+
+}

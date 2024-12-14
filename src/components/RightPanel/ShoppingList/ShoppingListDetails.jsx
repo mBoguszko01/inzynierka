@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ShoppingListItem from "./ShoppingListItem/ShoppingListItem";
 import ShoppingListItemInfo from "./ShoppingListItemInfo/ShoppingListItemInfo";
 import ShoppingListAddItems from "./ShoppingListAddItems/ShoppingListAddItems";
+import Shops from "./Shops/Shops";
 import { fetchShoppingListItems } from "../../../store/shoppingLists";
 
 const ShoppingListDetails = (props) => {
@@ -29,6 +30,7 @@ const ShoppingListDetails = (props) => {
   });
   return (
     <>
+      <Shops />
       <div className="shopping-list-main-container">
         <div className="shopping-list-container">
           <div className="shopping-list-title-container">

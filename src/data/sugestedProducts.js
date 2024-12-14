@@ -1,1299 +1,1299 @@
 const suggestedProducts = [
     {
-        "product_name": "Vodka",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Wheat Bread"
     },
     {
-        "product_name": "Dry Red Wine",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Rye Bread"
     },
     {
-        "product_name": "Semi-Dry White Wine",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Wholemeal Bread"
     },
     {
-        "product_name": "Lager Beer",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Gluten-Free Bread"
     },
     {
-        "product_name": "IPA Beer",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Toast Bread"
     },
     {
-        "product_name": "Single Malt Whisky",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Multigrain Bread"
     },
     {
-        "product_name": "Blended Whisky",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Graham Bread"
     },
     {
-        "product_name": "London Dry Gin",
-        "category": "Alcohol and Tobacco"
+        "category": "Dry Products",
+        "name": "Crisp Bread"
     },
     {
-        "product_name": "Silver Tequila",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Milk"
     },
     {
-        "product_name": "Coffee Liqueur",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Lactose-Free Milk"
     },
     {
-        "product_name": "Cigarettes",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Coconut Milk"
     },
     {
-        "product_name": "Nicotine Pouches",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Almond Milk"
     },
     {
-        "product_name": "Rolling Papers",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Soy Milk"
     },
     {
-        "product_name": "E-Cigarettes Liquids",
-        "category": "Alcohol and Tobacco"
+        "category": "Dairy Products",
+        "name": "Oat Milk"
     },
     {
-        "product_name": "Adhesive Bandages",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Milk Dessert with Chocolate"
     },
     {
-        "product_name": "Antiseptic Wipes",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Milk Dessert with Fruits"
     },
     {
-        "product_name": "Gauze Pads",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Natural Buttermilk"
     },
     {
-        "product_name": "Medical Tape",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Strawberry Buttermilk"
     },
     {
-        "product_name": "Antiseptic Cream or Ointment",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Lemon-Flavored Buttermilk"
     },
     {
-        "product_name": "Elastic Bandage",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Milk Drink with Probiotics"
     },
     {
-        "product_name": "Thermometer",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Sweetened Condensed Milk"
     },
     {
-        "product_name": "Tweezers",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Powdered Milk"
     },
     {
-        "product_name": "Pain Killers",
-        "category": "First Aid Kit"
+        "category": "Snacks and Sweets",
+        "name": "Milk Chocolate"
     },
     {
-        "product_name": "Disposable Gloves",
-        "category": "First Aid Kit"
+        "category": "Dairy Products",
+        "name": "Gouda Cheese"
     },
     {
-        "product_name": "Dog Food",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Edam Cheese"
     },
     {
-        "product_name": "Cat Food",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Emmentaler Cheese"
     },
     {
-        "product_name": "Pet Shampoo",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Cheddar Cheese"
     },
     {
-        "product_name": "Litter Box",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Mozzarella Cheese (sliced)"
     },
     {
-        "product_name": "Dog Leash",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Tilsit Cheese"
     },
     {
-        "product_name": "Cat Scratching Post",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Maasdam Cheese"
     },
     {
-        "product_name": "Pet Carrier",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Radamer Cheese"
     },
     {
-        "product_name": "Chew Toys",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Provolone Cheese"
     },
     {
-        "product_name": "Bird Seed",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Grana Padano Cheese"
     },
     {
-        "product_name": "Aquarium Filter",
-        "category": "Pet Products"
+        "category": "Dairy Products",
+        "name": "Quark for Cheesecake"
     },
     {
-        "product_name": "Baby Diapers",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Vanilla Homogenized Cheese"
     },
     {
-        "product_name": "Baby Wipes",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Chocolate Homogenized Cheese"
     },
     {
-        "product_name": "Infant Formula",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Natural Cottage Cheese"
     },
     {
-        "product_name": "Baby Bottle",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Cottage Cheese with Additives (e.g., chives)"
     },
     {
-        "product_name": "Pacifier",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Herb Flavored Cream Cheese"
     },
     {
-        "product_name": "Baby Blanket",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Brie Cheese"
     },
     {
-        "product_name": "Baby Stroller",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Camembert Cheese"
     },
     {
-        "product_name": "High Chair",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Gorgonzola Cheese"
     },
     {
-        "product_name": "Baby Monitor",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Roquefort Cheese"
     },
     {
-        "product_name": "Teething Toys",
-        "category": "Baby Products"
+        "category": "Dairy Products",
+        "name": "Blue Stilton Cheese"
     },
     {
-        "product_name": "Wheat Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Taleggio Cheese"
     },
     {
-        "product_name": "Rye Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Limburger Cheese"
     },
     {
-        "product_name": "Wholemeal Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Munster Cheese"
     },
     {
-        "product_name": "Gluten-Free Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Bleu d'Auvergne Cheese"
     },
     {
-        "product_name": "Baguette",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Saint Agur Cheese"
     },
     {
-        "product_name": "Kaiser Rolls",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Butter Rolls"
     },
     {
-        "product_name": "Butter Rolls",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Extra Butter"
     },
     {
-        "product_name": "Whole Grain Rolls",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Clarified Butter"
     },
     {
-        "product_name": "Pita",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Salted Butter"
     },
     {
-        "product_name": "Wheat Tortilla",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Herb Butter"
     },
     {
-        "product_name": "Corn Tortilla",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Plant-Based Butter"
     },
     {
-        "product_name": "Toast Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Coconut Butter"
     },
     {
-        "product_name": "Multigrain Bread",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Almond Butter"
     },
     {
-        "product_name": "Graham Bread",
-        "category": "Dry Products"
+        "category": "Snacks and Sweets",
+        "name": "Butter Popcorn"
     },
     {
-        "product_name": "Crisp Bread",
-        "category": "Dry Products"
+        "category": "Snacks and Sweets",
+        "name": "Butter Cookies"
     },
     {
-        "product_name": "Grissini",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Natural Yogurt"
     },
     {
-        "product_name": "Rusks",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Greek Yogurt"
     },
     {
-        "product_name": "Rice Cakes",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Vanilla Yogurt"
     },
     {
-        "product_name": "Corn Cakes",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Strawberry Yogurt"
     },
     {
-        "product_name": "Sweet Rolls",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Raspberry Yogurt"
     },
     {
-        "product_name": "Penne Pasta",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Blueberry Yogurt"
     },
     {
-        "product_name": "Spaghetti",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Fruit Yogurt"
     },
     {
-        "product_name": "Tagliatelle",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Natural Drinking Yogurt"
     },
     {
-        "product_name": "Fusilli",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Fruit Drinking Yogurt"
     },
     {
-        "product_name": "Gluten-Free Pasta",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Yogurt with Granola"
     },
     {
-        "product_name": "Whole Grain Pasta",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Organic Yogurt"
     },
     {
-        "product_name": "Rice Noodles",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Yogurt Cream with Fruits"
     },
     {
-        "product_name": "Soy Noodles",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Icelandic Skyr Yogurt"
     },
     {
-        "product_name": "Egg Pasta",
-        "category": "Dry Products"
+        "category": "Dairy Products",
+        "name": "Protein Yogurt"
     },
     {
-        "product_name": "White Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Penne Pasta"
     },
     {
-        "product_name": "Basmati Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Gluten-Free Pasta"
     },
     {
-        "product_name": "Jasmine Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Whole Grain Pasta"
     },
     {
-        "product_name": "Parboiled Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Egg Pasta"
     },
     {
-        "product_name": "Brown Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Rice Cakes"
     },
     {
-        "product_name": "Wild Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Rice Noodles"
     },
     {
-        "product_name": "Sushi Rice",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "White Rice"
     },
     {
-        "product_name": "Buckwheat",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Basmati Rice"
     },
     {
-        "product_name": "Millet",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Jasmine Rice"
     },
     {
-        "product_name": "Couscous",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Parboiled Rice"
     },
     {
-        "product_name": "Bulgur",
-        "category": "Dry Products"
+        "category": "Dry Products",
+        "name": "Brown Rice"
     },
     {
-        "product_name": "Milk",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Wild Rice"
     },
     {
-        "product_name": "Lactose-Free Milk",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Sushi Rice"
     },
     {
-        "product_name": "Coconut Milk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Rice Pudding"
     },
     {
-        "product_name": "Almond Milk",
-        "category": "Dairy Products"
+        "category": "Fish",
+        "name": "Fried Fish Snacks"
     },
     {
-        "product_name": "Soy Milk",
-        "category": "Dairy Products"
+        "category": "Fish",
+        "name": "Fish Sticks"
     },
     {
-        "product_name": "Oat Milk",
-        "category": "Dairy Products"
+        "category": "Water and Drinks",
+        "name": "Orange Juice"
     },
     {
-        "product_name": "18% Sour Cream",
-        "category": "Dairy Products"
+        "category": "Water and Drinks",
+        "name": "Apple Juice"
     },
     {
-        "product_name": "30% Cream",
-        "category": "Dairy Products"
+        "category": "Water and Drinks",
+        "name": "Multivitamin Juice"
     },
     {
-        "product_name": "Coffee Creamer",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Vodka"
     },
     {
-        "product_name": "Natural Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Dry Red Wine"
     },
     {
-        "product_name": "Greek Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Semi-Dry White Wine"
     },
     {
-        "product_name": "Vanilla Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Lager Beer"
     },
     {
-        "product_name": "Strawberry Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "IPA Beer"
     },
     {
-        "product_name": "Raspberry Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Single Malt Whisky"
     },
     {
-        "product_name": "Blueberry Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Blended Whisky"
     },
     {
-        "product_name": "Fruit Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "London Dry Gin"
     },
     {
-        "product_name": "Natural Drinking Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Silver Tequila"
     },
     {
-        "product_name": "Fruit Drinking Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Coffee Liqueur"
     },
     {
-        "product_name": "Yogurt with Granola",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Cigarettes"
     },
     {
-        "product_name": "Organic Yogurt",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Nicotine Pouches"
     },
     {
-        "product_name": "Gouda Cheese",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "Rolling Papers"
     },
     {
-        "product_name": "Edam Cheese",
-        "category": "Dairy Products"
+        "category": "Alcohol and Tobacco",
+        "name": "E-Cigarettes Liquids"
     },
     {
-        "product_name": "Emmentaler Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Antiseptic Wipes"
     },
     {
-        "product_name": "Cheddar Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Gauze Pads"
     },
     {
-        "product_name": "Mozzarella Cheese (sliced)",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Medical Tape"
     },
     {
-        "product_name": "Tilsit Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Antiseptic Cream or Ointment"
     },
     {
-        "product_name": "Maasdam Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Elastic Bandage"
     },
     {
-        "product_name": "Radamer Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Thermometer"
     },
     {
-        "product_name": "Provolone Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Tweezers"
     },
     {
-        "product_name": "Grana Padano Cheese",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Pain Killers"
     },
     {
-        "product_name": "Semi-Fat Quark",
-        "category": "Dairy Products"
+        "category": "First Aid Kit",
+        "name": "Disposable Gloves"
     },
     {
-        "product_name": "Fat Quark",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Dog Food"
     },
     {
-        "product_name": "Low-Fat Quark",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Cat Food"
     },
     {
-        "product_name": "Country-Style Quark",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Pet Shampoo"
     },
     {
-        "product_name": "Quark for Cheesecake",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Litter Box"
     },
     {
-        "product_name": "Vanilla Homogenized Cheese",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Dog Leash"
     },
     {
-        "product_name": "Chocolate Homogenized Cheese",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Cat Scratching Post"
     },
     {
-        "product_name": "Natural Cottage Cheese",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Pet Carrier"
     },
     {
-        "product_name": "Cottage Cheese with Additives (e.g., chives)",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Chew Toys"
     },
     {
-        "product_name": "Herb Flavored Cream Cheese",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Bird Seed"
     },
     {
-        "product_name": "Brie Cheese",
-        "category": "Dairy Products"
+        "category": "Pet Products",
+        "name": "Aquarium Filter"
     },
     {
-        "product_name": "Camembert Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Diapers"
     },
     {
-        "product_name": "Gorgonzola Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Wipes"
     },
     {
-        "product_name": "Roquefort Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Infant Formula"
     },
     {
-        "product_name": "Blue Stilton Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Bottle"
     },
     {
-        "product_name": "Taleggio Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Pacifier"
     },
     {
-        "product_name": "Limburger Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Blanket"
     },
     {
-        "product_name": "Munster Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Stroller"
     },
     {
-        "product_name": "Bleu d'Auvergne Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "High Chair"
     },
     {
-        "product_name": "Saint Agur Cheese",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Baby Monitor"
     },
     {
-        "product_name": "Vanilla Pudding",
-        "category": "Dairy Products"
+        "category": "Baby Products",
+        "name": "Teething Toys"
     },
     {
-        "product_name": "Chocolate Pudding",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Baguette"
     },
     {
-        "product_name": "Chocolate Mousse",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Kaiser Rolls"
     },
     {
-        "product_name": "Vanilla Mousse",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Whole Grain Rolls"
     },
     {
-        "product_name": "Creamy Dessert",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Pita"
     },
     {
-        "product_name": "Rice Pudding",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Wheat Tortilla"
     },
     {
-        "product_name": "Coconut Pudding",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Corn Tortilla"
     },
     {
-        "product_name": "Yogurt Cream with Fruits",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Grissini"
     },
     {
-        "product_name": "Milk Dessert with Chocolate",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Rusks"
     },
     {
-        "product_name": "Milk Dessert with Fruits",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Corn Cakes"
     },
     {
-        "product_name": "Extra Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Sweet Rolls"
     },
     {
-        "product_name": "Clarified Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Spaghetti"
     },
     {
-        "product_name": "Salted Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Tagliatelle"
     },
     {
-        "product_name": "Herb Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Fusilli"
     },
     {
-        "product_name": "Baking Margarine",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Soy Noodles"
     },
     {
-        "product_name": "Spreadable Margarine",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Buckwheat"
     },
     {
-        "product_name": "Plant-Based Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Millet"
     },
     {
-        "product_name": "Coconut Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Couscous"
     },
     {
-        "product_name": "Almond Butter",
-        "category": "Dairy Products"
+        "category": "Dry Products",
+        "name": "Bulgur"
     },
     {
-        "product_name": "Lactose-Free Margarine",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "18% Sour Cream"
     },
     {
-        "product_name": "Natural Kefir",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "30% Cream"
     },
     {
-        "product_name": "Fruit Kefir",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Coffee Creamer"
     },
     {
-        "product_name": "Natural Buttermilk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Semi-Fat Quark"
     },
     {
-        "product_name": "Strawberry Buttermilk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Fat Quark"
     },
     {
-        "product_name": "Lemon-Flavored Buttermilk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Low-Fat Quark"
     },
     {
-        "product_name": "Ayran",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Country-Style Quark"
     },
     {
-        "product_name": "Mango Lassi",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Vanilla Pudding"
     },
     {
-        "product_name": "Plain Lassi",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Chocolate Pudding"
     },
     {
-        "product_name": "Milk Drink with Probiotics",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Chocolate Mousse"
     },
     {
-        "product_name": "Icelandic Skyr Yogurt",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Vanilla Mousse"
     },
     {
-        "product_name": "Whipped Cream",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Creamy Dessert"
     },
     {
-        "product_name": "Mascarpone Cream",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Coconut Pudding"
     },
     {
-        "product_name": "Sweetened Condensed Milk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Baking Margarine"
     },
     {
-        "product_name": "Powdered Milk",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Spreadable Margarine"
     },
     {
-        "product_name": "Protein Yogurt",
-        "category": "Dairy Products"
+        "category": "Dairy Products",
+        "name": "Lactose-Free Margarine"
     },
     {
-        "product_name": "Chicken Breast",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Natural Kefir"
     },
     {
-        "product_name": "Chicken Thighs",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Fruit Kefir"
     },
     {
-        "product_name": "Turkey Breast",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Ayran"
     },
     {
-        "product_name": "Pork Loin",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Mango Lassi"
     },
     {
-        "product_name": "Pork Neck",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Plain Lassi"
     },
     {
-        "product_name": "Pork Shoulder",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Whipped Cream"
     },
     {
-        "product_name": "Minced Beef",
-        "category": "Meat and Cold Cuts"
+        "category": "Dairy Products",
+        "name": "Mascarpone Cream"
     },
     {
-        "product_name": "Beef Steak",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Chicken Breast"
     },
     {
-        "product_name": "Beef Tenderloin",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Chicken Thighs"
     },
     {
-        "product_name": "Minced Cutlets",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Turkey Breast"
     },
     {
-        "product_name": "Podwawelska Sausage",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Pork Loin"
     },
     {
-        "product_name": "Silesian Sausage",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Pork Neck"
     },
     {
-        "product_name": "Salami",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Pork Shoulder"
     },
     {
-        "product_name": "Canned Ham",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Minced Beef"
     },
     {
-        "product_name": "Parma Ham",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Beef Steak"
     },
     {
-        "product_name": "Bacon",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Beef Tenderloin"
     },
     {
-        "product_name": "Poultry Hot Dogs",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Minced Cutlets"
     },
     {
-        "product_name": "Pork Hot Dogs",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Podwawelska Sausage"
     },
     {
-        "product_name": "Chicken Liver",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Silesian Sausage"
     },
     {
-        "product_name": "Smoked Bacon",
-        "category": "Meat and Cold Cuts"
+        "category": "Meat and Cold Cuts",
+        "name": "Salami"
     },
     {
-        "product_name": "Fresh Salmon",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Canned Ham"
     },
     {
-        "product_name": "Smoked Salmon",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Parma Ham"
     },
     {
-        "product_name": "Cod",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Bacon"
     },
     {
-        "product_name": "Canned Tuna",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Poultry Hot Dogs"
     },
     {
-        "product_name": "Trout",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Pork Hot Dogs"
     },
     {
-        "product_name": "Halibut",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Chicken Liver"
     },
     {
-        "product_name": "Shrimp",
-        "category": "Fish"
+        "category": "Meat and Cold Cuts",
+        "name": "Smoked Bacon"
     },
     {
-        "product_name": "Mussels",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Fresh Salmon"
     },
     {
-        "product_name": "Octopus",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Smoked Salmon"
     },
     {
-        "product_name": "Pollock Fillets",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Cod"
     },
     {
-        "product_name": "Smoked Mackerel",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Canned Tuna"
     },
     {
-        "product_name": "Canned Sardines",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Trout"
     },
     {
-        "product_name": "Caviar",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Halibut"
     },
     {
-        "product_name": "Fried Fish Snacks",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Shrimp"
     },
     {
-        "product_name": "Fish Sticks",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Mussels"
     },
     {
-        "product_name": "Surimi",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Octopus"
     },
     {
-        "product_name": "Anchovies",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Pollock Fillets"
     },
     {
-        "product_name": "Red Snapper",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Smoked Mackerel"
     },
     {
-        "product_name": "Herring in Oil",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Canned Sardines"
     },
     {
-        "product_name": "Marinated Herring",
-        "category": "Fish"
+        "category": "Fish",
+        "name": "Caviar"
     },
     {
-        "product_name": "Tomatoes",
-        "category": "Vegetables and Fruits"
+        "category": "Fish",
+        "name": "Surimi"
     },
     {
-        "product_name": "Cucumbers",
-        "category": "Vegetables and Fruits"
+        "category": "Fish",
+        "name": "Anchovies"
     },
     {
-        "product_name": "Red Bell Pepper",
-        "category": "Vegetables and Fruits"
+        "category": "Fish",
+        "name": "Red Snapper"
     },
     {
-        "product_name": "Yellow Bell Pepper",
-        "category": "Vegetables and Fruits"
+        "category": "Fish",
+        "name": "Herring in Oil"
     },
     {
-        "product_name": "Green Bell Pepper",
-        "category": "Vegetables and Fruits"
+        "category": "Fish",
+        "name": "Marinated Herring"
     },
     {
-        "product_name": "Carrots",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Tomatoes"
     },
     {
-        "product_name": "Parsnips",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Cucumbers"
     },
     {
-        "product_name": "Celery Root",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Red Bell Pepper"
     },
     {
-        "product_name": "Zucchini",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Yellow Bell Pepper"
     },
     {
-        "product_name": "Eggplant",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Green Bell Pepper"
     },
     {
-        "product_name": "Pumpkin",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Carrots"
     },
     {
-        "product_name": "Potatoes",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Parsnips"
     },
     {
-        "product_name": "Sweet Potatoes",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Celery Root"
     },
     {
-        "product_name": "White Cabbage",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Zucchini"
     },
     {
-        "product_name": "Red Cabbage",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Eggplant"
     },
     {
-        "product_name": "Savoy Cabbage",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Pumpkin"
     },
     {
-        "product_name": "Cauliflower",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Potatoes"
     },
     {
-        "product_name": "Broccoli",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Sweet Potatoes"
     },
     {
-        "product_name": "Fresh Spinach",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "White Cabbage"
     },
     {
-        "product_name": "Kale",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Red Cabbage"
     },
     {
-        "product_name": "Apples",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Savoy Cabbage"
     },
     {
-        "product_name": "Pears",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Cauliflower"
     },
     {
-        "product_name": "Bananas",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Broccoli"
     },
     {
-        "product_name": "Oranges",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Fresh Spinach"
     },
     {
-        "product_name": "Tangerines",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Kale"
     },
     {
-        "product_name": "Lemons",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Apples"
     },
     {
-        "product_name": "Limes",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Pears"
     },
     {
-        "product_name": "Grapes",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Bananas"
     },
     {
-        "product_name": "Pineapple",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Oranges"
     },
     {
-        "product_name": "Mango",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Tangerines"
     },
     {
-        "product_name": "Kiwi",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Lemons"
     },
     {
-        "product_name": "Strawberries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Limes"
     },
     {
-        "product_name": "Raspberries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Grapes"
     },
     {
-        "product_name": "Blueberries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Pineapple"
     },
     {
-        "product_name": "Blackberries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Mango"
     },
     {
-        "product_name": "Cherries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Kiwi"
     },
     {
-        "product_name": "Sour Cherries",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Strawberries"
     },
     {
-        "product_name": "Plums",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Raspberries"
     },
     {
-        "product_name": "Peaches",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Blueberries"
     },
     {
-        "product_name": "Apricots",
-        "category": "Vegetables and Fruits"
+        "category": "Vegetables and Fruits",
+        "name": "Blackberries"
     },
     {
-        "product_name": "Potato Chips",
-        "category": "Snacks and Sweets"
+        "category": "Vegetables and Fruits",
+        "name": "Cherries"
     },
     {
-        "product_name": "Corn Chips",
-        "category": "Snacks and Sweets"
+        "category": "Vegetables and Fruits",
+        "name": "Sour Cherries"
     },
     {
-        "product_name": "Butter Popcorn",
-        "category": "Snacks and Sweets"
+        "category": "Vegetables and Fruits",
+        "name": "Plums"
     },
     {
-        "product_name": "Salted Popcorn",
-        "category": "Snacks and Sweets"
+        "category": "Vegetables and Fruits",
+        "name": "Peaches"
     },
     {
-        "product_name": "Crackers",
-        "category": "Snacks and Sweets"
+        "category": "Vegetables and Fruits",
+        "name": "Apricots"
     },
     {
-        "product_name": "Salted Peanuts",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Potato Chips"
     },
     {
-        "product_name": "Caramel Peanuts",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Corn Chips"
     },
     {
-        "product_name": "Almonds",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Salted Popcorn"
     },
     {
-        "product_name": "Pistachios",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Crackers"
     },
     {
-        "product_name": "Cashews",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Salted Peanuts"
     },
     {
-        "product_name": "Milk Chocolate",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Caramel Peanuts"
     },
     {
-        "product_name": "Dark Chocolate",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Almonds"
     },
     {
-        "product_name": "White Chocolate",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Pistachios"
     },
     {
-        "product_name": "Chocolate Bars",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Cashews"
     },
     {
-        "product_name": "Cereal Bars",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Dark Chocolate"
     },
     {
-        "product_name": "Butter Cookies",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "White Chocolate"
     },
     {
-        "product_name": "Oat Cookies",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Chocolate Bars"
     },
     {
-        "product_name": "Chocolate Wafers",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Cereal Bars"
     },
     {
-        "product_name": "Lollipops",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Oat Cookies"
     },
     {
-        "product_name": "Gummies",
-        "category": "Snacks and Sweets"
+        "category": "Snacks and Sweets",
+        "name": "Chocolate Wafers"
     },
     {
-        "product_name": "Sparkling Water",
-        "category": "Water and Drinks"
+        "category": "Snacks and Sweets",
+        "name": "Lollipops"
     },
     {
-        "product_name": "Still Water",
-        "category": "Water and Drinks"
+        "category": "Snacks and Sweets",
+        "name": "Gummies"
     },
     {
-        "product_name": "Flavored Water",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Sparkling Water"
     },
     {
-        "product_name": "Orange Juice",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Still Water"
     },
     {
-        "product_name": "Apple Juice",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Flavored Water"
     },
     {
-        "product_name": "Multivitamin Juice",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Fruit Smoothie"
     },
     {
-        "product_name": "Fruit Smoothie",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Vegetable Smoothie"
     },
     {
-        "product_name": "Vegetable Smoothie",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Black Tea"
     },
     {
-        "product_name": "Black Tea",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Green Tea"
     },
     {
-        "product_name": "Green Tea",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Fruit Tea"
     },
     {
-        "product_name": "Fruit Tea",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Herbal Tea"
     },
     {
-        "product_name": "Herbal Tea",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Ground Coffee"
     },
     {
-        "product_name": "Ground Coffee",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Instant Coffee"
     },
     {
-        "product_name": "Instant Coffee",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Espresso Capsules"
     },
     {
-        "product_name": "Espresso Capsules",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Decaffeinated Coffee"
     },
     {
-        "product_name": "Decaffeinated Coffee",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Isotonic Drink"
     },
     {
-        "product_name": "Isotonic Drink",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Energy Drink"
     },
     {
-        "product_name": "Energy Drink",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Lemonade"
     },
     {
-        "product_name": "Lemonade",
-        "category": "Water and Drinks"
+        "category": "Water and Drinks",
+        "name": "Cola"
     },
     {
-        "product_name": "Cola",
-        "category": "Water and Drinks"
+        "category": "Spices and Seasonings",
+        "name": "Salt"
     },
     {
-        "product_name": "Salt",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Pepper"
     },
     {
-        "product_name": "Pepper",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Paprika"
     },
     {
-        "product_name": "Paprika",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Cumin"
     },
     {
-        "product_name": "Cumin",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Coriander"
     },
     {
-        "product_name": "Coriander",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Turmeric"
     },
     {
-        "product_name": "Turmeric",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Cinnamon"
     },
     {
-        "product_name": "Cinnamon",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Nutmeg"
     },
     {
-        "product_name": "Nutmeg",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Clove"
     },
     {
-        "product_name": "Clove",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Ginger"
     },
     {
-        "product_name": "Ginger",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Garlic Powder"
     },
     {
-        "product_name": "Garlic Powder",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Onion Powder"
     },
     {
-        "product_name": "Onion Powder",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Chili Powder"
     },
     {
-        "product_name": "Chili Powder",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Oregano"
     },
     {
-        "product_name": "Oregano",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Thyme"
     },
     {
-        "product_name": "Thyme",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Rosemary"
     },
     {
-        "product_name": "Rosemary",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Bay Leaves"
     },
     {
-        "product_name": "Bay Leaves",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Parsley"
     },
     {
-        "product_name": "Parsley",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Saffron"
     },
     {
-        "product_name": "Saffron",
-        "category": "Spices and Seasonings"
+        "category": "Spices and Seasonings",
+        "name": "Cardamom"
     },
     {
-        "product_name": "Cardamom",
-        "category": "Spices and Seasonings"
+        "category": "Hygiene Products",
+        "name": "Toothpaste"
     },
     {
-        "product_name": "Toothpaste",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Toothbrush"
     },
     {
-        "product_name": "Toothbrush",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Shampoo"
     },
     {
-        "product_name": "Shampoo",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Conditioner"
     },
     {
-        "product_name": "Conditioner",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Body Wash"
     },
     {
-        "product_name": "Body Wash",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Bar Soap"
     },
     {
-        "product_name": "Bar Soap",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Deodorant"
     },
     {
-        "product_name": "Deodorant",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Shaving Cream"
     },
     {
-        "product_name": "Shaving Cream",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Razor Blades"
     },
     {
-        "product_name": "Razor Blades",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Feminine Hygiene Pads"
     },
     {
-        "product_name": "Feminine Hygiene Pads",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Tampons"
     },
     {
-        "product_name": "Tampons",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Hand Soap"
     },
     {
-        "product_name": "Hand Soap",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Hand Sanitizer"
     },
     {
-        "product_name": "Hand Sanitizer",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Face Wash"
     },
     {
-        "product_name": "Face Wash",
-        "category": "Hygiene Products"
+        "category": "Hygiene Products",
+        "name": "Moisturizing Cream"
     },
     {
-        "product_name": "Moisturizing Cream",
-        "category": "Hygiene Products"
+        "category": "First Aid Kit",
+        "name": "Adhesive Bandages"
     }
 ]
 export default suggestedProducts;

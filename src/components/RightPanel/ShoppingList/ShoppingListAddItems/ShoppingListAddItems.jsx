@@ -15,11 +15,11 @@ const ShoppingListAddItems = (props) => {
 
   const [search, setSearch] = useState("");
   const filteredItems = sugestedProducts.filter((item) =>
-    item.product_name.toLowerCase().includes(search.toLocaleLowerCase())
+    item.name.toLowerCase().includes(search.toLocaleLowerCase())
   );
   const handleAddItem = async (product) => {
     const newItem = {
-      name: product.product_name,
+      name: product.name,
       quantity: "1",
       unit: "",
       category: product.category,
@@ -48,7 +48,7 @@ await dispatch(
   const handleDeleteItem = (product, e) => {
     e.stopPropagation();
     updateItemsHandler((prevProducts) =>
-      prevProducts.filter((item) => item.itemName !== product.product_name)
+      prevProducts.filter((item) => item.itemName !== product.name)
     );
   };
 
@@ -78,12 +78,12 @@ await dispatch(
                 className="shopping-list-add-product-plus"
                 style={{
                   backgroundColor: allItems.some(
-                    (item) => item.name === product.product_name
+                    (item) => item.name === product.name
                   )
                     ? "blue"
                     : "#aaaaaa",
                   transform: allItems.some(
-                    (item) => item.name === product.product_name
+                    (item) => item.name === product.name
                   )
                     ? "rotate(90deg)"
                     : "rotate(0deg)",
@@ -99,9 +99,9 @@ await dispatch(
                   justifyContent: "space-between",
                 }}
               >
-                {product.product_name}
+                {product.name}
                 {allItems.some(
-                  (item) => item.itemName === product.product_name
+                  (item) => item.itemName === product.name
                 ) ? (
                   <div
                     className="shopping-list-delete-item"
