@@ -30,7 +30,7 @@ const ShoppingListDetails = (props) => {
   });
   return (
     <>
-      <Shops />
+      <Shops shoppingListId={selectedShoppingList.id}/>
       <div className="shopping-list-main-container">
         <div className="shopping-list-container">
           <div className="shopping-list-title-container">

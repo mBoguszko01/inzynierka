@@ -56,7 +56,8 @@ const DialogUpdateAsset = (props) => {
     if (newAssetData.name !== "" && newAssetData.value !== "") {
       dispatch(
         changeAssetValue({
-          asset: asset,
+          assetId: asset.id,
+          asset: newAssetData,
           value: newAssetData.value,
           proceedTransaction: false,
         })

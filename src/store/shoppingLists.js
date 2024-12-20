@@ -193,8 +193,7 @@ const shoppingListsSlice = createSlice({
               (list) => list.id === shoppingListId
             );
 
-            if (shoppingList) {
-              console.log(typeof(shoppingList.purchased_items));
+            if (shoppingList) { 
               if (!wasPurchased && item.is_purchased) {
                 shoppingList.purchased_items += 1;
               } else if (wasPurchased && !item.is_purchased) {

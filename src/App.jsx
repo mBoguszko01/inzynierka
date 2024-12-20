@@ -11,6 +11,7 @@ import { fetchTransactions } from "./store/transactions";
 import { addTransactionToDatabase } from "./store/transactions";
 import { updatePlannedTransactionsDate } from "./store/plannedTransactions";
 import { changeAssetValue } from "./store/assets.js";
+import { fetchShoppingItemsCategories } from "./store/shoppingListItemCategories.jsx";
 function App() {
   const dispatch = useDispatch();
   const transactions = useSelector(
@@ -25,6 +26,7 @@ function App() {
     dispatch(fetchCategories());
     dispatch(fetchTransactions());
     dispatch(fetchAssets());
+    dispatch(fetchShoppingItemsCategories());
   }, [dispatch]);
   
   useEffect(() => {

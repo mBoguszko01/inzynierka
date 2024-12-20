@@ -27,13 +27,12 @@ const DashboardTotalAssets = () => {
     .slice(0, 3);
 
   if (status === "loading") {
-    return <p>Ładowanie danych...</p>;
+    return <p>Loading data...</p>;
   }
 
   if (status === "failed") {
-    return <p>Błąd: {error}</p>;
+    return <p>Error: {error}</p>;
   }
-
   return (
     <div className="dashboard-assets-container">
       <span className="section-header">Total Assets</span>

@@ -33,13 +33,13 @@ export const addAssetToDB = createAsyncThunk(
 );
 export const changeAssetValue = createAsyncThunk(
   "assets/changeAssetValue",
-  async ({ asset, value, proceedTransaction }, thunkAPI) => {
+  async ({ assetId,asset, value, proceedTransaction }, thunkAPI) => {
     try {
-      const id = asset.id;
+      const id = assetId;
       const newValue = proceedTransaction ? asset.value - value : value;
       const response = await axios.put(
         `http://localhost:5000/api/assets/${id}`,
-        { value: newValue }
+        { asset:asset ,value: newValue }
       );
       return response.data;
     } catch (error) {

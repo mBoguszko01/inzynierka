@@ -114,7 +114,6 @@ const categorySlice = createSlice({
       })
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload);
         const id = action.payload.id;
         state.categoryList = state.categoryList.filter(
           (category) => category.id !== id

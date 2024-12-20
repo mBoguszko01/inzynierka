@@ -23,7 +23,6 @@ const DashboardPlannedTransactions = () => {
   limitedTransactions = [...transactions]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
-
   return (
     <div className="dashboard-planned-transactions-container">
       <span className="section-header">Planned Transactions</span>
@@ -39,10 +38,10 @@ const DashboardPlannedTransactions = () => {
           key={index}
             paymentDate={transaction.date.substring(0,10)}
             price={transaction.price}
-            imgSrc={"/Netflix_icon.jpg"}
+            imgSrc={transaction.name === "Netflix subscription" ? "/Netflix_icon.jpg" : transaction.name === "Gym membership" ? "/Gym_icon.jpg" : "./Rent.jpg"}
             
           >
-            {transaction.transaction_name}
+            {transaction.name}
           </Transaction>
         </>
       ))}

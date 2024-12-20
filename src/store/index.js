@@ -5,8 +5,9 @@ import transactionsReducer from './transactions';
 import plannedTransactionsReducer from './plannedTransactions';
 import categoryReducer from './categories';
 import shoppingListsReducer from './shoppingLists';
+import shoppingListItemCategoriesReducer from './shoppingListItemCategories'
 const store = configureStore({
-    reducer: {view: viewReducer, assets: assetsReducer, transactions: transactionsReducer, plannedTransactions: plannedTransactionsReducer, categories: categoryReducer, shoppingLists: shoppingListsReducer}
+    reducer: {view: viewReducer, assets: assetsReducer, transactions: transactionsReducer, plannedTransactions: plannedTransactionsReducer, categories: categoryReducer, shoppingLists: shoppingListsReducer,shoppingListItemCategories:shoppingListItemCategoriesReducer}
 });
 
 export default store;

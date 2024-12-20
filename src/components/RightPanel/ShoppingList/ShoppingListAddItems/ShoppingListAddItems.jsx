@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import "./ShoppingListAddItems.css";
 import suggestedProducts from "../../../../data/sugestedProducts";
@@ -12,12 +12,16 @@ const ShoppingListAddItems = (props) => {
   const dispatch = useDispatch();
   const { shoppingListId, allItems } = props;
   const sugestedProducts = suggestedProducts;
+  const itemsCategories = useSelector(
+    (state) => state.shoppingListItemCategories.shoppingListItemsCategoriesList
+  );
 
   const [search, setSearch] = useState("");
   const filteredItems = sugestedProducts.filter((item) =>
     item.name.toLowerCase().includes(search.toLocaleLowerCase())
   );
   const handleAddItem = async (product) => {
+    console.log(product);
     const newItem = {
       name: product.name,
       quantity: "1",
@@ -26,7 +30,7 @@ const ShoppingListAddItems = (props) => {
     };
     try {
       const existingItem = allItems.find((item) => item.name === newItem.name);
-      console.log(existingItem);
+      console.log(newItem);
       if (existingItem) {
 await dispatch(
           increaseItemQuantity({
@@ -35,7 +39,6 @@ await dispatch(
           })
         ).unwrap();
       } else {
-        // Dodaj nowy element, jeśli nie istnieje
         const addedItem = await dispatch(
           addShoppingListItem({ shoppingListId, item: newItem })
         ).unwrap();

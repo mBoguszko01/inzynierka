@@ -63,7 +63,7 @@ const RecentTransactions = (props) => {
             <tr key={index}>
               <td>{assetName}</td>
               <td>{categoryName}</td>
-              <td>{transaction.date.substring(0,10)}</td>
+              <td>{transaction.date ? transaction.date.substring(0,10) : ''}</td>
               <td>{transaction.price}</td>
               {currView.selectedView !== "Dashboard" && <td><button className="edit-button" onClick={() => handleEdit(transaction)}><Icon path={mdiPencilOutline} size={0.8} /></button></td>}
             </tr>)

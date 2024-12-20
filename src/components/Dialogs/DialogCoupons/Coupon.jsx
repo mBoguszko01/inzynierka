@@ -1,19 +1,30 @@
+import { useDispatch } from "react-redux";
+import { addShoppingListItem } from "../../../store/shoppingLists";
 import "./Coupon.css";
 
 const Coupon = (props) => {
-  const { coupon } = props;
-  console.log(coupon.category.toLowerCase());
-  const couponCategoryImgSrc = 1;
+  const dispatch = useDispatch();
+  const { coupon, shoppingListId } = props;
+  const handleAddToList = () => {
+    const newItem = {
+      name: coupon.name,
+      quantity: 1,
+      unit: "",
+      category: coupon.category,
+    };
+    dispatch(addShoppingListItem({shoppingListId, item:newItem}));
+    
+  };
   return (
     <div className="coupon-container">
       <img src={`${coupon.category.toLowerCase()}.svg`} width={"30px"} />
       <div className="coupon-name-container">
         <span>{coupon.name}</span>
         <span style={{ color: "#b4b4b4", fontSize: "0.8em" }}>
-          {coupon.manufacturer}
+          {coupon.manufacturer} {coupon.store}
         </span>
       </div>
-      <div style={{display:"flex", width:"35%"}}>
+      <div style={{ display: "flex", width: "35%" }}>
         <div className="coupon-prices">
           <span className="coupon-price-before">
             {coupon.price_before_discount}
@@ -22,7 +33,9 @@ const Coupon = (props) => {
             {coupon.price_after_discount}
           </span>
         </div>
-        <button className="coupon-add-btn">+ Add to list</button>
+        <button className="coupon-add-btn" onClick={handleAddToList}>
+          + Add to list
+        </button>
       </div>
     </div>
   );

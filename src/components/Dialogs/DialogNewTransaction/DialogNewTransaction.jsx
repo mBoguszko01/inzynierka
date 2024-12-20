@@ -103,10 +103,9 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       if (selectedAssetObj.value - transactionData.price < 0) {
         setShowAssetLowerThanZeroAlertWindow(true);
       } else {
-        
         const transactionsAsset = assets.find((asset) => asset.id == transactionData.asset_id);
         dispatch(
-          changeAssetValue({asset: transactionsAsset, value: parseFloat(transactionData.price), proceedTransaction: true})
+          changeAssetValue({assetId: transactionsAsset.id, asset: transactionsAsset, value: parseFloat(transactionData.price), proceedTransaction: true})
         );
         dispatch(addTransactionToDatabase(transactionData));
         setFormData(defaultFormData);
@@ -145,8 +144,9 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
           <DialogValueLowerThanZero
             isDialogOpen={true}
             closeDialog={() => {setShowAssetLowerThanZeroAlertWindow(false); handleClose()}}
-            selectedAsset = {formData.asset}
+            selectedAssetId = {formData.asset_id}
             setFormData = {() => setFormData(defaultFormData)}
+            transaction = {formData}
           />
         )}
       {isNewCategoryOpen &&
