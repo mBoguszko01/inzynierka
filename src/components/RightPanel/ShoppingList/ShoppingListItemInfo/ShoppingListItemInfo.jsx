@@ -36,10 +36,14 @@ const ShoppingListItemInfo = (props) => {
       </button>
       <form>
         <div className="shopping-list-item-info-container-img">
-          <img
-            src={`${item.category.toLowerCase()}.svg`}
-            className="shopping-list-category-img"
-          />
+        {item.category !== 'Custom' && <img
+          src={`${item.category.toLowerCase()}.svg`}
+          className="shopping-list-category-img"
+        />}
+        {item.category === 'Custom' && <img
+          src={"custom.png"}
+          className="shopping-list-category-img"
+        />}
         </div>
         <div className="shopping-list-item-info-container">
           <div className="shopping-list-item-info-vertical">

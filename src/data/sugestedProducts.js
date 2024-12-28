@@ -304,6 +304,10 @@ const suggestedProducts = [
         "name": "Whole Grain Pasta"
     },
     {
+        "category": "Dairy Products",
+        "name": "Eggs"
+    },
+    {
         "category": "Dry Products",
         "name": "Egg Pasta"
     },

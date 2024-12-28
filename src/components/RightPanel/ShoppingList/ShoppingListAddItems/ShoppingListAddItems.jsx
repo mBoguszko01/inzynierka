@@ -1,27 +1,71 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ShoppingListAddItems.css";
 import suggestedProducts from "../../../../data/sugestedProducts";
+import { couponsActions } from "../../../../store/coupons.js";
 import {
   addShoppingListItem,
   fetchShoppingListItems,
   increaseItemQuantity,
 } from "../../../../store/shoppingLists";
+import { fetchCoupons } from "../../../../store/coupons";
+import axios from "axios";
 
 const ShoppingListAddItems = (props) => {
   const dispatch = useDispatch();
   const { shoppingListId, allItems } = props;
   const sugestedProducts = suggestedProducts;
-  const itemsCategories = useSelector(
-    (state) => state.shoppingListItemCategories.shoppingListItemsCategoriesList
-  );
 
-  const [search, setSearch] = useState("");
+  const [input, setInput] = useState("");
   const filteredItems = sugestedProducts.filter((item) =>
-    item.name.toLowerCase().includes(search.toLocaleLowerCase())
+    item.name.toLowerCase().includes(input.toLocaleLowerCase())
   );
-  const handleAddItem = async (product) => {
-    console.log(product);
+  const allCouponsLidl = useSelector((state) => state.coupons.allLidlCoupons);
+
+  useEffect(()=>{dispatch(fetchCoupons(shoppingListId));}, [dispatch]);
+
+  const handleAddCustomItem = async () => {
+    const newItem = {
+      name: input,
+      quantity: "1",
+      unit: "",
+      category: "Custom",
+    };
+    try {
+      const existingItem = allItems.find((item) => item.name === newItem.name);
+      if (existingItem) {
+        await dispatch(
+          increaseItemQuantity({
+            shoppingListId,
+            itemId: existingItem.item_id,
+          })
+        ).unwrap();
+      } else {
+        const addedItem = await dispatch(
+          addShoppingListItem({ shoppingListId, item: newItem })
+        ).unwrap();
+        const response = await axios.post("http://localhost:5000/api/check-coupon", {
+          name: newItem.name
+        });
+        const suggestedCouponsLidl = response.data.suggestedCouponsLidl;
+        const suggestedCouponsBiedronka = response.data.suggestedCouponsBiedronka;
+        const suggestedCouponsCarrefour = response.data.suggestedCouponsCarrefour;
+
+        if (suggestedCouponsLidl.length > 0) {
+          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsLidl, store: "Lidl"}));
+        }
+        if (suggestedCouponsBiedronka.length > 0) {
+          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsBiedronka, store: "Biedronka"}));
+        }
+        if (suggestedCouponsCarrefour.length > 0) {
+          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsCarrefour, store: "Carrefour"}));
+        }
+      }
+    } catch (error) {
+      console.error("Błąd podczas dodawania elementu:", error);
+    }
+  };
+  const handleAddPredefinedItem = async (product) => {
     const newItem = {
       name: product.name,
       quantity: "1",
@@ -30,9 +74,8 @@ const ShoppingListAddItems = (props) => {
     };
     try {
       const existingItem = allItems.find((item) => item.name === newItem.name);
-      console.log(newItem);
       if (existingItem) {
-await dispatch(
+        await dispatch(
           increaseItemQuantity({
             shoppingListId,
             itemId: existingItem.item_id,
@@ -43,7 +86,6 @@ await dispatch(
           addShoppingListItem({ shoppingListId, item: newItem })
         ).unwrap();
       }
-      
     } catch (error) {
       console.error("Błąd podczas dodawania elementu:", error);
     }
@@ -64,18 +106,62 @@ await dispatch(
         <input
           type="text"
           className="shopping-list-add-item-input"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         />
       </div>
+
       <div className="shopping-list-suggested-products-wrapper">
+      {input !== "" && 
+        <div className="shopping-list-custom-item-container">
+          <div
+            className="shopping-list-suggested-product"
+            onClick={() => handleAddCustomItem()}
+          ><div
+              className="shopping-list-add-product-plus"
+              style={{
+                backgroundColor: allItems.some(
+                  (item) => item.name === input
+                )
+                  ? "blue"
+                  : "#aaaaaa",
+                transform: allItems.some((item) => item.name === input)
+                  ? "rotate(90deg)"
+                  : "rotate(0deg)",
+              }}
+            >
+              +
+            </div>
+            <div
+              style={{
+                width: "-webkit-fill-available",
+                paddingRight: "16px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {input}
+              {allItems.some((item) => item.itemName === input) ? (
+                <div
+                  className="shopping-list-delete-item"
+                  onClick={(e) => handleDeleteItem(product, e)}
+                >
+                  x
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        </div>
+      }
         <h4 style={{ marginBottom: "16px", marginTop: "16px" }}>Suggested</h4>
         <div className="shopping-list-suggested-products-container">
           {filteredItems.map((product, index) => (
             <div
               className="shopping-list-suggested-product"
               key={index}
-              onClick={() => handleAddItem(product)}
+              onClick={() => handleAddPredefinedItem(product)}
             >
               <div
                 className="shopping-list-add-product-plus"
@@ -85,9 +171,7 @@ await dispatch(
                   )
                     ? "blue"
                     : "#aaaaaa",
-                  transform: allItems.some(
-                    (item) => item.name === product.name
-                  )
+                  transform: allItems.some((item) => item.name === product.name)
                     ? "rotate(90deg)"
                     : "rotate(0deg)",
                 }}
@@ -103,9 +187,7 @@ await dispatch(
                 }}
               >
                 {product.name}
-                {allItems.some(
-                  (item) => item.itemName === product.name
-                ) ? (
+                {allItems.some((item) => item.itemName === product.name) ? (
                   <div
                     className="shopping-list-delete-item"
                     onClick={(e) => handleDeleteItem(product, e)}
