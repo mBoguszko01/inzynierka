@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     gap: 26px;
-    margin-bottom: 50px;
+    height: 75px;
 }
 .transaction-text-info-container{
     display: flex;

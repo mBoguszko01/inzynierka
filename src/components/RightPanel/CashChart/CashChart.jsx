@@ -45,8 +45,8 @@ const cashChartDummyData = [
 
 const CashChart = () => {
   return (
-    <div style={{width: '100%', height: '100%', paddingRight: '19px', display: 'flex', alignItems: 'center'}}>
-      <ResponsiveContainer width="100%" height={300}>
+    <div style={{width: '100%', height: '40vh', paddingRight: '19px', display: 'flex', alignItems: 'center', marginTop:'16px'}}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={cashChartDummyData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />

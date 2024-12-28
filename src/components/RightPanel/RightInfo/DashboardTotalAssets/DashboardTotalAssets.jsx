@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAssets } from "../../../../store/assets"; 
+import { fetchAssets } from "../../../../store/assets";
 import { viewActions } from "../../../../store/view";
 import DashboardAsset from "./DashboardAsset";
 
 const DashboardTotalAssets = () => {
   const dispatch = useDispatch();
   const { totalAssets, status, error } = useSelector((state) => state.assets);
-  
+
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchAssets());
@@ -38,23 +38,27 @@ const DashboardTotalAssets = () => {
       <span className="section-header">Total Assets</span>
       <span
         className="dashboard-asset-balance section-large-text"
-        style={{ marginBottom: 40 }}
+        style={{ marginBottom: 0 }}
       >
         {`+${totalAssetsValue}$`}
       </span>
-
-      {topThreeAssets.map((asset, index) => (
-        <DashboardAsset
-          key={index}
-          imgSrc={asset.logo}
-          balance={asset.value}
-        >
-          {asset.name}
-        </DashboardAsset>
-      ))}
+      <div className="dashboard-total-assets-container">
+        {topThreeAssets.length > 0 &&
+          topThreeAssets.map((asset, index) => (
+            <DashboardAsset
+              key={index}
+              imgSrc={asset.logo}
+              balance={asset.value}
+            >
+              {asset.name}
+            </DashboardAsset>
+          ))}
+        {topThreeAssets.length === 0 && (
+          <span>There is no data to display.</span>
+        )}
+      </div>
 
       <div className="separator"></div>
-
 
       <div className="show-more">
         <button onClick={changeViewHandler}>Show more</button>

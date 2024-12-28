@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addShoppingListItem } from "../../../store/shoppingLists";
+import { fetchCoupons } from "../../../store/coupons";
 import "./Coupon.css";
 
 const Coupon = (props) => {
@@ -13,7 +14,7 @@ const Coupon = (props) => {
       category: coupon.category,
     };
     dispatch(addShoppingListItem({shoppingListId, item:newItem}));
-    
+    dispatch(fetchCoupons(shoppingListId));
   };
   return (
     <div className="coupon-container">

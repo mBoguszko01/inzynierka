@@ -20,7 +20,6 @@ const ShoppingListAddItems = (props) => {
   const filteredItems = sugestedProducts.filter((item) =>
     item.name.toLowerCase().includes(input.toLocaleLowerCase())
   );
-  const allCouponsLidl = useSelector((state) => state.coupons.allLidlCoupons);
 
   useEffect(()=>{dispatch(fetchCoupons(shoppingListId));}, [dispatch]);
 
@@ -44,22 +43,7 @@ const ShoppingListAddItems = (props) => {
         const addedItem = await dispatch(
           addShoppingListItem({ shoppingListId, item: newItem })
         ).unwrap();
-        const response = await axios.post("http://localhost:5000/api/check-coupon", {
-          name: newItem.name
-        });
-        const suggestedCouponsLidl = response.data.suggestedCouponsLidl;
-        const suggestedCouponsBiedronka = response.data.suggestedCouponsBiedronka;
-        const suggestedCouponsCarrefour = response.data.suggestedCouponsCarrefour;
-
-        if (suggestedCouponsLidl.length > 0) {
-          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsLidl, store: "Lidl"}));
-        }
-        if (suggestedCouponsBiedronka.length > 0) {
-          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsBiedronka, store: "Biedronka"}));
-        }
-        if (suggestedCouponsCarrefour.length > 0) {
-          dispatch(couponsActions.addSuggestedCoupons({shoppingListId, coupons:suggestedCouponsCarrefour, store: "Carrefour"}));
-        }
+        dispatch(fetchCoupons(shoppingListId))  
       }
     } catch (error) {
       console.error("Błąd podczas dodawania elementu:", error);
@@ -85,6 +69,7 @@ const ShoppingListAddItems = (props) => {
         const addedItem = await dispatch(
           addShoppingListItem({ shoppingListId, item: newItem })
         ).unwrap();
+        dispatch(fetchCoupons(shoppingListId))
       }
     } catch (error) {
       console.error("Błąd podczas dodawania elementu:", error);

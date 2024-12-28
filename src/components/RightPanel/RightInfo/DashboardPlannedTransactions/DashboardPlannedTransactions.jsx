@@ -25,26 +25,33 @@ const DashboardPlannedTransactions = () => {
     .slice(0, 3);
   return (
     <div className="dashboard-planned-transactions-container">
-      <span className="section-header">Planned Transactions</span>
+      <span className="section-header" style={{marginTop:16}}>Planned Transactions</span>
       <span className="section-small-text" style={{ marginBottom: 7 }}>
         Total
       </span>
-      <span className="expense section-large-text" style={{ marginBottom: 40 }}>
+      <span className="expense section-large-text" style={{ marginBottom:0 }}>
         -{totalPriceOfPlannedTransactions}$
       </span>
-      {limitedTransactions.map((transaction, index) => (
-        <>
-          <Transaction
-          key={index}
-            paymentDate={transaction.date.substring(0,10)}
-            price={transaction.price}
-            imgSrc={transaction.name === "Netflix subscription" ? "/Netflix_icon.jpg" : transaction.name === "Gym membership" ? "/Gym_icon.jpg" : "./Rent.jpg"}
-            
-          >
-            {transaction.name}
-          </Transaction>
-        </>
-      ))}
+      <div className="dashboard-transactions-container">
+        {limitedTransactions.map((transaction, index) => (
+          <>
+            <Transaction
+              key={index}
+              paymentDate={transaction.date.substring(0, 10)}
+              price={transaction.price}
+              imgSrc={
+                transaction.name === "Netflix subscription"
+                  ? "/Netflix_icon.jpg"
+                  : transaction.name === "Gym membership"
+                  ? "/Gym_icon.jpg"
+                  : "./Rent.jpg"
+              }
+            >
+              {transaction.name}
+            </Transaction>
+          </>
+        ))}
+      </div>
       <div className="separator"></div>
       <div className="show-more">
         <button onClick={changeViewHandler}>Show more</button>
@@ -52,4 +59,4 @@ const DashboardPlannedTransactions = () => {
     </div>
   );
 };
-export default  DashboardPlannedTransactions;
+export default DashboardPlannedTransactions;
