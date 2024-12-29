@@ -51,30 +51,43 @@ const CircularChart = (props) => {
       <div className="circular-chart-name-container">
         <span className="circular-chart-name">{chartName}</span>
       </div>
-      <div  style={{ width: "100%", height: "75%", display: 'flex', alignItems: 'center', justifyContent:'center  ' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={chartData} // wymaga struktur {name: ... , value: ...}
-              cx="50%"
-              cy="50%"
-              innerRadius={"70%"}
-              outerRadius={"80%"} // zmiana tych parametrów zmienia grubość pierścienia
-              fill="#8884d8"
-              dataKey="value"
-              label
-            >
-              {chartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={colors[index % colors.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
+      <div
+        style={{
+          width: "100%",
+          height: "75%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center  ",
+        }}
+      >
+        {chartData.length === 0 && (
+          <span className="no-data-info">There is no data to display.</span>
+        )}
+        {chartData.length !== 0 && (
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={chartData} // wymaga struktur {name: ... , value: ...}
+                cx="50%"
+                cy="50%"
+                innerRadius={"70%"}
+                outerRadius={"80%"} // zmiana tych parametrów zmienia grubość pierścienia
+                fill="#8884d8"
+                dataKey="value"
+                label
+              >
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colors[index % colors.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </>
   );

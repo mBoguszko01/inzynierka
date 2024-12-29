@@ -27,3 +27,10 @@
     align-items: center;
     gap: 20px;
 }
+.dashboard-total-assets-container{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center ;
+}

@@ -55,3 +55,8 @@
     color: white;
     cursor: pointer;
 }
+.no-data-info{
+    font-size: 0.9em;
+    color: #aaaaaa;
+    text-align: center;
+}

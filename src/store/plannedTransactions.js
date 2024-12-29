@@ -41,26 +41,27 @@ export const updatePlannedTransactionsDate = createAsyncThunk(
       const updatedTransactions = indexes.map((index) => {
         const transaction = { ...state.plannedTransactionsList[index] };
         const firstDate = new Date(transaction.date);
-
-        const day = firstDate.getDate();
-        if (transaction.repeat_unit === "months") {
-          while (true) {
-            firstDate.setMonth(
-              firstDate.getMonth() + parseInt(transaction.repeat_value)
-            );
-            if (firstDate > new Date()) {
-              break;
+        while (firstDate < new Date()) {
+          const day = firstDate.getDate();
+          if (transaction.repeat_unit === "months") {
+            while (true) {
+              firstDate.setMonth(
+                firstDate.getMonth() + parseInt(transaction.repeat_value)
+              );
+              if (firstDate > new Date()) {
+                break;
+              }
             }
+            if (firstDate.getDate() !== day) {
+              firstDate.setDate(0);
+            }
+          } else {
+            let addingValue = transaction.repeat_value;
+            transaction.repeat_unit === "weeks"
+              ? (addingValue *= 7)
+              : addingValue;
+            firstDate.setDate(firstDate.getDate() + addingValue);
           }
-          if (firstDate.getDate() !== day) {
-            firstDate.setDate(0);
-          }
-        } else {
-          let addingValue = transaction.repeat_value;
-          transaction.repeat_unit === "weeks"
-            ? (addingValue *= 7)
-            : addingValue;
-          firstDate.setDate(firstDate.getDate() + addingValue);
         }
 
         firstDate.setHours(12);
@@ -79,9 +80,8 @@ export const updatePlannedTransactionsDate = createAsyncThunk(
       });
       const responses = await Promise.all(
         updatedTransactions.map((transaction) => {
-          console.log(transaction);
           axios.put(
-            `http://localhost:5000/api/planned-transactions/${transaction.transaction_id}`,
+            `http://localhost:5000/api/planned-transactions/${transaction.id}`,
             transaction
           );
         })
@@ -109,7 +109,7 @@ export const changePlannedTransaction = createAsyncThunk(
           name: plannedTransaction.name,
           price: plannedTransaction.price,
           repeat_unit: plannedTransaction.repeatUnit,
-          repeat_value: plannedTransaction.repeatValue
+          repeat_value: plannedTransaction.repeatValue,
         }
       );
       return response.data;
@@ -123,13 +123,15 @@ export const deletePlannedTransaction = createAsyncThunk(
   "assets/deletePlannedTransaction",
   async (plannedTransactionId, thunkAPI) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/planned-transactions/${plannedTransactionId}`);
+      const response = await axios.delete(
+        `http://localhost:5000/api/planned-transactions/${plannedTransactionId}`
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
 const plannedTransactionsSlice = createSlice({
   name: "plannedTransactions",
@@ -185,12 +187,14 @@ const plannedTransactionsSlice = createSlice({
       .addCase(deletePlannedTransaction.fulfilled, (state, action) => {
         state.status = "succeeded";
         const plannedTransactionId = action.payload.id;
-        state.plannedTransactionsList = state.plannedTransactionsList.filter((plannedTransaction) => plannedTransaction.id !== plannedTransactionId);
+        state.plannedTransactionsList = state.plannedTransactionsList.filter(
+          (plannedTransaction) => plannedTransaction.id !== plannedTransactionId
+        );
       })
       .addCase(deletePlannedTransaction.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
-      });;
+      });
   },
 });
 export const plannedTransactionActions = plannedTransactionsSlice.actions;

@@ -46,7 +46,7 @@ const PlannedTransactions = () => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        {limitedTransactions.length > 0 && <tbody>
           {limitedTransactions.map((transaction, index) => {
             return (
               <tr key={index}>
@@ -88,8 +88,9 @@ const PlannedTransactions = () => {
               </tr>
             );
           })}
-        </tbody>
+        </tbody>}
       </table>
+      {limitedTransactions.length === 0 && <span className="no-data-info" style={{display: 'block', width: '100%', textAlign:'center', marginTop:'30px'}}>There is no data to display.</span>}
     </>
   );
 };

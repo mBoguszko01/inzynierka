@@ -54,7 +54,7 @@ const DashboardTotalAssets = () => {
             </DashboardAsset>
           ))}
         {topThreeAssets.length === 0 && (
-          <span>There is no data to display.</span>
+          <span className="no-data-info">There is no data to display.</span>
         )}
       </div>
 

@@ -23,7 +23,7 @@ const LeftPanel = (props) => {
 
       <ul className="options-list">
         <div className="options-section">
-          <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Main</span>
+          <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Budget</span>
           <li>
             <ListElement name="Dashboard" isSidebarOpen={isSidebarOpen}/>
           </li>
@@ -38,7 +38,7 @@ const LeftPanel = (props) => {
           </li>
         </div>
         <div className="options-section">
-          <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Tools</span>
+          <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Coupons</span>
           <li>
             <ListElement name="Shopping List" isSidebarOpen={isSidebarOpen}/>
           </li>

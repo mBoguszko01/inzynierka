@@ -45,7 +45,7 @@
 .dashboard-recent-transactions{
     padding: 38px 22px;
     background-color: white;
-    height: 400px;
+    height: auto;
     border-radius: 10px;
     margin-top: 16px;
 }
@@ -60,6 +60,7 @@
 .dashboard-transactions-container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-height: 225px;
     max-height: 225px;
 }

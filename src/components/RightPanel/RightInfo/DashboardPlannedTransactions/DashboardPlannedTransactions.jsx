@@ -33,7 +33,7 @@ const DashboardPlannedTransactions = () => {
         -{totalPriceOfPlannedTransactions}$
       </span>
       <div className="dashboard-transactions-container">
-        {limitedTransactions.map((transaction, index) => (
+        {limitedTransactions.length > 0 &&  limitedTransactions.map((transaction, index) => (
           <>
             <Transaction
               key={index}
@@ -51,6 +51,7 @@ const DashboardPlannedTransactions = () => {
             </Transaction>
           </>
         ))}
+        {limitedTransactions.length === 0 && <span className="no-data-info">There is no data to display.</span>}
       </div>
       <div className="separator"></div>
       <div className="show-more">

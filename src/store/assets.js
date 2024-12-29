@@ -33,14 +33,19 @@ export const addAssetToDB = createAsyncThunk(
 );
 export const changeAssetValue = createAsyncThunk(
   "assets/changeAssetValue",
-  async ({ assetId,asset, value, proceedTransaction }, thunkAPI) => {
+  async ({ assetId, value, proceedTransaction }, thunkAPI) => {
     try {
-      const id = assetId;
+      const state = thunkAPI.getState(); // Pobierz aktualny stan Reduxa
+      const asset = state.assets.totalAssets.find((asset) => asset.id === assetId); 
+
       const newValue = proceedTransaction ? asset.value - value : value;
+      console.log(asset); //DLACZEGO ON TUTAJ WIDZI STARĄ WARTOŚĆ???
+
       const response = await axios.put(
-        `http://localhost:5000/api/assets/${id}`,
+        `http://localhost:5000/api/assets/${assetId}`,
         { asset:asset ,value: newValue }
       );
+      console.log('Zamykam');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -71,19 +76,6 @@ const assetsSlice = createSlice({
   reducers: {
     addNewElement(state, action) {
       state.totalAssets.push(action.payload);
-    },
-    updateValueLocally(state, action) {
-      //zmienic nazwe na proceed transaction -- używamy tego gdy wykonamy tranzakcje
-      const { asset_Id, value } = action.payload;
-      const account = state.totalAssets.find(
-        (account) => account.id == asset_Id
-      );
-      console.log(JSON.parse(JSON.stringify(state.totalAssets)));
-      if (account) {
-        account.value -= value;
-      } else {
-        console.log(`Something went wrong`);
-      }
     },
     updateValue2(state, action) {
       // używam tego gdy wartość asseta spadnie poniżej 0, lub gdy użytkownik chce ręcznie zmienić stan konta
@@ -129,7 +121,9 @@ const assetsSlice = createSlice({
           (asset) => asset.id === updatedAsset.id
         );
         if (existingAsset) {
+          console.log('Przypisuje ' , existingAsset.value );
           existingAsset.value = updatedAsset.value;
+          console.log('Nowa wartość ', existingAsset.value);
         }
       })
       .addCase(changeAssetValue.rejected, (state, action) => {
