@@ -1,64 +1,42 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plannedTransactionActions } from "../../../store/plannedTransactions";
-import {
-  mdiNetflix,
-  mdiSpotify,
-  mdiYoutube,
-  mdiSilverwareForkKnife,
-  mdiWeightLifter,
-  mdiCar,
-  mdiBus,
-  mdiTrain,
-  mdiAirplane,
-  mdiGasStation,
-  mdiHome,
-  mdiWater,
-  mdiLightbulb,
-  mdiPhone,
-  mdiHospital,
-  mdiPill,
-  mdiGift,
-  mdiCreditCard,
-  mdiBank,
-  mdiMovie,
-  mdiCurrencyUsd,
-  mdiShopping,
-  mdiFood,
-  mdiCoffee,
-  mdiPizza,
-  mdiHamburger,
-  mdiBeer,
-  mdiGlassWine,
-  mdiTaxi,
-  mdiBicycle,
-  mdiMotorbike,
-  mdiShipWheel,
-  mdiSchool,
-  mdiBookOpen,
-  mdiGamepad,
-  mdiMusic,
-  mdiTelevision,
-  mdiLaptop,
-  mdiCellphone,
-  mdiWifi,
-  mdiTools,
-  mdiHammerWrench,
-  mdiHeart,
-  mdiStar,
-  mdiPalette,
-  mdiCamera,
-  mdiBriefcase,
-  mdiChartLine,
-  mdiCart,
-  mdiTag,
-  mdiTicket,
-  mdiUmbrella,
-  mdiWeatherSunny,
-  mdiWeatherRainy,
-  mdiSnowflake,
-} from "@mdi/js";
-import Icon from "@mdi/react";
+import { Icon } from "@iconify/react";
+import netflixIcon from "@iconify/icons-logos/netflix-icon";
+import youtubeIcon from "@iconify/icons-logos/youtube-icon";
+import spotifyIcon from "@iconify/icons-logos/spotify-icon";
+import appleIcon from "@iconify/icons-logos/apple";
+import houseIcon from "@iconify/icons-ic/baseline-house";
+import shoppingCartIcon from "@iconify/icons-ic/baseline-shopping-cart";
+import localGasStationIcon from "@iconify/icons-ic/baseline-local-gas-station";
+import directionsCarIcon from "@iconify/icons-ic/baseline-directions-car";
+import directionsBusIcon from "@iconify/icons-ic/baseline-directions-bus";
+import flightIcon from "@iconify/icons-ic/baseline-flight";
+import restaurantIcon from "@iconify/icons-ic/baseline-restaurant";
+import fastfoodIcon from "@iconify/icons-ic/baseline-fastfood";
+import localBarIcon from "@iconify/icons-ic/baseline-local-bar";
+import localCafeIcon from "@iconify/icons-ic/baseline-local-cafe";
+import fitnessCenterIcon from "@iconify/icons-ic/baseline-fitness-center";
+import medicalServicesIcon from "@iconify/icons-ic/baseline-medical-services";
+import localHospitalIcon from "@iconify/icons-ic/baseline-local-hospital";
+import creditCardIcon from "@iconify/icons-ic/baseline-credit-card";
+import accountBalanceIcon from "@iconify/icons-ic/baseline-account-balance";
+import movieIcon from "@iconify/icons-ic/baseline-movie";
+import musicNoteIcon from "@iconify/icons-ic/baseline-music-note";
+import tvIcon from "@iconify/icons-ic/baseline-tv";
+import schoolIcon from "@iconify/icons-ic/baseline-school";
+import bookIcon from "@iconify/icons-ic/baseline-book";
+import giftIcon from "@iconify/icons-ic/baseline-card-giftcard";
+import favoriteIcon from "@iconify/icons-ic/baseline-favorite";
+import buildIcon from "@iconify/icons-ic/baseline-build";
+import umbrellaIcon from "@iconify/icons-ic/baseline-beach-access";
+import wifiIcon from "@iconify/icons-ic/baseline-wifi";
+import phoneIcon from "@iconify/icons-ic/baseline-phone";
+import lightbulbIcon from "@iconify/icons-ic/baseline-lightbulb";
+import waterIcon from "@iconify/icons-ic/baseline-water-drop";
+import currencyIcon from "@iconify/icons-ic/baseline-currency-exchange";
+import chartIcon from "@iconify/icons-ic/baseline-bar-chart";
+
 import { addPlannedTransactionToDB } from "../../../store/plannedTransactions";
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import DialogNewAsset from "../DialogNewAsset";
@@ -67,42 +45,40 @@ import "./DialogNewPlannedTransaction.css";
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
   const availableIcons = [
-    { name: "mdiSilverwareForkKnife", icon: mdiSilverwareForkKnife },
-    { name: "mdiCart", icon: mdiCart },
-    { name: "mdiGasStation", icon: mdiGasStation },
-    { name: "mdiCar", icon: mdiCar },
-    { name: "mdiBus", icon: mdiBus },
-    { name: "mdiTrain", icon: mdiTrain },
-    { name: "mdiAirplane", icon: mdiAirplane },
-    { name: "mdiHome", icon: mdiHome },
-    { name: "mdiWater", icon: mdiWater },
-    { name: "mdiLightbulb", icon: mdiLightbulb },
-    { name: "mdiPhone", icon: mdiPhone },
-    { name: "mdiHospital", icon: mdiHospital },
-    { name: "mdiPill", icon: mdiPill },
-    { name: "mdiCreditCard", icon: mdiCreditCard },
-    { name: "mdiBank", icon: mdiBank },
-    { name: "mdiMovie", icon: mdiMovie },
-    { name: "mdiMusic", icon: mdiMusic },
-    { name: "mdiTelevision", icon: mdiTelevision },
-    { name: "mdiGamepad", icon: mdiGamepad },
-    { name: "mdiBookOpen", icon: mdiBookOpen },
-    { name: "mdiSchool", icon: mdiSchool },
-    { name: "mdiGift", icon: mdiGift },
-    { name: "mdiHeart", icon: mdiHeart },
-    { name: "mdiTools", icon: mdiTools },
-    { name: "mdiUmbrella", icon: mdiUmbrella },
-    { name: "mdiWeatherSunny", icon: mdiWeatherSunny },
-    { name: "mdiCoffee", icon: mdiCoffee },
-    { name: "mdiBeer", icon: mdiBeer },
-    { name: "mdiPizza", icon: mdiPizza },
-    { name: "mdiHamburger", icon: mdiHamburger },
-    { name: "mdiGlassWine", icon: mdiGlassWine },
-    { name: "mdiShopping", icon: mdiShopping },
-    { name: "mdiTag", icon: mdiTag },
-    { name: "mdiTicket", icon: mdiTicket },
-    { name: "mdiCurrencyUsd", icon: mdiCurrencyUsd },
-    { name: "mdiChartLine", icon: mdiChartLine },
+    { name: "logosNetflix", icon: netflixIcon },
+    { name: "logosYoutube", icon: youtubeIcon },
+    { name: "logosSpotify", icon: spotifyIcon },
+    { name: "logosApple", icon: appleIcon },
+    { name: "icHouse", icon: houseIcon },
+    { name: "icShoppingCart", icon: shoppingCartIcon },
+    { name: "icLocalGasStation", icon: localGasStationIcon },
+    { name: "icDirectionsCar", icon: directionsCarIcon },
+    { name: "icDirectionsBus", icon: directionsBusIcon },
+    { name: "icFlight", icon: flightIcon },
+    { name: "icRestaurant", icon: restaurantIcon },
+    { name: "icFastfood", icon: fastfoodIcon },
+    { name: "icLocalBar", icon: localBarIcon },
+    { name: "icLocalCafe", icon: localCafeIcon },
+    { name: "icFitnessCenter", icon: fitnessCenterIcon },
+    { name: "icMedicalServices", icon: medicalServicesIcon },
+    { name: "icLocalHospital", icon: localHospitalIcon },
+    { name: "icCreditCard", icon: creditCardIcon },
+    { name: "icAccountBalance", icon: accountBalanceIcon },
+    { name: "icMovie", icon: movieIcon },
+    { name: "icMusicNote", icon: musicNoteIcon },
+    { name: "icTv", icon: tvIcon },
+    { name: "icSchool", icon: schoolIcon },
+    { name: "icBook", icon: bookIcon },
+    { name: "icGift", icon: giftIcon },
+    { name: "icFavorite", icon: favoriteIcon },
+    { name: "icBuild", icon: buildIcon },
+    { name: "icUmbrella", icon: umbrellaIcon },
+    { name: "icWifi", icon: wifiIcon },
+    { name: "icPhone", icon: phoneIcon },
+    { name: "icLightbulb", icon: lightbulbIcon },
+    { name: "icWater", icon: waterIcon },
+    { name: "icCurrency", icon: currencyIcon },
+    { name: "icChart", icon: chartIcon },
   ];
   const defaultFormData = {
     name: "",
@@ -464,7 +440,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                           }))
                         }
                       >
-                        <Icon path={icon.icon} size={1} />
+                        <Icon icon={icon.icon} width={24} height={24} />
                       </div>
                     ))}
                   </div>

@@ -1,106 +1,79 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Icon from "@mdi/react";
+import { Icon as IconifyIcon } from "@iconify/react";
 import { mdiPencilOutline } from "@mdi/js";
-import {
-  mdiNetflix,
-  mdiSpotify,
-  mdiYoutube,
-  mdiSilverwareForkKnife,
-  mdiWeightLifter,
-  mdiCar,
-  mdiBus,
-  mdiTrain,
-  mdiAirplane,
-  mdiGasStation,
-  mdiHome,
-  mdiWater,
-  mdiLightbulb,
-  mdiPhone,
-  mdiHospital,
-  mdiPill,
-  mdiGift,
-  mdiCreditCard,
-  mdiBank,
-  mdiMovie,
-  mdiCurrencyUsd,
-  mdiShopping,
-  mdiFood,
-  mdiCoffee,
-  mdiPizza,
-  mdiHamburger,
-  mdiBeer,
-  mdiGlassWine,
-  mdiTaxi,
-  mdiBicycle,
-  mdiMotorbike,
-  mdiShipWheel,
-  mdiSchool,
-  mdiBookOpen,
-  mdiGamepad,
-  mdiMusic,
-  mdiTelevision,
-  mdiLaptop,
-  mdiCellphone,
-  mdiWifi,
-  mdiTools,
-  mdiHammerWrench,
-  mdiHeart,
-  mdiStar,
-  mdiPalette,
-  mdiCamera,
-  mdiBriefcase,
-  mdiChartLine,
-  mdiCart,
-  mdiTag,
-  mdiTicket,
-  mdiUmbrella,
-  mdiWeatherSunny,
-  mdiWeatherRainy,
-  mdiSnowflake,
-} from "@mdi/js";
+import netflixIcon from "@iconify/icons-logos/netflix-icon";
+import youtubeIcon from "@iconify/icons-logos/youtube-icon";
+import spotifyIcon from "@iconify/icons-logos/spotify-icon";
+import appleIcon from "@iconify/icons-logos/apple";
+import houseIcon from "@iconify/icons-ic/baseline-house";
+import shoppingCartIcon from "@iconify/icons-ic/baseline-shopping-cart";
+import localGasStationIcon from "@iconify/icons-ic/baseline-local-gas-station";
+import directionsCarIcon from "@iconify/icons-ic/baseline-directions-car";
+import directionsBusIcon from "@iconify/icons-ic/baseline-directions-bus";
+import flightIcon from "@iconify/icons-ic/baseline-flight";
+import restaurantIcon from "@iconify/icons-ic/baseline-restaurant";
+import fastfoodIcon from "@iconify/icons-ic/baseline-fastfood";
+import localBarIcon from "@iconify/icons-ic/baseline-local-bar";
+import localCafeIcon from "@iconify/icons-ic/baseline-local-cafe";
+import fitnessCenterIcon from "@iconify/icons-ic/baseline-fitness-center";
+import medicalServicesIcon from "@iconify/icons-ic/baseline-medical-services";
+import localHospitalIcon from "@iconify/icons-ic/baseline-local-hospital";
+import creditCardIcon from "@iconify/icons-ic/baseline-credit-card";
+import accountBalanceIcon from "@iconify/icons-ic/baseline-account-balance";
+import movieIcon from "@iconify/icons-ic/baseline-movie";
+import musicNoteIcon from "@iconify/icons-ic/baseline-music-note";
+import tvIcon from "@iconify/icons-ic/baseline-tv";
+import schoolIcon from "@iconify/icons-ic/baseline-school";
+import bookIcon from "@iconify/icons-ic/baseline-book";
+import giftIcon from "@iconify/icons-ic/baseline-card-giftcard";
+import favoriteIcon from "@iconify/icons-ic/baseline-favorite";
+import buildIcon from "@iconify/icons-ic/baseline-build";
+import umbrellaIcon from "@iconify/icons-ic/baseline-beach-access";
+import wifiIcon from "@iconify/icons-ic/baseline-wifi";
+import phoneIcon from "@iconify/icons-ic/baseline-phone";
+import lightbulbIcon from "@iconify/icons-ic/baseline-lightbulb";
+import waterIcon from "@iconify/icons-ic/baseline-water-drop";
+import currencyIcon from "@iconify/icons-ic/baseline-currency-exchange";
+import chartIcon from "@iconify/icons-ic/baseline-bar-chart";
 import DialogUpdatePlannedTransaction from "../../Dialogs/DialogUpdatePlannedTransaction/DialogUpdatePlannedTransaction";
 import DialogUpdateCategory from "../../Dialogs/DialogUpdateCategory/DialogUpdateCategory";
 const iconMap = {
-  mdiNetflix,
-  mdiSpotify,
-  mdiYoutube,
-  mdiSilverwareForkKnife,
-  mdiCart,
-  mdiGasStation,
-  mdiCar,
-  mdiBus,
-  mdiTrain,
-  mdiAirplane,
-  mdiHome,
-  mdiWater,
-  mdiLightbulb,
-  mdiPhone,
-  mdiHospital,
-  mdiPill,
-  mdiCreditCard,
-  mdiBank,
-  mdiMovie,
-  mdiMusic,
-  mdiTelevision,
-  mdiGamepad,
-  mdiBookOpen,
-  mdiSchool,
-  mdiGift,
-  mdiHeart,
-  mdiTools,
-  mdiUmbrella,
-  mdiWeatherSunny,
-  mdiCoffee,
-  mdiBeer,
-  mdiPizza,
-  mdiHamburger,
-  mdiGlassWine,
-  mdiShopping,
-  mdiTag,
-  mdiTicket,
-  mdiCurrencyUsd,
-  mdiChartLine,
+  logosNetflix: netflixIcon,
+  logosYoutube: youtubeIcon,
+  logosSpotify: spotifyIcon,
+  logosApple: appleIcon,
+  icHouse: houseIcon,
+  icShoppingCart: shoppingCartIcon,
+  icLocalGasStation: localGasStationIcon,
+  icDirectionsCar: directionsCarIcon,
+  icDirectionsBus: directionsBusIcon,
+  icFlight: flightIcon,
+  icRestaurant: restaurantIcon,
+  icFastfood: fastfoodIcon,
+  icLocalBar: localBarIcon,
+  icLocalCafe: localCafeIcon,
+  icFitnessCenter: fitnessCenterIcon,
+  icMedicalServices: medicalServicesIcon,
+  icLocalHospital: localHospitalIcon,
+  icCreditCard: creditCardIcon,
+  icAccountBalance: accountBalanceIcon,
+  icMovie: movieIcon,
+  icMusicNote: musicNoteIcon,
+  icTv: tvIcon,
+  icSchool: schoolIcon,
+  icBook: bookIcon,
+  icGift: giftIcon,
+  icFavorite: favoriteIcon,
+  icBuild: buildIcon,
+  icUmbrella: umbrellaIcon,
+  icWifi: wifiIcon,
+  icPhone: phoneIcon,
+  icLightbulb: lightbulbIcon,
+  icWater: waterIcon,
+  icCurrency: currencyIcon,
+  icChart: chartIcon,
 };
 const PlannedTransactions = () => {
   const assets = useSelector((state) => state.assets.totalAssets);
@@ -149,7 +122,9 @@ const PlannedTransactions = () => {
         {limitedTransactions.length > 0 && (
           <tbody>
             {limitedTransactions.map((transaction, index) => {
+              
               const iconPath = iconMap[transaction.logo_url] || null;
+              console.log(iconMap);
               return (
                 <tr key={index}>
                   <td>
@@ -182,7 +157,13 @@ const PlannedTransactions = () => {
                         )
                       : transaction.repeat_unit}
                   </td>
-                  <td><Icon path={iconPath} size={1.2} style={{color:"#000"}}/></td>
+                  <td>
+                    <IconifyIcon
+                      icon={iconPath}
+                      size={1.2}
+                      style={{ color: "#000" }}
+                    />
+                  </td>
                   <td>
                     <button
                       className="edit-button"
