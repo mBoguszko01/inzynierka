@@ -4,6 +4,7 @@ import { assetsActions } from "../../../store/assets";
 import { transactionActions } from "../../../store/transactions";
 import { changeAssetValue } from "../../../store/assets";
 import { addTransactionToDatabase } from "../../../store/transactions";
+import { fetchAssets } from "../../../store/assets";
 import DialogUpdateAsset from "../DialogUpdateAsset/DialogUpdateAsset";
 
 const DialogValueLowerThanZero = (props) => {
@@ -16,16 +17,20 @@ const DialogValueLowerThanZero = (props) => {
   const [showUpdateWindow, setShowUpdateWindow] = useState(false);
   console.log(transaction);
   const handleSubmit = () => {
+    const submitTransaction = {...transaction};
+    submitTransaction.date = new Date(submitTransaction.date);
+    submitTransaction.date.setHours(12); 
+    console.log(transaction);
     dispatch(
       changeAssetValue({
         assetId: transaction.asset_id,
-        asset: selectedAsset,
         value: parseFloat(transaction.price),
         proceedTransaction: true,
       })
     );
-    dispatch(addTransactionToDatabase(transaction));
+    dispatch(addTransactionToDatabase(submitTransaction));
     setFormData();
+    dispatch(fetchAssets());
     closeDialog();
   };
   return (

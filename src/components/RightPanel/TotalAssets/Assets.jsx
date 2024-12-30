@@ -32,7 +32,7 @@ const Assets = () => {
         </tr>
       </thead>
       <tbody>
-        {limitedAssets.map((asset, index) => (
+        {limitedAssets.length > 0 && limitedAssets.map((asset, index) => (
           <tr key={index}>
             <td>DODAC LOGO</td>
             <td>{asset.name}</td>
@@ -42,6 +42,7 @@ const Assets = () => {
         ))}
       </tbody>
     </table>
+    {limitedAssets.length === 0 && <span className="no-data-info" style={{display: 'block', width: '100%', textAlign:'center', marginTop:'30px'}}>There is no data to display.</span>}
     {showDialog && <DialogUpdateAsset asset={seletedAsset} closeDialog={closeDialog}/>}
     </>
   );

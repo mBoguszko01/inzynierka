@@ -35,17 +35,15 @@ export const changeAssetValue = createAsyncThunk(
   "assets/changeAssetValue",
   async ({ assetId, value, proceedTransaction }, thunkAPI) => {
     try {
-      const state = thunkAPI.getState(); // Pobierz aktualny stan Reduxa
-      const asset = state.assets.totalAssets.find((asset) => asset.id === assetId); 
-
+      const state = thunkAPI.getState();
+      const asset = state.assets.totalAssets.find((asset) => asset.id == assetId); 
+      console.log(assetId);
       const newValue = proceedTransaction ? asset.value - value : value;
-      console.log(asset); //DLACZEGO ON TUTAJ WIDZI STARĄ WARTOŚĆ???
-
       const response = await axios.put(
         `http://localhost:5000/api/assets/${assetId}`,
         { asset:asset ,value: newValue }
       );
-      console.log('Zamykam');
+      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -121,9 +119,7 @@ const assetsSlice = createSlice({
           (asset) => asset.id === updatedAsset.id
         );
         if (existingAsset) {
-          console.log('Przypisuje ' , existingAsset.value );
           existingAsset.value = updatedAsset.value;
-          console.log('Nowa wartość ', existingAsset.value);
         }
       })
       .addCase(changeAssetValue.rejected, (state, action) => {

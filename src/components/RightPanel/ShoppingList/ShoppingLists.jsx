@@ -33,10 +33,10 @@ const ShoppingLists = () => {
           <div className="all-shopping-lists-container">
             <div style={{ alignSelf: "end" }}>
               <button className="new-shopping-list-button" onClick={()=>setIsDialogOpen(true)}>
-                +Add new shopping list
+                +Create new shopping list
               </button>
             </div>
-
+            <span className="no-data-info">There is no data to display.</span>
             {shoppingLists.map((shoppingList, index) => (
               <div
                 className="shopping-list"

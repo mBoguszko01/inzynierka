@@ -39,13 +39,7 @@ const DashboardPlannedTransactions = () => {
               key={index}
               paymentDate={transaction.date.substring(0, 10)}
               price={transaction.price}
-              imgSrc={
-                transaction.name === "Netflix subscription"
-                  ? "/Netflix_icon.jpg"
-                  : transaction.name === "Gym membership"
-                  ? "/Gym_icon.jpg"
-                  : "./Rent.jpg"
-              }
+              imgSrc={transaction.logo_url}
             >
               {transaction.name}
             </Transaction>

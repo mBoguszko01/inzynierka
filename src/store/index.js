@@ -5,7 +5,9 @@ import transactionsReducer from "./transactions";
 import plannedTransactionsReducer from "./plannedTransactions";
 import categoryReducer from "./categories";
 import shoppingListsReducer from "./shoppingLists";
-import couponsReducer from './coupons'
+import couponsReducer from './coupons';
+import balanceReducer from './balance';
+
 const store = configureStore({
   reducer: {
     view: viewReducer,
@@ -14,7 +16,8 @@ const store = configureStore({
     plannedTransactions: plannedTransactionsReducer,
     categories: categoryReducer,
     shoppingLists: shoppingListsReducer,
-    coupons: couponsReducer
+    coupons: couponsReducer,
+    balance: balanceReducer,
   },
 });
 

@@ -4,7 +4,7 @@ import { transactionActions } from "../../../store/transactions";
 import { addTransactionToDatabase } from "../../../store/transactions";
 import { changeAssetValue } from "../../../store/assets";
 import { assetsActions } from "../../../store/assets";
-
+import { fetchBalance } from "../../../store/balance";
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import "./DialogNewTransaction.css";
 
@@ -30,8 +30,10 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
   const [isDateValid, setIsDateValid] = useState(true);
   const [isPriceValid, setIsPriceValid] = useState(true);
 
-  const [showAssetLowerThanZeroAlertWindow, setShowAssetLowerThanZeroAlertWindow] =
-    useState(false);
+  const [
+    showAssetLowerThanZeroAlertWindow,
+    setShowAssetLowerThanZeroAlertWindow,
+  ] = useState(false);
 
   const closeNewCategoryDialog = () => {
     setIsNewCategoryOpen(false);
@@ -103,11 +105,19 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
       if (selectedAssetObj.value - transactionData.price < 0) {
         setShowAssetLowerThanZeroAlertWindow(true);
       } else {
-        const transactionsAsset = assets.find((asset) => asset.id == transactionData.asset_id);
+        const transactionsAsset = assets.find(
+          (asset) => asset.id == transactionData.asset_id
+        );
         dispatch(
-          changeAssetValue({assetId: transactionsAsset.id, asset: transactionsAsset, value: parseFloat(transactionData.price), proceedTransaction: true})
+          changeAssetValue({
+            assetId: transactionsAsset.id,
+            asset: transactionsAsset,
+            value: parseFloat(transactionData.price),
+            proceedTransaction: true,
+          })
         );
         dispatch(addTransactionToDatabase(transactionData));
+        dispatch(fetchBalance());
         setFormData(defaultFormData);
         closeDialog();
       }
@@ -143,10 +153,13 @@ const DialogNewTransaction = ({ isDialogOpen, closeDialog }) => {
         !isNewCategoryOpen && (
           <DialogValueLowerThanZero
             isDialogOpen={true}
-            closeDialog={() => {setShowAssetLowerThanZeroAlertWindow(false); handleClose()}}
-            selectedAssetId = {formData.asset_id}
-            setFormData = {() => setFormData(defaultFormData)}
-            transaction = {formData}
+            closeDialog={() => {
+              setShowAssetLowerThanZeroAlertWindow(false);
+              handleClose();
+            }}
+            selectedAssetId={formData.asset_id}
+            setFormData={() => setFormData(defaultFormData)}
+            transaction={formData}
           />
         )}
       {isNewCategoryOpen &&

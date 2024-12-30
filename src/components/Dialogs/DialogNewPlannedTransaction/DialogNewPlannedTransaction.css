@@ -14,3 +14,38 @@
     color: #b4b4b4;
     font-size: 13px;
 }
+.logo-selection-container {
+    display: flex;
+    gap: 10px;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 5px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+  
+  .logo-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-option:hover {
+    border-color: #007bff;
+  }
+  
+  .logo-option.selected {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+  }
+  
+  .custom-logo-url {
+    margin-top: 15px;
+  }
+  

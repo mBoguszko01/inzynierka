@@ -42,9 +42,6 @@ const LeftPanel = (props) => {
           <li>
             <ListElement name="Shopping List" isSidebarOpen={isSidebarOpen}/>
           </li>
-          <li>
-            <ListElement name="Savings Planner" isSidebarOpen={isSidebarOpen}/>
-          </li>
         </div>
         <span className="list-section-heading" style={!isSidebarOpen ? {textAlign:'center'} : {}}>Settings</span>
         <li>

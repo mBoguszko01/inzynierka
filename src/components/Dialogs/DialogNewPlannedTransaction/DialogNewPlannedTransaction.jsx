@@ -1,6 +1,64 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plannedTransactionActions } from "../../../store/plannedTransactions";
+import {
+  mdiNetflix,
+  mdiSpotify,
+  mdiYoutube,
+  mdiSilverwareForkKnife,
+  mdiWeightLifter,
+  mdiCar,
+  mdiBus,
+  mdiTrain,
+  mdiAirplane,
+  mdiGasStation,
+  mdiHome,
+  mdiWater,
+  mdiLightbulb,
+  mdiPhone,
+  mdiHospital,
+  mdiPill,
+  mdiGift,
+  mdiCreditCard,
+  mdiBank,
+  mdiMovie,
+  mdiCurrencyUsd,
+  mdiShopping,
+  mdiFood,
+  mdiCoffee,
+  mdiPizza,
+  mdiHamburger,
+  mdiBeer,
+  mdiGlassWine,
+  mdiTaxi,
+  mdiBicycle,
+  mdiMotorbike,
+  mdiShipWheel,
+  mdiSchool,
+  mdiBookOpen,
+  mdiGamepad,
+  mdiMusic,
+  mdiTelevision,
+  mdiLaptop,
+  mdiCellphone,
+  mdiWifi,
+  mdiTools,
+  mdiHammerWrench,
+  mdiHeart,
+  mdiStar,
+  mdiPalette,
+  mdiCamera,
+  mdiBriefcase,
+  mdiChartLine,
+  mdiCart,
+  mdiTag,
+  mdiTicket,
+  mdiUmbrella,
+  mdiWeatherSunny,
+  mdiWeatherRainy,
+  mdiSnowflake,
+} from "@mdi/js";
+import Icon from "@mdi/react";
 import { addPlannedTransactionToDB } from "../../../store/plannedTransactions";
 import DialogNewCategory from "../DialogNewCategory/NewCategoryDialog";
 import DialogNewAsset from "../DialogNewAsset";
@@ -8,6 +66,44 @@ import "./DialogNewPlannedTransaction.css";
 //nazwa, konto, data, cena, co ile powtarzamy, logo
 const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
   const dispatch = useDispatch();
+  const availableIcons = [
+    { name: "mdiSilverwareForkKnife", icon: mdiSilverwareForkKnife },
+    { name: "mdiCart", icon: mdiCart },
+    { name: "mdiGasStation", icon: mdiGasStation },
+    { name: "mdiCar", icon: mdiCar },
+    { name: "mdiBus", icon: mdiBus },
+    { name: "mdiTrain", icon: mdiTrain },
+    { name: "mdiAirplane", icon: mdiAirplane },
+    { name: "mdiHome", icon: mdiHome },
+    { name: "mdiWater", icon: mdiWater },
+    { name: "mdiLightbulb", icon: mdiLightbulb },
+    { name: "mdiPhone", icon: mdiPhone },
+    { name: "mdiHospital", icon: mdiHospital },
+    { name: "mdiPill", icon: mdiPill },
+    { name: "mdiCreditCard", icon: mdiCreditCard },
+    { name: "mdiBank", icon: mdiBank },
+    { name: "mdiMovie", icon: mdiMovie },
+    { name: "mdiMusic", icon: mdiMusic },
+    { name: "mdiTelevision", icon: mdiTelevision },
+    { name: "mdiGamepad", icon: mdiGamepad },
+    { name: "mdiBookOpen", icon: mdiBookOpen },
+    { name: "mdiSchool", icon: mdiSchool },
+    { name: "mdiGift", icon: mdiGift },
+    { name: "mdiHeart", icon: mdiHeart },
+    { name: "mdiTools", icon: mdiTools },
+    { name: "mdiUmbrella", icon: mdiUmbrella },
+    { name: "mdiWeatherSunny", icon: mdiWeatherSunny },
+    { name: "mdiCoffee", icon: mdiCoffee },
+    { name: "mdiBeer", icon: mdiBeer },
+    { name: "mdiPizza", icon: mdiPizza },
+    { name: "mdiHamburger", icon: mdiHamburger },
+    { name: "mdiGlassWine", icon: mdiGlassWine },
+    { name: "mdiShopping", icon: mdiShopping },
+    { name: "mdiTag", icon: mdiTag },
+    { name: "mdiTicket", icon: mdiTicket },
+    { name: "mdiCurrencyUsd", icon: mdiCurrencyUsd },
+    { name: "mdiChartLine", icon: mdiChartLine },
+  ];
   const defaultFormData = {
     name: "",
     asset_id: "",
@@ -91,7 +187,8 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       plannedTransactionData.asset_id !== "" &&
       plannedTransactionData.category_id !== "" &&
       plannedTransactionData.date !== "" &&
-      (plannedTransactionData.price !== "" && !isNaN(plannedTransactionData.price)) &&
+      plannedTransactionData.price !== "" &&
+      !isNaN(plannedTransactionData.price) &&
       plannedTransactionData.repeatValue !== ""
     ) {
       plannedTransactionData = {
@@ -99,7 +196,6 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
         date: new Date(formData.date).toISOString(),
         price: parseFloat(formData.price),
       };
-      //dispatch(plannedTransactionActions.addNewElement(plannedTransactionData));
       dispatch(addPlannedTransactionToDB(plannedTransactionData));
       setFormData(defaultFormData);
       closeDialog();
@@ -113,18 +209,30 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       if (plannedTransactionData.category_id == "") {
         setIsCategoryValid(false);
       }
-      if (plannedTransactionData.date === "" || new Date(plannedTransactionData.date) < new Date()) {
+      if (
+        plannedTransactionData.date === "" ||
+        new Date(plannedTransactionData.date) < new Date()
+      ) {
         setIsDateValid(false);
-        setInvalidDateReason(plannedTransactionData.date === "" ? 'You must select a date!' : 'The planned transaction must have a date in the future!')
+        setInvalidDateReason(
+          plannedTransactionData.date === ""
+            ? "You must select a date!"
+            : "The planned transaction must have a date in the future!"
+        );
       }
-      if (plannedTransactionData.price === "" || isNaN(plannedTransactionData.price)) {
+      if (
+        plannedTransactionData.price === "" ||
+        isNaN(plannedTransactionData.price)
+      ) {
         setIsPriceValid(false);
       }
-      if (parseInt(plannedTransactionData.repeatValue) == 0 || plannedTransactionData.repeatValue === "") {
+      if (
+        parseInt(plannedTransactionData.repeatValue) == 0 ||
+        plannedTransactionData.repeatValue === ""
+      ) {
         setIsRepeatValueValid(false);
       }
     }
-
   };
 
   const handlePriceBlur = (e) => {
@@ -141,7 +249,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
       ...prev,
       repeatValue: parseInt(value).toString(),
     }));
-  }
+  };
   const handleClose = () => {
     setFormData(defaultFormData);
     setIsNameValid(true);
@@ -153,7 +261,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
     closeDialog();
   };
   let firstPossibleDay = new Date();
-  firstPossibleDay.setDate(firstPossibleDay.getDate() + 1); //mozna rozpoczac planned transactions od jutra
+  firstPossibleDay.setDate(firstPossibleDay.getDate() + 1);
   return (
     <>
       {isNewCategoryOpen && (
@@ -313,7 +421,7 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                       className="dialog-select-repeat"
                     >
                       <option value="days" defaultValue>
-                        &nbsp;{(formData.repeatValue === "1") ? "day" : "days"}
+                        &nbsp;{formData.repeatValue === "1" ? "day" : "days"}
                       </option>
                       <option value="weeks">
                         &nbsp;{formData.repeatValue === "1" ? "week" : "weeks"}
@@ -341,15 +449,25 @@ const DialogNewPlannedTransaction = ({ isDialogOpen, closeDialog }) => {
                     </div>
                   )}
                 <div className="dialog-input-section">
-                  <label>Logo - wersja robocza</label>
-                  <input
-                    name="logoUrl"
-                    type="text"
-                    value={formData.logoUrl}
-                    onChange={handleChange}
-                    className="dialog-input"
-                    autocomplete="off"
-                  />
+                  <label>Logo</label>
+                  <div className="logo-selection-container">
+                    {availableIcons.map((icon, index) => (
+                      <div
+                        key={index}
+                        className={`logo-option ${
+                          formData.logoUrl === icon.url ? "selected" : ""
+                        }`}
+                        onClick={() =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            logoUrl: icon.name,
+                          }))
+                        }
+                      >
+                        <Icon path={icon.icon} size={1} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </form>
